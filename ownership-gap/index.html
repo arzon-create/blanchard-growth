@@ -260,6 +260,29 @@
     }
     @page{ size:A4; margin:14mm;}
   }
+
+.hero-metric.profile-first .profile-title{
+  font-family:var(--serif);
+  font-size:clamp(30px,4.2vw,54px);
+  line-height:1.04;
+  color:var(--white);
+  max-width:820px;
+  margin:8px 0 14px;
+}
+.profile-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px;}
+.gap-secondary{
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:.045em;
+  color:var(--slate-dim);
+  border-left:1px solid var(--line);
+  padding-left:12px;
+}
+@media(max-width:620px){
+  .profile-meta{align-items:flex-start;flex-direction:column;gap:8px;}
+  .gap-secondary{border-left:0;padding-left:0;}
+}
+
 </style>
 </head>
 <body>
@@ -700,10 +723,10 @@ function validateReportCoherence(pattern, scores){
 function getHeroNarrative(s, pattern){
   const type = pattern.heroType;
   if(type === 'healthy'){
-    return `A ${s.gap}-point Ownership Gap indicates that ownership capacity and the management environment enabling it are closely aligned. With strong Ownership Capacity and low Manager Dependency, the opportunity is less about closing a gap and more about protecting and extending what already works.`;
+    return `Ownership Capacity is strong and Manager Dependency is low. The low numerical gap is therefore a healthy result: the management environment appears to release roughly as much ownership as people are equipped to exercise.`;
   }
   if(type === 'foundational'){
-    return `A low Ownership Gap is not necessarily a sign of strong ownership. In this case, Ownership Capacity itself is still developing, suggesting that the priority is to build the foundations of self-leadership before focusing on releasing greater autonomy.`;
+    return `The numerical gap is low, but that does not mean ownership is strong. Ownership Capacity is still developing, so the priority is to strengthen the foundations of self-leadership before focusing on releasing greater autonomy.`;
   }
   if(type === 'significant'){
     return `A ${s.gap}-point Ownership Gap suggests that people's capacity to take ownership may be materially ahead of what the current management environment enables them to exercise.`;
@@ -806,6 +829,32 @@ function gapLabel(gap, capacity, dependency, heroType){
   if(gap < CONFIG.gapBands.major) return "Significant Gap";
   return "Major Gap";
 }
+
+function ownershipProfileLabel(scores, pattern){
+  if(pattern.heroType === 'healthy') return "Healthy Ownership Balance";
+  if(pattern.heroType === 'foundational') return "Developing Ownership Foundation";
+  if(scores.gap >= CONFIG.gapBands.major) return "Major Ownership Constraint";
+  if(scores.gap >= CONFIG.gapBands.significant) return "Capability Ahead of Release";
+  if(scores.gap >= CONFIG.gapBands.moderate) return "Ownership Release Gap";
+  if(scores.capacity >= CONFIG.bands.strong && scores.dependency >= CONFIG.dependencyBands.high) return "Capability Trapped by Dependency";
+  return pattern.headline || "Mixed Ownership Profile";
+}
+
+function ownershipProfileBand(scores, pattern){
+  if(pattern.heroType === 'healthy') return "Strong foundation";
+  if(pattern.heroType === 'foundational') return "Foundation to build";
+  if(scores.gap >= CONFIG.gapBands.significant) return "Material gap";
+  if(scores.gap >= CONFIG.gapBands.moderate) return "Moderate gap";
+  return "Mixed pattern";
+}
+
+function gapSecondaryText(gap){
+  if(gap >= CONFIG.gapBands.major) return `Ownership Gap: ${gap} pts \u2014 Major`;
+  if(gap >= CONFIG.gapBands.significant) return `Ownership Gap: ${gap} pts \u2014 Significant`;
+  if(gap >= CONFIG.gapBands.moderate) return `Ownership Gap: ${gap} pts \u2014 Moderate`;
+  return `Ownership Gap: ${gap} pts \u2014 No material gap detected`;
+}
+
 function gapLabelClass(gap, capacity, dependency, heroType){
   if(gap < CONFIG.gapBands.moderate){
     if(capacity < CONFIG.bands.developing) return heroType === 'foundational' ? "b-emerging" : "b-developing";
@@ -846,6 +895,7 @@ const viewMode = urlParams.get('view');
 const respondentId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('r'+Date.now()+Math.random().toString(36).slice(2));
 
 let current = 0;
+let hasRestoredProgress = false;
 let answers = new Array(QUESTIONS.length).fill(null);
 let lastScores = null; // set after computeScores runs
 let lastPatterns = null;
@@ -922,7 +972,8 @@ function submitIntake(){
 }
 
 function startAssessment(){
-  current = 0;
+  if(!hasRestoredProgress) current = 0;
+  hasRestoredProgress = false;
   document.getElementById('progressTrack').style.display='block';
   show('screen-assessment');
   renderQuestion();
@@ -1039,10 +1090,13 @@ function showIndividualReport(){
       <div class="confidential">Individual responses are not displayed in the Team Dashboard<br><button class="btn btn-ghost btn-sm no-print" style="margin-top:8px;" onclick="window.print()">\uD83D\uDDA8 Print / Save PDF</button></div>
     </div>
 
-    <div class="hero-metric">
-      <div class="hero-lbl">Ownership Gap</div>
-      <div class="hero-num">${s.gap} <span>pts</span></div>
-      <div class="hero-band ${gapLabelClass(s.gap, s.capacity, s.dependency, p.primary.heroType)}">${gapLabel(s.gap, s.capacity, s.dependency, p.primary.heroType)}</div>
+    <div class="hero-metric profile-first">
+      <div class="hero-lbl">Ownership Profile</div>
+      <div class="profile-title">${ownershipProfileLabel(s, p.primary)}</div>
+      <div class="profile-meta">
+        <span class="hero-band ${gapLabelClass(s.gap, s.capacity, s.dependency, p.primary.heroType)}">${ownershipProfileBand(s, p.primary)}</span>
+        <span class="gap-secondary">${gapSecondaryText(s.gap)}</span>
+      </div>
       <p class="hero-note">${getHeroNarrative(s, p.primary)}</p>
     </div>
 
@@ -1105,7 +1159,7 @@ function showIndividualReport(){
 function emailReport(){
   const s = lastScores, p = lastPatterns;
   const subject = encodeURIComponent('My Ownership Gap Results');
-  const body = encodeURIComponent(`My Ownership Gap: ${s.gap} pts (${gapLabel(s.gap, s.capacity, s.dependency, p.primary.heroType)})\nOwnership Capacity: ${s.capacity}/100 (${band(s.capacity)})\nManager Dependency: ${s.dependency}/100 (${dependencyBand(s.dependency)})\n\nCore Ownership Tension: ${p.primary.headline}\n${p.primary.insight}\n\n\u2014 The Ownership Gap\u2122, Blanchard Israel`);
+  const body = encodeURIComponent(`My Ownership Profile: ${ownershipProfileLabel(s, p.primary)}\nOwnership Gap: ${s.gap} pts\nOwnership Capacity: ${s.capacity}/100 (${band(s.capacity)})\nManager Dependency: ${s.dependency}/100 (${dependencyBand(s.dependency)})\n\nCore Ownership Tension: ${p.primary.headline}\n${p.primary.insight}\n\n\u2014 The Ownership Gap\u2122, Blanchard Israel`);
   window.location.href = `mailto:?subject=${subject}&body=${body}`;
 }
 

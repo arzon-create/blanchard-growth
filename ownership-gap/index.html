@@ -721,6 +721,7 @@ const CONFIG = {
   environment: "external", // "internal" | "external" ג€” controls whether the review badge shows
   publicTeamSelfService: false, // public flow shows "Explore the Organizational View" instead of free self-service team creation
   organizationalDiagnosticEnabled: true,
+  teamReviewEnabled: false, // paid/facilitated organizational option only ג€” never exposed in the free public flow
   scoring: { version: "v2.0" },
   bands: { exceptional:90, strong:75, developing:60, emerging:40 },
   dependencyBands: { veryHigh:75, high:60, moderate:40 },
@@ -729,7 +730,7 @@ const CONFIG = {
   alignment: { zeroPointSD: 40 },
   teamPriority: { scoreWeight:0.4, dispersionWeight:0.75, dependencyBonus:15, roleGapBonus:15, corePatternBonus:15 },
   roles: ROLES,
-  links: { selfLeadership: "https://www.blanchard.com/self-leadership" },
+  links: { selfLeadership: "https://www.blanchard.com/our-content/programs/self-leadership" },
   contact: { email: "erez@blanchard.co.il" },
 };
 
@@ -840,7 +841,7 @@ const urlParams = new URLSearchParams(window.location.search);
 let sessionToken = sanitizeCode(urlParams.get('session'));
 const arrivedViaInvite = !!sessionToken; // captured once, before sessionToken may be reassigned by "Build Team View"
 const internalOverride = CONFIG.environment === 'internal' && urlParams.get('internal') === '1'; // only works in internal builds ג€” external/public builds cannot be unlocked via URL param
-const teamSelfServiceAvailable = CONFIG.publicTeamSelfService || internalOverride || arrivedViaInvite;
+const teamSelfServiceAvailable = CONFIG.teamReviewEnabled && (CONFIG.publicTeamSelfService || internalOverride || arrivedViaInvite);
 const viewMode = urlParams.get('view');
 const respondentId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('r'+Date.now()+Math.random().toString(36).slice(2));
 
@@ -857,6 +858,22 @@ function show(id){
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
 }
+
+
+// Restore unfinished individual diagnostic progress in the free public version.
+try{
+  const savedProfile = localStorage.getItem('ownershipGapPilotProfile');
+  if(savedProfile) profile = {...profile, ...JSON.parse(savedProfile)};
+  const savedAnswers = localStorage.getItem('ownershipGapPilotAnswers');
+  const savedCurrent = parseInt(localStorage.getItem('ownershipGapPilotCurrent') || '0', 10);
+  if(savedAnswers){
+    const parsed = JSON.parse(savedAnswers);
+    if(Array.isArray(parsed) && parsed.length === QUESTIONS.length){
+      answers = parsed;
+      current = Number.isFinite(savedCurrent) ? Math.max(0, Math.min(savedCurrent, QUESTIONS.length-1)) : 0;
+    }
+  }
+}catch(e){}
 
 /* =========================================================
    ASSESSMENT FLOW
@@ -898,6 +915,9 @@ function submitIntake(){
     return;
   }
   profile = { orgName, name, role, country };
+  try{
+    localStorage.setItem('ownershipGapPilotProfile', JSON.stringify(profile));
+  }catch(e){}
   startAssessment();
 }
 
@@ -937,6 +957,10 @@ function renderQuestion(){
 
 function selectAnswer(v){
   answers[current] = v;
+  try{
+    localStorage.setItem('ownershipGapPilotAnswers', JSON.stringify(answers));
+    localStorage.setItem('ownershipGapPilotCurrent', String(current));
+  }catch(e){}
   renderQuestion();
 }
 
@@ -954,6 +978,10 @@ function nextQuestion(){
     document.getElementById('progressTrack').style.display='none';
     lastScores = computeScores(answers);
     lastPatterns = matchPatterns(lastScores);
+    try{
+      localStorage.removeItem('ownershipGapPilotAnswers');
+      localStorage.removeItem('ownershipGapPilotCurrent');
+    }catch(e){}
     if(sessionToken){
       finishInvitedSubmission();
     } else {
@@ -1185,6 +1213,10 @@ function genToken(){
 }
 
 function showTeamCreate(){
+  if(!CONFIG.teamReviewEnabled){
+    show('screen-org-diagnostic');
+    return;
+  }
   renderCreateForm();
   show('screen-team-create');
 }
@@ -1340,6 +1372,10 @@ async function closeSession(token){
 const MIN_N = CONFIG.privacy.minGroupN;
 
 function viewGroupResults(){
+  if(!CONFIG.teamReviewEnabled){
+    show('screen-org-diagnostic');
+    return;
+  }
   show('screen-group');
   loadGroupDashboard();
 }
@@ -1591,19 +1627,19 @@ function sendContact(){
 /* =========================================================
    BOOTSTRAP
    ========================================================= */
-if(CONFIG.environment !== 'internal'){
-  const tag = document.querySelector('.proto-tag');
-  if(tag) tag.style.display = 'none';
-}
 
-if(sessionToken && viewMode==='team'){
-  // creator's bookmarked dashboard link ג€” go straight to the group dashboard, no assessment required
+if(CONFIG.teamReviewEnabled && sessionToken && viewMode==='team'){
+  // paid/facilitated Team Review only
   document.getElementById('orgBadge').style.display='flex';
   document.getElementById('orgBadgeCode').textContent = 'Loadingג€¦';
   viewGroupResults();
-} else if(sessionToken){
-  // invited participant link ג€” must complete assessment; auto-joins the team on Finish (C1)
+} else if(CONFIG.teamReviewEnabled && sessionToken){
+  // paid/facilitated Team Review only
   loadInvitedSession();
+} else if(!CONFIG.teamReviewEnabled && sessionToken){
+  // Public/free version: session/team links are intentionally disabled.
+  sessionToken = '';
+  show('screen-invite');
 }
 </script>
 </body>

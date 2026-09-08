@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>הרשמה | Blanchard Management Essentials®</title>
+<meta name="description" content="הרשמה למחזור נובמבר 2026 של Blanchard Management Essentials® – 4 השיחות שכל מנהל צוות צריך לדעת לנהל.">
+<style>
+:root{
+ --navy:#123544;--navy2:#0d2935;--teal:#008d7d;--orange:#ef6b3a;
+ --cream:#f7f4ed;--paper:#fffdfa;--text:#17313d;--muted:#687a83;
+ --line:#dfe4e2;--soft:#edf4f1;--danger:#a84c3d;--shadow:0 24px 70px rgba(8,34,45,.14);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Heebo,Arial,sans-serif;color:var(--text);background:var(--cream)}
+a{color:inherit}
+.wrap{max-width:1180px;margin:auto;padding:24px}
+header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 24px}
+.logo{font-weight:900;font-size:25px;color:var(--teal);letter-spacing:-.04em}
+.logo small{display:block;color:var(--navy);font-size:11px;text-align:left;letter-spacing:.12em}
+.back{font-size:13px;text-decoration:none;color:var(--muted)}
+.layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px;align-items:start}
+.summary{background:linear-gradient(150deg,var(--navy),var(--navy2));color:#fff;border-radius:28px;padding:38px;position:sticky;top:20px;box-shadow:var(--shadow)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.09em;color:#8fd4c9}
+h1{font-size:43px;line-height:1.06;margin:12px 0 14px;letter-spacing:-.035em}
+.summary .sub{font-size:18px;line-height:1.55;color:rgba(255,255,255,.82);margin-bottom:26px}
+.facts{display:grid;gap:0;border-top:1px solid rgba(255,255,255,.15)}
+.fact{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.15);display:grid;grid-template-columns:95px 1fr;gap:12px}
+.fact span{font-size:11px;color:rgba(255,255,255,.55);font-weight:700}
+.fact strong{font-size:14px;line-height:1.5}
+.price{margin-top:24px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:18px;border-radius:17px}
+.price strong{font-size:22px}.price p{margin:6px 0 0;color:rgba(255,255,255,.72);font-size:13px;line-height:1.5}
+.formcard{background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:34px;box-shadow:0 18px 55px rgba(17,49,61,.08)}
+.step{font-size:12px;color:var(--teal);font-weight:800;letter-spacing:.06em}
+h2{font-size:30px;margin:7px 0 8px;letter-spacing:-.02em}
+.intro{margin:0 0 24px;color:var(--muted);font-size:14px;line-height:1.55}
+form{display:grid;gap:15px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:12px;font-weight:800;margin:0 0 7px}
+.req{color:var(--orange)}
+input{width:100%;border:1px solid var(--line);background:#fff;border-radius:13px;padding:14px 13px;font:inherit;outline:none;transition:.18s}
+input:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(0,141,125,.09)}
+.commit{background:#fff8f3;border:1px solid #f0d2c5;border-radius:17px;padding:17px;margin-top:4px}
+.commit h3{font-size:14px;margin:0 0 8px}
+.commit ul{margin:0;padding-right:18px;color:#5f6e75;font-size:12px;line-height:1.65}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:12px;line-height:1.55;color:#4f626c}
+.check input{width:auto;margin-top:4px}
+button{border:0;border-radius:14px;background:var(--orange);color:#fff;padding:15px;font:800 16px Heebo,Arial,sans-serif;cursor:pointer;box-shadow:0 12px 25px rgba(239,107,58,.2)}
+button:disabled{opacity:.55}
+.micro{text-align:center;font-size:11px;color:#839198}
+.contact{margin-top:21px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.7}
+.contact b{color:var(--text)}
+.error{display:none;background:#fff0ec;color:#913f31;padding:10px 12px;border-radius:11px;font-size:12px}
+.success{display:none;text-align:center;padding:38px 10px}
+.success .icon{width:54px;height:54px;margin:auto auto 13px;border-radius:50%;background:#e4f4ef;color:var(--teal);display:grid;place-items:center;font-size:27px;font-weight:900}
+.success h3{font-size:27px;margin:0 0 9px}
+.success p{color:var(--muted);line-height:1.6}
+footer{font-size:11px;color:#849097;text-align:center;padding:28px 0 8px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.summary{position:static}.wrap{padding:16px}.summary,.formcard{border-radius:22px;padding:24px}h1{font-size:37px}}
+@media(max-width:520px){header{padding-bottom:14px}.row{grid-template-columns:1fr}.summary{padding:22px}h1{font-size:34px}.summary .sub{font-size:16px}.fact{grid-template-columns:80px 1fr}.formcard{padding:22px 18px}h2{font-size:26px}}
+
+.add-person{width:100%;background:transparent;color:var(--teal);border:1px dashed rgba(0,141,125,.42);box-shadow:none;margin-top:2px;padding:13px;font-size:14px}
+.add-person:hover{background:#f1f8f6}
+.add-person:disabled{opacity:.5;cursor:default}
+.extra-person{position:relative;background:#f7faf8;border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:2px}
+.extra-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.extra-head strong{font-size:13px}.remove-person{width:auto;background:none;color:#8a5a4e;box-shadow:none;padding:4px 8px;font-size:12px}
+.limit-note{font-size:11px;color:var(--muted);text-align:center;margin-top:-7px}
+@media(max-width:520px){.extra-person .row{grid-template-columns:1fr}}
+.hp-field{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="logo">blanchard<small>ISRAEL</small></div>
+ <a class="back" href="https://growth.blanchard.co.il/public-workshops/management-essentials/">← חזרה לעמוד הקורס</a>
+</header>
+
+<main class="layout">
+<section class="summary">
+ <div class="eyebrow">BLANCHARD MANAGEMENT ESSENTIALS®</div>
+ <h1>4 השיחות שכל מנהל צוות צריך לדעת לנהל</h1>
+ <div class="sub">מחזור נובמבר 2026 · הרשמה</div>
+ <div class="facts">
+   <div class="fact"><span>מועדים</span><strong>15.11.26 + 22.11.26</strong></div>
+   <div class="fact"><span>שעות</span><strong>09:00–16:30</strong></div>
+   <div class="fact"><span>מנחה</span><strong>דקל דיון</strong></div>
+   <div class="fact"><span>מיקום</span><strong>כפר הנוער עיינות · Lead Up</strong></div>
+ </div>
+ <div class="price">
+   <strong>₪2,450 + מע״מ</strong>
+   <p>למשתתף · שני משתתפים מאותו ארגון: ₪4,500 + מע״מ</p>
+ </div>
+</section>
+
+<section class="formcard">
+ <div id="formArea">
+   <div class="step">REGISTRATION · NOVEMBER 2026</div>
+   <h2>נשאר רק להשלים את ההרשמה</h2>
+   <p class="intro">מלאו את הפרטים מטה. לאחר קבלת הטופס נשלח אישור הרשמה והנחיות להמשך.</p>
+
+   <form id="regForm">
+    <div class="hp-field" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+    <div class="row">
+     <div><label>שם המשתתף/ת <span class="req">*</span></label><input name="participantName" required autocomplete="name"></div>
+     <div><label>תפקיד <span class="req">*</span></label><input name="role" required></div>
+    </div>
+    <div class="row">
+     <div><label>אימייל המשתתף/ת <span class="req">*</span></label><input type="email" name="email" required autocomplete="email"></div>
+     <div><label>טלפון המשתתף/ת <span class="req">*</span></label><input type="tel" name="phone" required autocomplete="tel"></div>
+    </div>
+    <div id="additionalParticipants"></div>
+    <button class="add-person" id="addParticipantBtn" type="button">+ הוספת נרשם/ת נוסף/ת</button>
+    <div class="limit-note">ניתן לרשום עד 5 משתתפים באותה הרשמה</div>
+
+    <div class="commit">
+      <h3>אישור תנאי ההרשמה</h3>
+      <ul>
+        <li>אני מתחייב/ת לשלם את דמי ההשתתפות מיד עם קבלת חשבונית החיוב ולא יאוחר מיום הסדנה – 15.11.26.</li>
+        <li><b>ביטול הרשמה אפשרי ללא חיוב עד 29.10.26.</b></li>
+      </ul>
+      <label class="check"><input type="checkbox" name="terms" required><span>קראתי ואני מאשר/ת את תנאי ההרשמה והתשלום. <span class="req">*</span></span></label>
+    </div>
+
+    <h2 style="font-size:20px;margin:8px 0 0">פרטי הגורם המאשר / הנהלת חשבונות</h2>
+    <div class="row">
+     <div><label>שם מלא של הגורם המאשר <span class="req">*</span></label><input name="approverName" required></div>
+     <div><label>טלפון נייד – הגורם המאשר <span class="req">*</span></label><input type="tel" name="approverPhone" required></div>
+    </div>
+    <div><label>אימייל – הגורם המאשר <span class="req">*</span></label><input type="email" name="approverEmail" required></div>
+
+    <h2 style="font-size:20px;margin:8px 0 0">פרטים לחשבונית</h2>
+    <div><label>כתובת הארגון למשלוח חשבונית <span class="req">*</span></label><input name="billingAddress" required></div>
+    <div class="row">
+     <div><label>ח״פ חברה <span class="req">*</span></label><input name="companyId" required inputmode="numeric"></div>
+     <div><label>שם מלא לחשבונית <span class="req">*</span></label><input name="invoiceName" required></div>
+    </div>
+
+    <div id="err" class="error"></div>
+    <button id="submitBtn" type="submit">השלמת הרשמה למחזור נובמבר ←</button>
+    <div class="micro">הפרטים משמשים לצורך הרשמה, חיוב ותקשורת הקשורה לקורס בלבד.</div>
+   </form>
+
+   <div class="contact">
+    <b>שאלות לגבי תשלום / חשבוניות:</b> ליאור · <a href="mailto:lior@businesstraining.co.il">lior@businesstraining.co.il</a><br>
+    <b>שאלות מקצועיות לגבי הקורס:</b> דקל · <a href="mailto:dekel@businesstraining.co.il">dekel@businesstraining.co.il</a> · 054-2021455
+   </div>
+ </div>
+
+ <div id="success" class="success">
+   <div class="icon">✓</div>
+   <h3>ההרשמה התקבלה</h3>
+   <p>תודה. הפרטים נשלחו. אישור הרשמה אמור להגיע לכל אחד מהנרשמים למייל שמולא בטופס.</p>
+ </div>
+</section>
+</main>
+<footer>Blanchard Israel · Management Essentials®</footer>
+</div>
+
+<script>
+/*
+  לאחר פריסת Google Apps Script כ-Web App:
+  הדביקו כאן את כתובת ה-/exec שקיבלתם מגוגל.
+*/
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxi-sPXpRZdgslILxL9tkwJH-vRCg-rQNskZp5L0ocWgr1UwHsXALbv2NTNvc7XOo_z/exec";
+window.__FORM_LOADED_AT=Date.now();
+const form=document.getElementById("regForm"), btn=document.getElementById("submitBtn"), err=document.getElementById("err");
+const additionalParticipants=document.getElementById("additionalParticipants");
+const addParticipantBtn=document.getElementById("addParticipantBtn");
+const MAX_PARTICIPANTS=5;
+
+function updateAddButton(){
+ const count=1+additionalParticipants.querySelectorAll(".extra-person").length;
+ addParticipantBtn.disabled=count>=MAX_PARTICIPANTS;
+ addParticipantBtn.textContent=count>=MAX_PARTICIPANTS
+   ?"הגעתם למקסימום של 5 נרשמים"
+   :"+ הוספת נרשם/ת נוסף/ת";
+}
+
+addParticipantBtn.addEventListener("click",()=>{
+ const count=1+additionalParticipants.querySelectorAll(".extra-person").length;
+ if(count>=MAX_PARTICIPANTS) return;
+ const n=count+1;
+ const card=document.createElement("div");
+ card.className="extra-person";
+ card.innerHTML=`
+   <div class="extra-head"><strong>נרשם/ת ${n}</strong><button type="button" class="remove-person">הסרה</button></div>
+   <div class="row">
+     <div><label>שם המשתתף/ת <span class="req">*</span></label><input data-p="name" required></div>
+     <div><label>תפקיד <span class="req">*</span></label><input data-p="role" required></div>
+   </div>
+   <div class="row" style="margin-top:12px">
+     <div><label>אימייל המשתתף/ת <span class="req">*</span></label><input type="email" data-p="email" required></div>
+     <div><label>טלפון המשתתף/ת <span class="req">*</span></label><input type="tel" data-p="phone" required></div>
+   </div>`;
+ card.querySelector(".remove-person").addEventListener("click",()=>{card.remove();renumberParticipants();updateAddButton();});
+ additionalParticipants.appendChild(card);
+ renumberParticipants();updateAddButton();
+ card.querySelector("input").focus();
+});
+
+function renumberParticipants(){
+ additionalParticipants.querySelectorAll(".extra-person").forEach((card,i)=>{
+   card.querySelector(".extra-head strong").textContent="נרשם/ת "+(i+2);
+ });
+}
+function collectParticipants(fd){
+ const list=[{name:fd.get("participantName")||"",role:fd.get("role")||"",email:fd.get("email")||"",phone:fd.get("phone")||""}];
+ additionalParticipants.querySelectorAll(".extra-person").forEach(card=>{
+   list.push({
+    name:card.querySelector('[data-p="name"]').value,
+    role:card.querySelector('[data-p="role"]').value,
+    email:card.querySelector('[data-p="email"]').value,
+    phone:card.querySelector('[data-p="phone"]').value
+   });
+ });
+ return list;
+}
+updateAddButton();
+form.addEventListener("submit",async e=>{
+ e.preventDefault(); err.style.display="none";
+ if(FORM_ENDPOINT.includes("PASTE_GOOGLE")){
+   err.textContent="העמוד מוכן. לפני פרסום יש לחבר את כתובת ה-Google Apps Script לשמירת ההרשמות.";
+   err.style.display="block"; return;
+ }
+ const fd=new FormData(form);
+ const data=Object.fromEntries(fd.entries());
+ data.participants=collectParticipants(fd);
+ data.registrationId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():("reg-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+ data.formLoadedAt=window.__FORM_LOADED_AT||Date.now();
+ data.course="Blanchard Management Essentials®"; data.cohort="November 2026";
+ data.source="Premium Registration Page"; data.page=location.href; data.submittedAt=new Date().toISOString();
+ btn.disabled=true;btn.textContent="שולח הרשמה...";
+ try{
+   await fetch(FORM_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
+   document.getElementById("formArea").style.display="none";document.getElementById("success").style.display="block";window.scrollTo({top:0,behavior:"smooth"});
+ }catch(x){
+   err.textContent="לא הצלחנו לשלוח את ההרשמה. נסו שוב או צרו איתנו קשר.";
+   err.style.display="block";btn.disabled=false;btn.textContent="השלמת הרשמה למחזור נובמבר ←";
+ }
+});
+</script>
+</body>
+</html>

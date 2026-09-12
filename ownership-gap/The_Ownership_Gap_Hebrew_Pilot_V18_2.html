@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<!-- Ownership Gap Hebrew Pilot V18.2: Erez CTA portrait + clarified sharing. | V18.1: restored next-step layer and print optimization. | V18: executive diagnosis-first report. | V17: adaptive report intelligence. | V16: consolidated pilot feedback + culture positioning + transparent Gap math + report depth. | V15: questionnaire UX + terminology lock + executive report polish. Based on V14 QA. | V14: V7 locked questionnaire + V11 narrative architecture + Hebrew scoring adapter.  SP5-grade Diagnostic Truth + final visual/readability QA. Core questions/scoring unchanged. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><span class="og-lockup" dir="ltr">The Ownership Gap<span class="og-tm">™</span></span> — אבחון לתרבות של לקיחת בעלות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#132436; --ink-soft:#1B3143; --ink-card:#1E3A4A; --line: rgba(255,255,255,0.13);
+    --gold:#D9A63E; --gold-soft: rgba(217,166,62,0.16);
+    --orange:#E8763A; --orange-soft: rgba(232,118,58,0.18);
+    --slate:#DAE2E9; --slate-dim:#A9B7C3; --white:#ffffff;
+    --teal:#2E9E82; --teal-soft: rgba(46,158,130,0.16);
+    --clay:#C1573E; --clay-soft: rgba(193,87,62,0.16);
+    --card:#FBF8F2; --card-alt:#F3EEE2; --ink-text:#152A3A; --ink-text-soft:#51636F; --card-line: rgba(21,42,58,0.10);
+    --serif:'Heebo',Arial,sans-serif; --sans:'Heebo','IBM Plex Sans',Arial,sans-serif; --mono:'Heebo','IBM Plex Sans',Arial,sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background: linear-gradient(155deg, #0F2231 0%, #103F3E 48%, #0F4433 100%) fixed;
+    color:var(--white); font-family:var(--sans); -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  ::selection{ background:var(--orange); color:#fff; }
+  /* Hebrew Pilot visual system */
+  html,body{direction:rtl;} body{text-align:right;font-family:var(--sans);}
+  input,select,textarea,button{font-family:var(--sans);} input,select,textarea{direction:rtl;text-align:right;}
+  .brandmark{left:auto;right:28px}.brand-region,.proto-tag,.legal-footer{font-family:var(--sans);letter-spacing:.04em}
+  .invite-title,.q-text,.tension-headline,h1,h2,h3{font-family:var(--sans)!important;letter-spacing:-.02em}
+  .q-text{line-height:1.45}.scale-row{direction:ltr}.scale-anchors{direction:rtl}
+  .panel,.score-card,.hero-metric{border-radius:14px}.btn{font-weight:700}
+  .dash-wrap{direction:rtl}.bar-row-top,.score-row,.dash-head{direction:rtl}
+  .tension-insight,.tension-impl,.hero-note,.desc,.sub,.a-desc,.impl-list li{line-height:1.7}
+
+
+  .proto-tag{ position:fixed; top:14px; left:50%; transform:translateX(-50%); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--slate-dim); background:var(--ink-soft); border:1px solid var(--line); padding:6px 14px; border-radius:100px; z-index:500; pointer-events:none;}
+  .brandmark{ position:fixed; top:18px; left:28px; z-index:450; line-height:1;}
+  .brand-word{ font-family:var(--sans); font-weight:700; font-size:18px; letter-spacing:-0.02em; color:var(--white);}
+  .brand-word .dot{ color:var(--gold);}
+  .brand-region{ font-family:var(--mono); font-size:9px; letter-spacing:.25em; color:var(--slate-dim); margin-top:3px;}
+  .legal-footer{ position:fixed; bottom:14px; left:50%; transform:translateX(-50%); font-family:var(--mono); font-size:10px; color:var(--slate-dim); z-index:200; pointer-events:none; text-align:center; white-space:nowrap;}
+  .org-badge{ position:fixed; top:16px; right:28px; z-index:450; font-family:var(--mono); font-size:12.5px; color:var(--slate); background:var(--ink-soft); border:1px solid var(--line); padding:7px 14px; border-radius:100px; display:flex; align-items:center; gap:8px;}
+  .org-badge b{ color:var(--gold); font-weight:600;}
+
+  .screen{ display:none; min-height:100vh; width:100%; align-items:center; justify-content:center; padding:90px 24px 60px; animation:fadeIn .5s ease;}
+  .screen.active{ display:flex;}
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+  .eyebrow{ font-family:var(--mono); font-size:13.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--gold); display:inline-block;}
+  h1,h2,h3{ font-family:var(--serif); font-weight:600; letter-spacing:-0.01em;}
+  .btn{ font-family:var(--sans); font-weight:600; font-size:14.5px; padding:15px 30px; border-radius:3px; border:1px solid transparent; cursor:pointer; transition:all .2s ease; display:inline-flex; align-items:center; gap:10px;}
+  .btn-primary{ background:var(--orange); color:#fff;}
+  .btn-primary:hover{ background:#D5652C; transform:translateY(-1px);}
+  .btn-primary:disabled{ opacity:.35; cursor:not-allowed; transform:none;}
+  .btn-ghost{ background:transparent; color:var(--white); border-color:var(--line);}
+  .btn-ghost:hover{ border-color:var(--gold); color:var(--gold);}
+  .btn-sm{ padding:9px 16px; font-size:12.5px;}
+  .highlight{ background:linear-gradient(transparent 62%, var(--gold-soft) 62%); color:var(--white); font-weight:500;}
+
+  input[type=text], input[type=email], select, textarea{
+    width:100%; background:transparent; border:1px solid var(--line); border-radius:4px; color:var(--white);
+    padding:13px 14px; font-family:var(--sans); font-size:14px; margin-bottom:14px;
+  }
+  select option{ background:var(--ink-card); color:var(--white);}
+  label{ font-family:var(--mono); font-size:13.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--slate-dim); display:block; margin-bottom:6px;}
+
+  /* ---------- INVITE / LANDING ---------- */
+  #screen-invite{
+    background:
+      radial-gradient(ellipse 1000px 600px at 85% -10%, rgba(232,118,58,0.16), transparent 62%),
+      radial-gradient(ellipse 800px 500px at -5% 90%, rgba(46,158,130,0.20), transparent 60%);
+  }
+  .invite-wrap{ max-width:700px;}
+  .invite-logo{ margin-bottom:34px;}
+  .invite-logo-word{ font-family:var(--sans); font-weight:700; font-size:32px; letter-spacing:-0.02em; color:var(--white);}
+  .invite-logo-word .dot{ color:var(--gold);}
+  .invite-logo-region{ font-family:var(--mono); font-size:12.5px; letter-spacing:.3em; color:var(--slate-dim); margin-top:4px;}
+  .product-name{ font-family:var(--serif); font-weight:600; font-size:clamp(22px,2.6vw,27px); color:var(--white); margin-bottom:14px; letter-spacing:-0.01em;}
+  .product-name .dot{ color:var(--orange); font-weight:400;}
+  .invite-title{ font-size:clamp(30px,4.6vw,44px); line-height:1.15; margin-bottom:20px;}
+  .invite-key{ font-family:var(--serif); font-size:20px; font-weight:500; line-height:1.6; margin-bottom:22px; max-width:580px;}
+  .invite-sub{ font-family:var(--sans); font-size:16.5px; color:var(--slate); line-height:1.7; margin-bottom:32px; max-width:560px;}
+  .invite-meta{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:32px; font-family:var(--mono); font-size:13px; color:var(--slate-dim);}
+  .invite-meta span{ border:1px solid var(--line); padding:6px 12px; border-radius:100px;}
+  .why-block{ margin-top:32px; padding-top:26px; border-top:1px solid var(--line); max-width:520px;}
+  .why-block h4{ font-family:var(--serif); font-weight:500; font-size:17px; margin-bottom:12px;}
+  .why-block p{ font-size:16px; color:var(--slate); line-height:1.75;}
+  .why-block p + p{ margin-top:14px;}
+  .why-block .disclaimer{ color:var(--slate-dim); font-size:14.5px;}
+  .preview-line{ font-family:var(--mono); font-size:14px; color:var(--gold); letter-spacing:.02em; line-height:1.8;}
+
+  /* ---------- ASSESSMENT ---------- */
+  #screen-assessment{ align-items:flex-start; padding-top:130px;}
+  .assess-wrap{ max-width:680px; width:100%; margin:0 auto;}
+  .progress-track{ position:fixed; top:0; left:0; height:3px; width:100%; background:rgba(255,255,255,0.14); z-index:400;}
+  .progress-fill{ height:100%; background:var(--orange); transition:width .35s ease; width:0%;}
+  .q-counter{ font-family:var(--sans); font-size:14px; color:var(--white); opacity:.85; margin-bottom:16px; font-weight:500;}
+  .question-card{ background:var(--card); border-radius:14px; padding:44px 46px; box-shadow:0 12px 40px rgba(8,20,28,0.30);}
+  .q-text{ font-family:var(--serif); font-weight:500; font-size:clamp(23px,3vw,30px); line-height:1.35; margin-bottom:44px; min-height:100px; color:var(--ink-text);}
+  .scale-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:10px;}
+  .scale-btn{
+    width:56px; height:56px; min-width:44px; min-height:44px; border-radius:50%; border:1.5px solid rgba(21,42,58,0.18);
+    background:#fff; color:var(--ink-text); font-family:var(--mono); font-size:17px; font-weight:600;
+    cursor:pointer; transition:all .15s ease; display:flex; align-items:center; justify-content:center;
+  }
+  .scale-btn.endpoint{ border-color:rgba(21,42,58,0.32); } /* subtle emphasis on 1 and 5 — the behavioral anchors */
+  .scale-btn:hover{ border-color:var(--teal);}
+  .scale-btn.selected{ background:var(--teal); border-color:var(--teal); color:#fff;}
+  .scale-anchors{ display:flex; justify-content:space-between; font-size:15px; color:var(--ink-text-soft); line-height:1.5; margin-bottom:36px; gap:16px;}
+  .scale-anchors span{ max-width:240px; font-weight:500;}
+  .scale-anchors span:last-child{ text-align:right; color:var(--ink-text);}
+  .nav-row{ display:flex; justify-content:flex-end; align-items:center; margin-top:8px;}
+  .btn-onlight{ color:var(--ink-text); border-color:rgba(21,42,58,0.22);}
+  .btn-onlight:hover{ color:var(--teal); border-color:var(--teal);}
+
+  /* ---------- TRANSITION / SHARED CARDS ---------- */
+  .center-wrap{ text-align:center; max-width:520px;}
+  .check-mark{ width:56px; height:56px; border-radius:50%; border:1px solid var(--gold); margin:0 auto 32px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:24px; font-family:var(--serif);}
+
+  /* ---------- REPORT (shared individual + group) ---------- */
+  .dash-wrap{ max-width:980px; width:100%; margin:0 auto;}
+  .report-brand{ margin-bottom:18px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  .report-brand-name{ font-family:var(--serif); font-weight:600; font-size:22px; color:var(--white);}
+  .report-brand-name .dot{ color:var(--orange);}
+  .report-brand-type{ font-family:var(--mono); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--slate-dim); margin-top:4px;}
+  .dash-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:12px; flex-wrap:wrap; gap:16px;}
+  .dash-head h2{ font-size:26px; margin-bottom:4px;}
+  .dash-head .sub{ color:var(--slate); font-size:14px; max-width:540px; line-height:1.6;}
+  .confidential{ font-family:var(--mono); font-size:12.5px; color:var(--slate-dim); letter-spacing:.08em; text-transform:uppercase; border:1px solid var(--line); padding:6px 12px; border-radius:100px; text-align:center;}
+
+  .hero-metric{ background:var(--ink-card); border:1px solid rgba(255,255,255,0.10); border-radius:10px; padding:36px 40px; margin:24px 0 18px; position:relative; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.25);}
+  .hero-metric::before{ content:''; position:absolute; top:-40%; left:-8%; width:60%; height:200%; background:radial-gradient(circle, rgba(46,158,130,0.28), transparent 65%);}
+  .hero-metric::after{ content:''; position:absolute; bottom:-50%; right:-10%; width:50%; height:150%; background:radial-gradient(circle, rgba(232,118,58,0.14), transparent 65%);}
+  .hero-lbl{ font-family:var(--mono); font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--orange); margin-bottom:10px; position:relative;}
+  .hero-num{ font-family:var(--serif); font-size:64px; line-height:1; position:relative; color:var(--white);}
+  .hero-num span{ font-size:22px; color:var(--slate-dim);}
+  .hero-band{ display:inline-block; margin-top:12px; font-family:var(--mono); font-size:12.5px; padding:5px 12px; border-radius:100px; position:relative;}
+  .hero-band.b-strong{ background:var(--teal-soft); color:var(--teal);}
+  .hero-band.b-developing{ background:var(--gold-soft); color:var(--gold);}
+  .hero-band.b-emerging{ background:var(--clay-soft); color:var(--clay);}
+  .hero-note{ margin-top:14px; color:var(--slate); font-size:14px; line-height:1.6; max-width:560px; position:relative;}
+
+  .score-row{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:22px;}
+  .score-row.team{ grid-template-columns:repeat(4,1fr);}
+  /* Light executive content cards — the readability fix: rich background is the canvas, diagnostic content sits on clean off-white cards */
+  .score-card{ background:var(--card); border:1px solid var(--card-line); border-radius:8px; padding:24px; box-shadow:0 4px 14px rgba(15,34,49,0.16);}
+  .score-card .lbl{ font-family:var(--mono); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-text-soft); margin-bottom:14px;}
+  .score-card .num{ font-family:var(--serif); font-size:36px; color:var(--ink-text); line-height:1;}
+  .score-card .num span{ font-size:15px; color:var(--ink-text-soft);}
+  .score-card .band{ margin-top:10px; font-size:12.5px; font-weight:600; font-family:var(--mono);}
+  .score-card .desc{ margin-top:8px; font-size:13px; color:var(--ink-text-soft); line-height:1.5;}
+  .band.b-exceptional{ color:#1F7A63;} .band.b-strong{ color:#1F7A63;} .band.b-developing{ color:#A9791F;}
+  .band.b-emerging{ color:#A8442D;} .band.b-constrained{ color:#A8442D;}
+
+  .panel{ background:var(--card); border:1px solid var(--card-line); border-radius:10px; padding:32px; margin-bottom:22px; color:var(--ink-text); box-shadow:0 4px 18px rgba(15,34,49,0.14);}
+  .panel h3{ font-size:17px; margin-bottom:16px; font-weight:600; color:var(--ink-text);}
+  .panel .sub{ font-size:12.5px; color:var(--ink-text-soft); margin-top:-10px; margin-bottom:18px; font-family:var(--mono);}
+  .panel .eyebrow{ color:var(--orange);}
+  .panel .eyebrow::before{ background:var(--orange);}
+
+  .bar-row{ margin-bottom:16px;}
+  .bar-row:last-child{ margin-bottom:0;}
+  .bar-row-top{ display:flex; justify-content:space-between; font-size:14.5px; margin-bottom:6px;}
+  .bar-row-top .dname{ font-family:var(--sans); font-weight:600; color:var(--ink-text);}
+  .bar-row-top .dval{ font-family:var(--mono); color:var(--ink-text-soft);}
+  .bar-track{ height:9px; background:rgba(21,42,58,0.10); border-radius:4px; overflow:hidden;}
+  .bar-fill{ height:100%; background:var(--teal); border-radius:4px; transition:width .4s ease;}
+  .bar-band{ font-size:12.5px; color:var(--ink-text-soft); margin-top:4px; font-family:var(--mono);}
+
+  .tension-headline{ font-family:var(--serif); font-size:22px; margin-bottom:12px; color:var(--ink-text);}
+  .tension-insight{ color:var(--ink-text); font-size:14.5px; line-height:1.7; margin-bottom:10px;}
+  .tension-impl{ color:var(--ink-text-soft); font-size:14.5px; line-height:1.6; border-left:3px solid var(--orange); padding-left:14px;}
+  .secondary-signal{ margin-top:18px; padding-top:16px; border-top:1px solid var(--card-line); font-size:13px; color:var(--ink-text-soft);}
+
+  .impl-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; list-style:none;}
+  .impl-list li{ font-size:14.5px; color:var(--ink-text-soft); line-height:1.55; padding:14px 16px; background:var(--card-alt); border-radius:6px;}
+  .impl-list li b{ color:var(--ink-text); display:block; margin-bottom:4px; font-size:14px;}
+
+  .action-list{ list-style:none; counter-reset:act;}
+  .action-list li{ counter-increment:act; padding:14px 0 14px 34px; position:relative; border-bottom:1px solid var(--card-line);}
+  .action-list li:last-child{ border:none; padding-bottom:0;}
+  .action-list li::before{ content:counter(act); position:absolute; left:0; top:14px; font-family:var(--mono); font-size:11px; color:#fff; background:var(--orange); width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center;}
+  .action-list .a-title{ font-family:var(--serif); font-size:16px; margin-bottom:4px; color:var(--ink-text);}
+  .action-list .a-desc{ font-size:14.5px; color:var(--ink-text-soft); line-height:1.55;}
+
+  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;}
+  .footer-cta{ text-align:center; padding:36px 20px 10px;}
+  .footer-cta p{ color:var(--slate); max-width:480px; margin:0 auto 18px; font-size:15px; line-height:1.6;}
+  .footer-cta .btn-ghost{ color:var(--ink-text); border-color:rgba(21,42,58,0.24); background:rgba(255,255,255,0.55);}
+  .footer-cta .btn-ghost:hover{ color:var(--teal); border-color:var(--teal);}
+  body.report-active .legal-footer{ display:none;}
+
+  /* ---------- TEAM FLOW ---------- */
+  .form-wrap{ max-width:480px; width:100%;}
+  .role-grid{ display:grid; gap:0;}
+  .invite-link-box{ display:flex; gap:8px; margin-bottom:16px;}
+  .invite-link-box input{ margin-bottom:0; font-family:var(--mono); font-size:12.5px;}
+  .share-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+
+  .heatmap-table{ width:100%; border-collapse:collapse; font-size:13px;}
+  .heatmap-table th{ font-family:var(--mono); font-size:12.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--slate-dim); text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);}
+  .heatmap-table td{ padding:10px; border-bottom:1px solid var(--line); font-family:var(--mono);}
+  .heatmap-table td.dname{ font-family:var(--sans); color:var(--white);}
+  .heat-cell{ display:inline-block; min-width:38px; text-align:center; padding:4px 8px; border-radius:4px;}
+
+  .gap-flag{ display:inline-block; margin-left:6px; padding:2px 8px; border-radius:100px; font-size:10px; font-family:var(--mono); background:rgba(193,97,63,0.18); color:var(--clay); vertical-align:middle;}
+
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--slate);}
+  .empty-state h2{ margin-bottom:16px;}
+  .empty-state p{ max-width:440px; margin:0 auto 8px; line-height:1.6; font-size:14.5px;}
+  .lock-progress{ display:flex; justify-content:center; gap:8px; margin:24px 0;}
+  .lock-progress .dot{ width:12px; height:12px; border-radius:50%; background:var(--ink-soft); border:1px solid var(--line);}
+  .lock-progress .dot.filled{ background:var(--gold); border-color:var(--gold);}
+
+  .modal-overlay{ display:none; position:fixed; inset:0; background:rgba(8,10,16,0.72); z-index:900; align-items:center; justify-content:center; padding:20px;}
+  .modal-overlay.active{ display:flex;}
+  .modal-box{ background:var(--ink-card); border:1px solid var(--line); border-radius:8px; padding:36px; max-width:420px; width:100%; position:relative; max-height:90vh; overflow-y:auto;}
+  .modal-close{ position:absolute; top:16px; right:16px; background:none; border:none; color:var(--slate); font-size:16px; cursor:pointer;}
+  .modal-box h3{ font-size:20px; margin-bottom:10px;}
+  .modal-box > p{ color:var(--slate); font-size:14.5px; line-height:1.6; margin-bottom:20px;}
+  .modal-box .btn{ width:100%; justify-content:center; margin-top:4px;}
+
+  @media (max-width:760px){
+    .invite-meta{ flex-wrap:wrap;}
+    .score-row, .score-row.team{ grid-template-columns:1fr 1fr;}
+    .impl-list{ grid-template-columns:1fr;}
+    .brandmark{ display:none;}
+    .org-badge{ top:auto; bottom:14px; right:14px; font-size:9px; padding:5px 10px;}
+    .proto-tag{ top:auto; bottom:14px; left:14px; transform:none;}
+    .scale-btn{ width:44px; height:44px; font-size:14px;}
+    .heatmap-table{ font-size:11px;}
+    .question-card{ padding:30px 24px;}
+  }
+
+  /* Individual Report Capacity/Dependency cards stack fully at small mobile widths (fix per final visual round).
+     Team Dashboard's 4-card row is intentionally left at 2x2 here — not a layout change, per scope. */
+  @media (max-width:520px){
+    .score-row:not(.team){ grid-template-columns:1fr;}
+    .hero-metric{ padding:28px 24px;}
+    .cta-row{ flex-direction:column;}
+    .cta-row .btn{ width:100%; justify-content:center;}
+  }
+
+  /* Very small phones (~320-340px): 5×44px touch targets + gaps can exceed available width
+     once screen + card padding are subtracted. Tighten padding/gap only — never touch targets. */
+  @media (max-width:340px){
+    .screen{ padding-left:12px; padding-right:12px;}
+    .question-card{ padding:24px 14px;}
+    .scale-row{ gap:4px;}
+    .scale-anchors{ font-size:13px;}
+  }
+
+  .print-header, .print-footer{ display:none; }
+  @media print{
+    html, body{ background:var(--ink) !important; color:var(--white) !important; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;}
+    .proto-tag, .org-badge, .legal-footer, .brandmark, .btn, .no-print, .report-brand{ display:none !important;}
+    .screen{ min-height:0; padding:8px 4px 40px;}
+    .panel, .score-card, .hero-metric{ break-inside:avoid;}
+    .print-header{
+      display:flex !important; justify-content:space-between; align-items:baseline;
+      border-bottom:2px solid var(--orange); padding-bottom:10px; margin-bottom:18px;
+    }
+    .print-header .pw{ font-family:var(--sans); font-weight:700; font-size:16px; color:var(--white);}
+    .print-header .pw .dot{ color:var(--orange);}
+    .print-header .pt{ font-family:var(--mono); font-size:10px; color:var(--slate);}
+    .print-footer{
+      display:block !important; margin-top:26px; padding-top:10px; border-top:1px solid var(--line);
+      font-family:var(--mono); font-size:9px; color:var(--slate-dim);
+    }
+    @page{ size:A4; margin:14mm;}
+  }
+
+@media print{
+ html,body{background:#fff!important;color:#152A3A!important;direction:rtl!important}
+ #screen-individual{background:#fff!important;padding:0!important;display:block!important}
+ .dash-wrap{max-width:none!important;width:100%!important;margin:0!important}
+ .dash-head{background:#132436!important;padding:18px!important;border-radius:10px!important;margin-bottom:12px!important}
+ .hero-metric{margin:0 0 10px!important;padding:18px!important;background:#173843!important}
+ .score-row{gap:10px!important;margin-bottom:10px!important}.score-card{padding:14px!important}
+ .panel{padding:12px!important;margin-bottom:7px!important;border:1px solid #e2ded4!important;box-shadow:none!important}
+ .footer-cta{display:none!important}.print-footer{color:#52636f!important;margin-top:8px!important;padding-top:6px!important;font-size:8.5px!important}
+ .print-header .pw{color:#152A3A!important}.print-header .pt{color:#52636f!important}
+ .panel h3{font-size:16px!important;margin-bottom:5px!important}.tension-headline{font-size:19px!important}.hero-num{font-size:42px!important}
+ .tension-insight,.tension-impl,.hero-note,.desc,.sub,.a-desc,.impl-list li{font-size:12.8px!important;line-height:1.48!important}
+ .impl-list li,.action-list li{padding:6px 0!important}.bar-row{margin-bottom:5px!important}.bar-row-top{font-size:12.5px!important}
+ .questions-panel{padding:8px!important}.questions-panel .action-list li{padding:3px 0!important}.questions-panel .a-title{font-size:12.2px!important;line-height:1.35!important}
+ .panel,.score-card,.hero-metric{break-inside:avoid-page!important}
+ @page{size:A4;margin:8mm}
+}
+
+  .q-meta{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:14px;}
+  .q-meta .q-counter{margin:0;}
+  .q-dimension{
+    display:inline-flex;align-items:center;min-height:30px;padding:5px 12px;border-radius:999px;
+    background:rgba(236,112,45,.10);border:1px solid rgba(236,112,45,.22);
+    color:var(--orange);font-size:14px;font-weight:700;line-height:1.25;
+  }
+  .frequency-scale{direction:rtl;align-items:stretch;gap:10px;margin:28px 0 34px;}
+  .frequency-scale .scale-choice{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .frequency-scale .scale-btn{flex:none;}
+  .frequency-scale .scale-label{
+    direction:rtl;text-align:center;color:var(--ink-text-soft);font-size:13px;font-weight:600;line-height:1.25;
+    min-height:34px;display:flex;align-items:flex-start;justify-content:center;
+  }
+  .frequency-scale .scale-choice.selected .scale-label{color:var(--ink-text);}
+  @media(max-width:640px){
+    .q-meta{align-items:flex-start;gap:8px;margin-bottom:10px;}
+    .q-dimension{font-size:12.5px;padding:4px 9px;}
+    .frequency-scale{gap:4px;margin:22px 0 28px;}
+    .frequency-scale .scale-label{font-size:10.5px;line-height:1.15;min-height:38px;}
+  }
+
+</style>
+</head>
+<body>
+
+<div class="proto-tag">פיילוט עברית — לשימוש פנימי</div>
+<div class="brandmark"><div class="brand-word">blanchard<span class="dot">.</span></div><div class="brand-region">ISRAEL</div></div>
+<div class="legal-footer">© 2026 Blanchard Israel Ltd. All rights reserved.</div>
+<div class="org-badge" id="orgBadge" style="display:none;">Session: <b id="orgBadgeCode">—</b></div>
+
+<div class="progress-track" id="progressTrack" style="display:none;"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- ===================== SCREEN 1 — LANDING ===================== -->
+<section class="screen active" id="screen-invite">
+  <div class="invite-wrap">
+    <div class="invite-logo"><div class="invite-logo-word">blanchard<span class="dot">.</span></div><div class="invite-logo-region">ISRAEL</div></div>
+    <div class="product-name"><span class="og-lockup" dir="ltr">The Ownership Gap<span class="og-tm">™</span></span></div>
+    <div class="eyebrow">אבחון לתרבות של לקיחת בעלות</div>
+    <h1 class="invite-title">האם התרבות הארגונית שלכם מעודדת לקיחת בעלות — או מייצרת תלות במנהל?</h1>
+    <p class="invite-key"><span class="highlight">כשהיכולת של האנשים מתפתחת מהר יותר מהבעלות שהם מקבלים — המנהל עלול להפוך לצוואר הבקבוק.</span></p>
+    <p class="invite-sub"><span class="og-lockup" dir="ltr">The Ownership Gap<span class="og-tm">™</span></span> הוא כלי אבחון ורפלקציה למנהלים, שבוחן כיצד התרבות הארגונית והפרקטיקות הניהוליות משפיעות על היכולת של אנשים לקחת בעלות: עד כמה הם מצוידים לפעול, ועד כמה סביבת העבודה מאפשרת להם לעשות זאת בפועל.</p>
+    <div class="invite-meta"><span>24 שאלות</span><span>8-12 דקות</span><span>תוצאה מיידית</span></div>
+    <button class="btn btn-primary" onclick="showIntake()">לגלות את ה־Ownership Gap בארגון שלי ←</button>
+
+    <div class="why-block">
+      <h4>למה עכשיו?</h4>
+      <p class="why-now-lead"><span>בעידן שבו AI מגדיל במהירות את היכולת של אנשים לנתח, ליצור, להחליט ולבצע — ארגון שלא מרחיב במקביל את היכולת לקחת בעלות עלול להאיץ דווקא את צווארי הבקבוק.</span></p>
+      <p>ארגונים רבים עדיין פועלים עם דפוסי ניהול שנבנו לעידן אחר: החלטות עולות למעלה, מנהלים פותרים בעיות ואנשים ממתינים לכיוון או לאישור. <span class="og-lockup" dir="ltr">The Ownership Gap<span class="og-tm">™</span></span> נועד לפתוח שיחה ניהולית על הפער שבין היכולת הקיימת בארגון לבין התרבות, ההרגלים וזכויות ההחלטה שמאפשרים — או מעכבים — לקיחת בעלות בפועל.</p>
+      <p class="disclaimer">הכלי נשען על עקרונות Self Leadership® ועל עשרות שנות עבודה של Blanchard עם ארגונים ומנהלים בפיתוח עצמאות, אחריות, השפעה וביצועים. הוא נועד לייצר תמונת מצב ראשונית ושיחה ניהולית ממוקדת — לא להחליף אבחון ארגוני רחב.</p>
+    </div>
+
+    <div class="why-block" style="margin-top:22px; padding-top:18px;">
+      <p class="disclaimer" style="font-size:12px;">Blanchard Israel היא הנציגות הישראלית של Blanchard — חברת פיתוח מנהיגות גלובלית, מבוססת מחקר, הפועלת ביותר מ־70 מדינות. <a href="https://www.blanchard.co.il" target="_blank" rel="noopener" style="color:var(--gold);">עוד על Blanchard Israel ←</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SCREEN 1B — INVITED PARTICIPANT ===================== -->
+<section class="screen" id="screen-invited">
+  <div class="form-wrap" id="invitedContent"></div>
+</section>
+
+<!-- ===================== SCREEN 1C — INTAKE (organic path, before Q1) ===================== -->
+<section class="screen" id="screen-intake">
+  <div class="form-wrap" id="intakeContent"></div>
+</section>
+
+<!-- ===================== SCREEN 2 — ASSESSMENT ===================== -->
+<section class="screen" id="screen-assessment">
+  <div class="assess-wrap">
+    <div class="q-meta">
+      <div class="q-counter" id="qCounter">שאלה 1 מתוך 24</div>
+      <div class="q-dimension" id="qDimension">קריאת תיגר על הנחות ומגבלות</div>
+    </div>
+    <div class="question-card">
+      <h2 class="q-text" id="qText"></h2>
+      <div class="scale-row frequency-scale" id="scaleRow" role="radiogroup" aria-labelledby="qText"></div>
+      <div class="nav-row" style="justify-content:space-between;">
+        <button class="btn btn-ghost btn-onlight" id="backBtn" onclick="prevQuestion()" style="visibility:hidden;">חזרה →</button>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>הבא ←</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SCREEN 3 — TRANSITION ===================== -->
+<section class="screen" id="screen-transition">
+  <div class="center-wrap">
+    <div class="check-mark">✓</div>
+    <h2 style="font-size:30px; margin-bottom:14px;">תמונת ה־Ownership Gap שלך מוכנה</h2>
+    <p id="transitionSub" style="color:var(--slate); line-height:1.7; margin-bottom:20px; font-size:15px;">הדוח אינו מציג רק ציון. הוא מחבר בין היכולת לקחת בעלות, המרחב שהתרבות הארגונית מאפשרת בפועל וששת הממדים שמסבירים את התמונה.</p>
+    <div class="report-preview">
+      <div><strong>01</strong><span><b>מה התמונה המרכזית?</b> יכולת, תלות — והפער ביניהן.</span></div>
+      <div><strong>02</strong><span><b>למה זו התמונה?</b> ששת הממדים והדפוסים הבולטים.</span></div>
+      <div><strong>03</strong><span><b>איך זה עשוי להיראות?</b> ביטויים בעבודה והמחיר הארגוני.</span></div>
+      <div><strong>04</strong><span><b>מה כדאי לעשות?</b> מהלכים ושאלות המותאמים לתוצאה.</span></div>
+    </div>
+    <button class="btn btn-primary" onclick="showIndividualReport()">לצפייה בתוצאות שלי ←</button>
+  </div>
+</section>
+
+<!-- ===================== SCREEN 4 — INDIVIDUAL REPORT ===================== -->
+<section class="screen" id="screen-individual" style="align-items:flex-start; padding-top:70px;">
+  <div class="dash-wrap" id="individualContent"></div>
+</section>
+
+<!-- ===================== SCREEN 5 — BUILD TEAM VIEW (prompt) ===================== -->
+<section class="screen" id="screen-team-prompt">
+  <div class="center-wrap">
+    <div class="eyebrow" style="justify-content:center;">השלב הבא</div>
+    <h2 style="font-size:28px; margin-bottom:16px;">This Is How You See the Organization.</h2>
+    <p style="color:var(--slate); line-height:1.7; margin-bottom:32px; font-size:15.5px;">Does your leadership team see the same thing? Build a Team View to find out — every participant still gets their own individual report.</p>
+    <button class="btn btn-primary" onclick="showTeamCreate()">Build the Team View →</button>
+    <div style="margin-top:16px;"><button class="btn btn-ghost btn-sm" onclick="show('screen-individual')">חזרה → to my report</button></div>
+  </div>
+</section>
+
+<!-- ===================== SCREEN 5B — EXPLORE THE ORGANIZATIONAL VIEW (public path) ===================== -->
+<section class="screen" id="screen-org-diagnostic">
+  <div class="center-wrap" style="max-width:560px;">
+    <div class="eyebrow" style="justify-content:center;">מהתובנה האישית לתמונה הארגונית</div>
+    <h2 style="font-size:26px; margin-bottom:16px;">הדוח שלך משקף נקודת מבט אחת.</h2>
+    <p style="color:var(--slate); line-height:1.75; margin-bottom:22px; font-size:15px;">An Organizational Diagnostic reveals where leadership perspectives align, where they differ, and where manager dependency may be limiting ownership.</p>
+    <div class="preview-line">Leadership Alignment · Perception Gaps · Role Differences · Team Priorities</div>
+    <div style="margin:30px 0; padding-top:26px; border-top:1px solid var(--line);">
+      <h3 style="font-size:19px; margin-bottom:14px;">לקחת את <span class="og-lockup" dir="ltr">The Ownership Gap<span class="og-tm">™</span></span> לרמת הארגון</h3>
+      <button class="btn btn-primary" onclick="openContact()">לתיאום שיחת חשיבה ניהולית ←</button>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="show('screen-individual')">חזרה → to my report</button>
+  </div>
+</section>
+
+<!-- ===================== SCREEN 6 — CREATE / JOIN TEAM SESSION ===================== -->
+<section class="screen" id="screen-team-create">
+  <div class="form-wrap" id="teamCreateContent"></div>
+</section>
+
+<!-- ===================== SCREEN 7 — SHARE INVITE ===================== -->
+<section class="screen" id="screen-team-share">
+  <div class="form-wrap" id="teamShareContent"></div>
+</section>
+
+<!-- ===================== SCREEN 8 — GROUP DASHBOARD ===================== -->
+<section class="screen" id="screen-group" style="align-items:flex-start; padding-top:70px;">
+  <div class="dash-wrap" id="groupContent"></div>
+</section>
+
+<!-- ===================== CONTACT MODAL ===================== -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeContact()">✕</button>
+    <h3>Request a 30-Minute Executive Debrief</h3>
+    <p>Scores tell you where to look. The real value comes from understanding what is creating the pattern — and what to change first.</p>
+    <label>Full name</label><input type="text" id="cName">
+    <label>Company</label><input type="text" id="cCompany">
+    <label>Email</label><input type="email" id="cEmail">
+    <label>Anything you'd like us to know? (optional)</label><textarea id="cMsg" rows="3"></textarea>
+    <button class="btn btn-primary" onclick="sendContact()">Open Email Draft →</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   DATA — questions, dimensions, patterns, actions, implications
+   (kept as data so copy/logic can be swapped without touching UI code)
+   ========================================================= */
+const DIMS = ["Assumed Constraints","Points of Power","Proactivity","Goal Clarity","Diagnosing","Matching"];
+
+// LOCKED HEBREW PILOT QUESTIONNAIRE — exact wording from V7 Approved Design.
+// Measurement adapter maps the first 18 items to six Capacity dimensions and Q19–Q24 to direct Manager Dependency.
+const QUESTIONS = [
+  {"id":"Q1","dim":"Assumed Constraints","text":"כשאנשים נתקלים במגבלה, הם בודקים מה באמת מונע מהם להתקדם לפני שהם מניחים ש״אין מה לעשות״.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q2","dim":"Assumed Constraints","text":"כאשר כלל, נוהל או ״ככה עושים כאן״ מגבילים התקדמות, אנשים בודקים האם זו באמת מגבלה מחייבת — או הנחה שאפשר לקרוא עליה תיגר.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q3","dim":"Assumed Constraints","text":"כשדרך פעולה אחת חסומה, אנשים מחפשים דרכים חלופיות להתקדם.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q4","dim":"Points of Power","text":"גם ללא סמכות פורמלית, אנשים משתמשים במומחיות ובניסיון שלהם כדי לקדם דברים.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q5","dim":"Points of Power","text":"כשנדרשת השפעה על אחרים, אנשים מפעילים בעצמם קשרים וממשקים לפני שהם מבקשים מהמנהל להתערב.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q6","dim":"Points of Power","text":"כאשר ההחלטה אינה בידיהם, אנשים עדיין פועלים על הדברים שעליהם הם כן יכולים להשפיע.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q7","dim":"Proactivity","text":"כשמתעוררת בעיה, אנשים בדרך כלל מגיעים עם הצעה לדרך פעולה — ולא רק עם הבעיה.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q8","dim":"Proactivity","text":"כאשר נושא שבאחריותם אינו מתקדם, אנשים יוזמים את הצעד הבא לפני שהמנהל נדרש להתערב.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q9","dim":"Proactivity","text":"כשנסיבות משתנות, אנשים מתאימים את דרך הפעולה שלהם במקום להמתין שהמנהל יגיד להם מה לעשות.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q10","dim":"Goal Clarity","text":"לפני שהם מתחילים לפעול, אנשים מוודאים שהם מבינים את התוצאה הרצויה — ולא רק את המשימה שניתנה להם.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q11","dim":"Goal Clarity","text":"כאשר הציפיות אינן ברורות, אנשים יוזמים בירור במקום להמתין להנחיה.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q12","dim":"Goal Clarity","text":"כאשר חסר להם מידע כדי להתקדם, אנשים מבררים באופן ממוקד מה חסר להם במקום לעצור עד שהמנהל יתערב.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q13","dim":"Diagnosing","text":"כשאנשים נתקעים, הם מסוגלים לזהות מה בדיוק מונע מהם להתקדם.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q14","dim":"Diagnosing","text":"לפני שהם מבקשים עזרה, אנשים בוחנים מה הם כבר יודעים ומסוגלים לעשות בעצמם.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q15","dim":"Diagnosing","text":"אנשים מבחינים בין מצב שבו חסר להם ידע או ניסיון לבין מצב שבו הם זקוקים לביטחון, משוב או תמיכה.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q16","dim":"Matching","text":"כשאנשים פונים למנהל, הם מסוגלים להסביר מה בדיוק הם צריכים ממנו כדי להתקדם.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q17","dim":"Matching","text":"אנשים מבקשים Direction או Support באופן ממוקד, במקום להעביר למנהל את האחריות לפתרון.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q18","dim":"Matching","text":"לאחר שקיבלו מהמנהל את העזרה הנדרשת, האחריות להמשך נשארת אצלם.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":false},
+  {"id":"Q19","dim":"Manager Dependency","text":"החלטות שאנשים יכולים לקבל במסגרת האחריות שלהם עדיין מגיעות לעיתים קרובות לאישור המנהל.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":true},
+  {"id":"Q20","dim":"Manager Dependency","text":"כאשר מתעוררת בעיה, המנהל נוטה לספק את הפתרון לפני שהאדם גיבש דרך פעולה משלו.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":true},
+  {"id":"Q21","dim":"Manager Dependency","text":"אנשים נוטים לבדוק עם המנהל לפני שהם פועלים, גם כאשר הנושא נמצא בבירור בתחום האחריות שלהם.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":true},
+  {"id":"Q22","dim":"Manager Dependency","text":"כאשר משהו חשוב נתקע, ההתקדמות תלויה לעיתים קרובות בזמינותו של המנהל.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":true},
+  {"id":"Q23","dim":"Manager Dependency","text":"מנהלים מעורבים בהחלטות תפעוליות שאפשר היה לקבל קרוב יותר למקום שבו העבודה מתבצעת.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":true},
+  {"id":"Q24","dim":"Manager Dependency","text":"תהליכים, נורמות או מנגנוני אישור בארגון מחזירים למנהל החלטות שאנשים היו יכולים לקבל בעצמם.","a1":"כמעט אף פעם","a5":"כמעט תמיד","dep":true}
+];
+const DEPENDENCY_IDX = [18,19,20,21,22,23]; // Locked Hebrew V7: Q19–Q24 are direct Manager Dependency items (0-indexed).
+
+const HE_PATTERNS = {"capability_trapped":{"headline":"יכולת קיימת — הבעלות עדיין תקועה בתלות","insight":"נראה שקיימת בארגון יכולת משמעותית לקחת בעלות, אבל העבודה עדיין נשענת במידה רבה על מעורבות מנהלים.","implication":"מנהלים עלולים להפוך לצוואר בקבוק בהחלטות ובביצוע גם במקומות שבהם אחרים כבר מסוגלים לקחת יותר בעלות.","sectionTitle":"מה הפער הזה עלול לעלות לכם","businessImplications":[{"title":"יכולת שאינה מנוצלת במלואה","desc":"אנשים שמסוגלים לקחת יותר אחריות עלולים להמתין להחלטות שהם כבר יכולים לקבל."},{"title":"צווארי בקבוק בהחלטות","desc":"עבודה עלולה להיתקע אצל מנהלים שנשארו בלולאת האישור גם כשהיכולת כבר קיימת."},{"title":"מהירות ביצוע","desc":"ככל שההחלטה רחוקה יותר מהמקום שבו העבודה מתבצעת, כך גדל הסיכוי לעיכוב."},{"title":"AI מתקדם מהר יותר מהאוטונומיה","desc":"כאשר AI מרחיב את היכולת לנתח ולבצע, זכויות ההחלטה עלולות להישאר מאחור."}]},"foundational_gap":{"headline":"פער יסוד","insight":"ברוב הממדים, היכולת לקחת בעלות עדיין מתפתחת ובמקביל המנהלים מעורבים מאוד בהחלטות היום־יום.","implication":"זו כנראה יותר סוגיה מערכתית של בניית יכולת מאשר פרקטיקה ניהולית אחת שצריך לתקן.","sectionTitle":"איפה נכון לחזק לקיחת בעלות קודם","businessImplications":[{"title":"יכולת לפני שחרור","desc":"המוקד אינו להסיר אישורים אלא לבנות את היכולת והביטחון שבעלות דורשת."},{"title":"בהירות כנקודת פתיחה","desc":"לפני שאנשים יכולים לקחת יותר בעלות, הם צריכים להבין היטב את התוצאה והציפיות."},{"title":"יסודות של Self Leadership®","desc":"הדפוס הזה מגיב בדרך כלל טוב יותר לבניית הרגלי Self Leadership מאשר לשינויי מבנה בלבד."}]},"developing_foundation":{"headline":"הבסיס ללקיחת בעלות עדיין מתפתח","insight":"היכולת לקחת בעלות עדיין מתפתחת, בעוד התלות במנהל נמוכה יחסית. לכן האתגר המרכזי כאן אינו עודף שליטה ניהולית — אלא חיזוק היכולת לקחת בעלות באופן עקבי.","implication":"זהו שלב של בנייה — המטרה היא לחזק הרגלי Self Leadership® שמאפשרים לאנשים לקחת בעלות באופן עקבי, לפני שמרחיבים עוד את האוטונומיה.","sectionTitle":"איפה נכון לחזק לקיחת בעלות קודם","businessImplications":[{"title":"מוכנות לא אחידה","desc":"היכולת לקחת בעלות עשויה להיות חזקה בחלק מהמצבים וחלשה באחרים."},{"title":"תמיכה ניהולית לא אחידה","desc":"רמת התמיכה עשויה להשתנות לפי מנהל או משימה במקום לנבוע מאבחון עקבי."},{"title":"בונים לפני שמשחררים","desc":"אוטונומיה מועילה כאשר אנשים יודעים לאבחן מה הם צריכים ולפעול מתוך בהירות."}]},"untested_autonomy":{"headline":"אוטונומיה שעדיין לא נבחנה","insight":"המנהלים אינם נראים מעורבים מאוד בהחלטות היום־יום — אבל ייתכן שזה משקף מעורבות נמוכה או ציפיות נמוכות, ולא עצמאות אמיתית.","implication":"תלות נמוכה במנהל אינה בהכרח לקיחת בעלות חזקה; ייתכן שפשוט עוד לא ציפו מאנשים לקחת בעלות.","sectionTitle":"איפה נכון לחזק לקיחת בעלות קודם","businessImplications":[{"title":"תלות נמוכה אינה בהכרח בריאה","desc":"כאשר היכולת עדיין מתפתחת, היעדר מעורבות ניהולית אינו בהכרח סימן לעצמאות."},{"title":"ייתכן שלקיחת בעלות עדיין אינה ציפייה מפורשת","desc":"אנשים אולי לא לוקחים צעד אחורה כי הם מוכנים וסומכים עליהם, אלא כי טרם הוגדרה ציפייה ללקיחת בעלות."},{"title":"נקודת פתיחה, לא פער לסגירה","desc":"נכון לבנות יחד יכולת וציפיות, לפני שמסירים פיקוח שאולי אינו הבעיה המרכזית."}]},"strong_foundation":{"headline":"בסיס חזק — יש מקום להרחיב בעלות","insight":"גם היכולת לקחת בעלות וגם העצמאות ממעורבות מנהלים נראות חזקות — תמונה בריאה באמת.","implication":"ההזדמנות היא לשמר את הדפוס הזה כשהארגון גדל, לא לתקן פער שאינו קיים.","sectionTitle":"מה הבסיס החזק הזה מאפשר","businessImplications":[{"title":"לגדול בלי להוסיף תלות","desc":"כשהארגון גדל, האתגר הוא לשמר לקיחת בעלות על החלטות בלי להוסיף שכבות ואישורים מיותרים."},{"title":"AI כמכפיל ללקיחת בעלות","desc":"בסיס חזק של לקיחת בעלות מאפשרת ל־AI להרחיב שיקול דעת ויכולת, ולא רק להאיץ תלות בהחלטות מנהלים."},{"title":"דפוס שכדאי להגן עליו","desc":"צמיחה, לחץ או הנהלה חדשה יכולים למשוך החלטות חזרה למעלה. חשוב לדעת מה עובד כדי לשמר אותו."}]},"energy_no_alignment":{"headline":"אנרגיה בלי יישור קו","insight":"אנשים נראים מוכנים לפעול, אך לא תמיד קיימת מספיק בהירות לגבי סדרי עדיפויות ותוצאות.","implication":"הסיכון אינו פסיביות אלא ביצוע נמרץ בכיוונים שונים.","sectionTitle":"איפה הפער עשוי להופיע","businessImplications":[{"title":"פעילות ללא מיקוד","desc":"אנרגיה גבוהה ללא בהירות משותפת יכולה לייצר הרבה תנועה בלי מספיק התקדמות."},{"title":"עבודה חוזרת וסדרי עדיפויות מתנגשים","desc":"כאשר אנשים משלימים עמימות לפי פרשנות אישית, צוותים עלולים למשוך לכיוונים שונים."},{"title":"מהירות בלי כיוון","desc":"מהירות היא יתרון רק כשהיא מופנית למטרה הנכונה."}]},"knowing_not_asking":{"headline":"יודעים מה צריך — עדיין לא מבקשים","insight":"אנשים עשויים להבין מה הם צריכים, אבל לא תמיד מתרגמים את ההבנה לבקשה מפורשת ל־Direction או Support.","implication":"חלק מעבודת האבחון עדיין עלולה להישאר אצל המנהל אף שהעובד כבר מסוגל לקחת אותה.","sectionTitle":"איפה הפער עשוי להופיע","businessImplications":[{"title":"האבחון עדיין נשאר אצל המנהל","desc":"אנשים אולי מבינים מה חסר, אך אינם מנסחים בקשה ישירה."},{"title":"דפוס שקט","desc":"זה בדרך כלל לא נראה כמשבר אלא כסבבי תמיכה מעט איטיים יותר."},{"title":"פער בבקשה, לא בהבנה","desc":"ההזדמנות היא לנרמל בקשות ישירות וממוקדות לעזרה."}]},"willing_limited_influence":{"headline":"רוצים לפעול — ההשפעה מוגבלת","insight":"אנשים נראים מוכנים לקדם דברים, אך כאשר נדרשת השפעה הם נשענים יותר מדי על סמכות פורמלית.","implication":"התקדמות חוצת־ארגון עלולה להיות תלויה יותר מדי בהסלמה למנהל.","sectionTitle":"איפה הפער עשוי להופיע","businessImplications":[{"title":"חיכוך בין ממשקים","desc":"התקדמות שתלויה בצוותים אחרים עלולה לעבור דרך הסלמה פורמלית יותר מהנדרש."},{"title":"מקורות השפעה שאינם מנוצלים","desc":"אנשים שמוכנים לפעול אולי אינם משתמשים מספיק בקשרים, מומחיות ואמינות."},{"title":"מיומנות ניתנת לאימון","desc":"זו לעיתים קרובות מיומנות של ניווט והשפעה, לא בעיית מוטיבציה."}]},"clarification_bottleneck":{"headline":"צוואר בקבוק של בהירות","insight":"עמימות נוטה לנוע כלפי מעלה.","implication":"מנהלים עלולים להשקיע יותר מדי זמן בתרגום סדרי עדיפויות ובהגדרת הצלחה לאחרים.","sectionTitle":"מה הפער הזה עלול לעלות לכם","businessImplications":[{"title":"עמימות שעולה למעלה","desc":"כאשר סדרי עדיפויות אינם ברורים, חוסר הבהירות נוטה להגיע למנהל."},{"title":"זמן ניהולי על תרגום","desc":"מנהלים עלולים לבזבז זמן על הסברים חוזרים והגדרת קריטריונים להצלחה."},{"title":"החלטות שמתעכבות בגלל הקשר חסר","desc":"עבודה יכולה להיעצר בזמן שממתינים לבהירות שאפשר היה לבקש ישירות."}]},"ownership_held_back":{"headline":"בעלות שמעוכבת על ידי תלות","insight":"היכולת לקחת בעלות מתפתחת, אבל ההתקדמות עדיין נשענת במידה גבוהה על מעורבות מנהלים.","implication":"נדרשים כאן שני דברים יחד: להמשיך לבנות יכולת Self Leadership ובמקביל להפחית escalation ואישורים מיותרים.","sectionTitle":"איפה תלות במנהל עלולה לעכב לקיחת בעלות","businessImplications":[{"title":"שני צרכים במקביל","desc":"גם בניית יכולת וגם הפחתת אישורים מיותרים חשובים כאן."},{"title":"Escalation כברירת מחדל","desc":"חלק ממה שעולה למנהלים היום עשוי לנבוע מהרגל ולא מצורך אמיתי בפיקוח."},{"title":"יכולת שמתפתחת אך עדיין לא משתחררת","desc":"יש כאן יכולת אמיתית לעבוד איתה; חלק מהחסם נראה מבני יותר ממקצועי."}]},"default_mixed":{"headline":"תמונה מעורבת ומתפתחת","insight":"אין דפוס אחד דומיננטי — רמות לקיחת הבעלות והתלות יחסית מאוזנות, ללא מתח מרכזי אחד.","implication":"כדאי לקרוא את ששת הממדים ישירות ולבדוק היכן התמונה חזקה והיכן פחות.","sectionTitle":"איפה כדאי להעמיק","businessImplications":[{"title":"אין דפוס יחיד דומיננטי","desc":"התמונה אינה מצביעה על מנגנון אחד שמסביר את המצב."},{"title":"כדאי להסתכל ברמת הממדים","desc":"הפרופיל בן ששת הממדים הוא כרגע מקור המידע השימושי ביותר."}]},"clear_constrained":{"headline":"בהירות קיימת — ועדיין יש מגבלות","insight":"אנשים עשויים להבין היטב מה מצופה מהם, ובכל זאת לפעול מתוך הנחות צרות לגבי מה מותר להם לשנות או להשפיע עליו.","implication":"הבהירות קיימת, אבל מרחב לקיחת הבעלות והיוזמה עדיין עלול להיות מוגבל.","sectionTitle":"איפה הפער עשוי להופיע","businessImplications":[{"title":"בהירות בלי רשות","desc":"אנשים עשויים להבין את היעד ועדיין לפעול כאילו יוזמה מחוץ למסלול הצר אינה רצויה."},{"title":"יוזמה שאינה מנוצלת","desc":"כאשר הנחות ומגבלות אינן מאותגרות, חלק מהיוזמה האפשרית נשארת על השולחן."},{"title":"פער תפיסתי יותר מפער מיומנות","desc":"הדפוס הזה מגיב לעיתים להזמנה מפורשת לפעול ולרשות, לא רק להכשרה."}]},"constraints_no_confidence":{"headline":"מגבלות בלי ביטחון","insight":"אנשים עשויים גם לקבל מגבלות כקבועות וגם להתקשות להעריך את המוכנות שלהם למשימה — בלם כפול על יוזמה.","implication":"הסרת חסמים פורמליים בלבד כנראה לא תספיק בלי לחזק גם יכולת Self-Assessment.","sectionTitle":"איפה הפער עשוי להופיע","businessImplications":[{"title":"בלם כפול על יוזמה","desc":"קבלת מגבלות כקבועות וחוסר ודאות לגבי המוכנות האישית עלולים לחזק זה את זה."},{"title":"שינוי מבני לבדו לא יספיק","desc":"הסרת חסמים יכולה להישאר ללא השפעה אם לא נבנית גם יכולת לאבחן מה נדרש."},{"title":"פער בביטחון, לא רק ברשות","desc":"נדרש כאן לעיתים אימון ב־Self-Assessment לצד יצירת מרחב ארגוני."}]},"power_no_practice":{"headline":"מקורות השפעה קיימים — עדיין לא מופעלים","insight":"אנשים נראים מודעים למקורות ההשפעה שעומדים לרשותם מעבר לסמכות פורמלית, אך אינם משתמשים בהם באופן פרואקטיבי ועקבי.","implication":"הבנת מקורות ההשפעה עדיין אינה מתורגמת ליוזמה; החסם עשוי להיות יותר ביטחון או רשות מאשר ידע.","sectionTitle":"איפה הפער עשוי להופיע","businessImplications":[{"title":"מודעות בלי פעולה","desc":"האנשים מכירים את מקורות ההשפעה אבל עדיין לא מפעילים אותם מספיק."},{"title":"פער של ביטחון או רשות","desc":"לעיתים מדובר בהיסוס ולא בחוסר הבנה של הדרך להשפיע."},{"title":"מומנטום שניתן לשחרר","desc":"כאשר הפער נסגר, יוזמה יכולה לגדול במהירות כי ההבנה כבר קיימת."}]},"asking_no_diagnosing":{"headline":"מבקשים עזרה — לפני שמאבחנים","insight":"אנשים מרגישים בנוח לבקש עזרה, אבל לא תמיד מזהים קודם במדויק איזה סוג עזרה הם באמת צריכים.","implication":"המנהל עדיין עלול לבצע חלק גדול מעבודת האבחון, גם כאשר העובד יוזם את השיחה.","sectionTitle":"איפה הפער עשוי להופיע","businessImplications":[{"title":"בקשות ללא אבחון מלא","desc":"בקשת העזרה יזומה, אך לא תמיד מבוססת על זיהוי מדויק של הצורך."},{"title":"המנהל עדיין עושה את החשיבה","desc":"גם בקשה פרואקטיבית יכולה להשאיר אצל המנהל את עבודת האבחון."},{"title":"פער ברצף הפעולות","desc":"המוקד הוא לחזק את שלב האבחון, לא להחליש את עצם בקשת העזרה."}]},"independence_ahead":{"headline":"העצמאות מקדימה את העקביות","insight":"התלות במנהל נמוכה מאוד, אבל היכולת לקחת בעלות עדיין אינה חזקה באופן עקבי בכל ששת הממדים.","implication":"נכון לחזק את היכולות שהופכות אוטונומיה לאמינה — לא להחזיר יותר החלטות למעלה.","sectionTitle":"איפה היכולת לקחת בעלות צריכה להשלים את הפער","businessImplications":[{"title":"האוטונומיה כבר קיימת","desc":"מעורבות מנהלים אינה נראית כחסם המרכזי."},{"title":"היכולת עדיין לא אחידה","desc":"חלק מיכולות ה־Self Leadership עדיין אינן חזקות מספיק כדי לתמוך באופן עקבי באוטונומיה הקיימת."},{"title":"לחזק, לא לרכז מחדש","desc":"הפתרון אינו לקחת החלטות בחזרה, אלא לפתח את היכולת להשתמש באוטונומיה היטב."}]}};
+const HE_ACTIONS = {"stop_solving":{"title":"לא לפתור לפני שמאבחנים","desc":"לפני שנותנים תשובה, לשאול: „מה לדעתך אתה צריך ממני?”"},"clarify_decisions":{"title":"להבהיר לקיחת בעלות על החלטות","desc":"להגדיר במפורש אילו החלטות כבר אינן דורשות אישור מנהל."},"self_reporting":{"title":"לעבור ממעקב ניהולי לדיווח עצמי","desc":"לבקש מאנשים להציף סיכונים לפני שהמנהל צריך לגלות אותם."},"outcome_clarity":{"title":"להגדיר בהירות לגבי התוצאה לפני הפעולה","desc":"להגדיר איך נראית הצלחה לפני שמתחילים, לא אחרי."},"align_priorities":{"title":"ליישר סדרי עדיפויות במפורש","desc":"להפוך trade-offs והחלטות תיעדוף לגלויים ולא להניח שהם מובנים."},"normalize_asking":{"title":"לנרמל בקשת עזרה","desc":"להבהיר שבקשת Direction או Support היא לגיטימית ומצופה."},"expand_power":{"title":"להרחיב את מקורות ההשפעה המוכרים","desc":"לקרוא בשם למקורות השפעה שאינם סמכות פורמלית: מומחיות, קשרים ואמינות."},"reduce_escalation":{"title":"להפחית escalation כברירת מחדל","desc":"לפני שמסלימים, לשאול: „מי עוד יכול לפתור את זה?”"},"push_clarity_down":{"title":"להעביר יצירת בהירות קרוב יותר לעבודה","desc":"לצייד אנשים ביכולת להגדיר בעצמם קריטריונים להצלחה."},"invite_initiative":{"title":"להזמין יוזמה במפורש","desc":"בהירות אינה יוצרת לבדה רשות; להגדיר היכן אנשים חופשיים לפעול."},"challenge_constraints":{"title":"לאתגר הנחות ומגבלות","desc":"לשאול: „מה היינו עושים אילו זו לא הייתה מגבלה?”"},"codify_practices":{"title":"לעגן את מה שכבר עובד","desc":"לתעד את הפרקטיקות שיוצרות את הדפוס כדי שישרדו צמיחה ושינוי."},"extend_ownership":{"title":"להרחיב בעלות לאזורים נוספים","desc":"לזהות את הגבול הבא של אחריות שאפשר להעביר קרוב יותר לעבודה."},"protect_centralization":{"title":"להגן מפני ריכוז מחדש","desc":"לשים לב ללחץ, צמיחה או משבר שמושכים החלטות חזרה למעלה."},"self_assessment":{"title":"לבנות הרגלי Self-Assessment","desc":"לבקש מאנשים להעריך את רמת היכולת והביטחון שלהם לפני שמגדירים תמיכה."},"reward_initiative":{"title":"לחזק ניסיונות לקחת בעלות","desc":"להכיר ביוזמה בתום לב גם כאשר התוצאה אינה מושלמת."},"coach_diagnosis":{"title":"לאמן את האבחון, לא רק לתת תשובה","desc":"לשאול „מה לדעתך הבעיה?” לפני שמגיבים."}};
+
+const ACTIONS = {
+  stop_solving:{title:"Stop Solving Before Diagnosing", desc:"Before giving an answer, ask: \u201CWhat do you think you need from me?\u201D"},
+  clarify_decisions:{title:"Clarify Decision Ownership", desc:"Explicitly identify which decisions no longer require manager approval."},
+  self_reporting:{title:"Shift from Follow-Up to Self-Reporting", desc:"Ask employees to surface risks before managers need to discover them."},
+  outcome_clarity:{title:"Set Outcome Clarity Before Action", desc:"Define what success looks like before people start, not after."},
+  align_priorities:{title:"Align Priorities Explicitly", desc:"Make trade-offs and priority calls visible, not assumed."},
+  normalize_asking:{title:"Normalize Asking", desc:"Make it explicitly safe and expected to request direction or support."},
+  expand_power:{title:"Expand Recognized Points of Power", desc:"Explicitly name non-positional sources of influence — expertise, relationships, credibility."},
+  reduce_escalation:{title:"Reduce Default Escalation", desc:"Before escalating, ask: \u201Cwho else could resolve this?\u201D"},
+  push_clarity_down:{title:"Push Clarity Downward", desc:"Equip people to define their own success criteria."},
+  invite_initiative:{title:"Explicitly Invite Initiative", desc:"Clarity alone doesn't create permission — name where people are free to act."},
+  challenge_constraints:{title:"Challenge Assumed Constraints Openly", desc:"Ask: \u201Cwhat would we do if that weren't a constraint?\u201D"},
+  codify_practices:{title:"Codify What's Working", desc:"Document the practices creating this pattern so they survive growth."},
+  extend_ownership:{title:"Extend Ownership to New Areas", desc:"Look for the next frontier of responsibility to hand over."},
+  protect_centralization:{title:"Protect Against Re-Centralization", desc:"Watch for pressure — growth, crisis — that pulls decisions back up."},
+  self_assessment:{title:"Build Self-Assessment Habits", desc:"Ask people to name their own confidence and competence before assigning support."},
+  reward_initiative:{title:"Reward Attempted Ownership", desc:"Recognize good-faith initiative even when outcomes are imperfect."},
+  coach_diagnosis:{title:"Coach the Diagnosis, Not Just the Answer", desc:"Ask \u201Cwhat do you think the issue is\u201D before responding."},
+};
+
+// Each pattern owns its own contextual section title + tone-matched implications.
+// This is the fix for the diagnostic-coherence bug: implications used to be pulled from a
+// shared, cost-framed dictionary regardless of which pattern matched, so a healthy pattern
+// could still surface "may be costing you" language. Now each pattern carries implications
+// written in the correct tone for its own story (cost / exploratory / opportunity / foundational).
+// sectionType is also used by validateReportCoherence() as a guard against future patterns
+// accidentally mixing tones.
+
+// Patterns evaluated in priority order (lower = checked first); first match = primary, next match = secondary.
+const PATTERNS = [
+  {id:"capability_trapped", priority:1, headline:"Capability Trapped in Dependency", relatedDims:["Points of Power","Proactivity","Diagnosing","Matching"],
+   cond:(s)=> s.capacity>=70 && s.dependency>=55,
+   insight:"Your organization appears to have meaningful capacity for ownership, but work still relies heavily on managerial involvement.",
+   implication:"Managers may be functioning as decision and execution bottlenecks for work that others are increasingly ready to own.",
+   sectionType:"cost", sectionTitle:"What This Gap May Be Costing You", heroType:"significant",
+   businessImplications:[
+     {title:"Underused Talent", desc:"People capable of taking on more may be spending real time waiting for decisions that could be theirs to make."},
+     {title:"Decision Bottlenecks", desc:"Work may be queuing behind managers who are still in the approval loop for decisions others are ready to own."},
+     {title:"Slower Execution", desc:"The distance between a decision moment and a decision maker directly affects how fast work moves."},
+     {title:"AI Growing Faster Than Autonomy", desc:"As AI expands what people can analyze and execute, decision rights may not be expanding at the same pace."},
+   ],
+   actions:["stop_solving","clarify_decisions","self_reporting"]},
+  {id:"foundational_gap", priority:1.5, headline:"Foundational Gap", relatedDims:DIMS,
+   cond:(s)=> s.capacity<50 && s.dependency>=60,
+   insight:"Across most dimensions, ownership capacity is still developing while managers remain heavily involved in day-to-day decisions.",
+   implication:"This is likely more of a systemic development need than a single management practice to fix.",
+   sectionType:"foundational", sectionTitle:"Where Ownership May Need to Be Built First", heroType:"foundational",
+   businessImplications:[
+     {title:"Capability Before Release", desc:"The priority here isn't removing managerial approval — it's building the underlying skills and confidence ownership requires."},
+     {title:"Clarity as a Starting Point", desc:"Before people can own more, they typically need a clearer picture of what's expected and what success looks like."},
+     {title:"Self-Leadership Fundamentals", desc:"This pattern often responds best to building core self-leadership habits, not to org-design changes alone."},
+   ],
+   actions:["self_assessment","outcome_clarity","coach_diagnosis"]},
+  {id:"developing_foundation", priority:1.52, headline:"Developing Ownership Foundation", relatedDims:DIMS,
+   cond:(s)=> s.capacity<50 && s.dependency>=30 && s.dependency<60,
+   insight:"Ownership capacity appears to be developing, while managerial involvement is neither especially low nor especially high. The priority is less about releasing more autonomy and more about strengthening the foundations that allow people to use autonomy well.",
+   implication:"This is a building phase — the goal is consistent self-leadership habits, not a specific release decision.",
+   sectionType:"foundational", sectionTitle:"Where Ownership May Need to Be Built First", heroType:"foundational",
+   businessImplications:[
+     {title:"Inconsistent Readiness", desc:"Ownership capability may be stronger in some situations than others."},
+     {title:"Managers May Be Compensating Unevenly", desc:"Support may vary by manager or task rather than following a clear self-leadership approach."},
+     {title:"Build Before You Release", desc:"Greater autonomy is most useful when people can diagnose what they need and act with clarity."},
+   ],
+   actions:["self_assessment","outcome_clarity","coach_diagnosis"]},
+  {id:"untested_autonomy", priority:1.55, headline:"Untested Autonomy", relatedDims:DIMS,
+   cond:(s)=> s.capacity<50 && s.dependency<30,
+   insight:"Managers don't appear heavily involved in day-to-day decisions — but this may reflect limited engagement or low expectations rather than genuine self-sufficiency.",
+   implication:"Low dependency on managers is not the same as strong ownership capacity — it may simply mean ownership hasn't been asked for yet.",
+   sectionType:"foundational", sectionTitle:"Where Ownership May Need to Be Built First", heroType:"foundational",
+   businessImplications:[
+     {title:"Low Dependency Isn't Automatically Healthy", desc:"When managers aren't heavily involved and capacity is still developing, the likely story is limited engagement — not strong self-sufficiency."},
+     {title:"Ownership May Not Yet Be Expected", desc:"People may not be stepping back because they're capable and trusted, but because ownership hasn't been actively asked of them."},
+     {title:"A Starting Point, Not a Gap to Close", desc:"This pattern often calls for building capability and expectations together, rather than removing managerial oversight that may not be the real constraint."},
+   ],
+   actions:["self_assessment","outcome_clarity","clarify_decisions"]},
+  {id:"strong_foundation", priority:1.6, headline:"Strong Foundation, Room to Release", relatedDims:[],
+   cond:(s)=> s.capacity>=75 && s.dependency<40,
+   insight:"Both ownership capacity and independence from managerial involvement are strong — a genuinely healthy pattern.",
+   implication:"The opportunity now is sustaining this as the organization scales, not fixing a gap.",
+   sectionType:"opportunity", sectionTitle:"What This Strong Foundation Makes Possible", heroType:"healthy",
+   businessImplications:[
+     {title:"Scale Without Adding Dependency", desc:"As the organization grows, the opportunity is to preserve decision ownership without adding unnecessary managerial layers or approvals."},
+     {title:"AI as an Ownership Multiplier", desc:"Strong ownership creates the conditions for AI to expand individual capability and judgment — rather than simply increasing dependence on faster managerial decisions."},
+     {title:"A Model Worth Protecting", desc:"Growth, crisis, or new leadership can quietly pull decisions back upward. Naming what's working helps preserve it."},
+   ],
+   actions:["codify_practices","extend_ownership","protect_centralization"]},
+  {id:"energy_no_alignment", priority:2, headline:"Energy Without Alignment", relatedDims:["Proactivity","Goal Clarity"],
+   cond:(s)=> s.dimScores["Proactivity"]>=80 && s.dimScores["Goal Clarity"]<=40,
+   insight:"People appear willing to act, but may not always have enough clarity about priorities and outcomes.",
+   implication:"The risk is not passivity. It is energetic execution in different directions.",
+   sectionType:"exploratory", sectionTitle:"Where This Gap May Be Showing Up", heroType:"exploratory",
+   businessImplications:[
+     {title:"Activity Without Strategic Focus", desc:"High energy without shared clarity on priorities can produce a lot of motion that doesn't add up to progress."},
+     {title:"Rework and Conflicting Priorities", desc:"When people fill ambiguity with their own interpretation, teams can end up pulling in different directions."},
+     {title:"Speed Without Direction", desc:"Fast execution is only an advantage when it's pointed at the right target."},
+   ],
+   actions:["outcome_clarity","align_priorities","clarify_decisions"]},
+  {id:"knowing_not_asking", priority:3, headline:"Knowing Isn't Yet Asking", relatedDims:["Diagnosing","Matching"],
+   cond:(s)=> s.dimScores["Diagnosing"]>=80 && s.dimScores["Matching"]<=40,
+   insight:"People may understand what they need but are not consistently turning that awareness into explicit requests for direction or support.",
+   implication:"Managers may still be carrying diagnostic work employees could increasingly own.",
+   sectionType:"exploratory", sectionTitle:"Where This Gap May Be Showing Up", heroType:"exploratory",
+   businessImplications:[
+     {title:"Diagnostic Work Still Sitting With Managers", desc:"People may understand what's needed but aren't yet turning that understanding into direct requests."},
+     {title:"A Quiet, Not Loud, Pattern", desc:"This gap often doesn't show up as a crisis — it shows up as slightly slower support cycles that are easy to miss."},
+     {title:"An Asking, Not a Knowing, Skill Gap", desc:"The opportunity is less about building awareness and more about normalizing direct requests for help."},
+   ],
+   actions:["stop_solving","normalize_asking","self_reporting"]},
+  {id:"willing_limited_influence", priority:4, headline:"Willing to Act — Limited in Influence", relatedDims:["Proactivity","Points of Power"],
+   cond:(s)=> s.dimScores["Proactivity"]>=80 && s.dimScores["Points of Power"]<=40,
+   insight:"People appear ready to move things forward but may rely too heavily on formal authority when influence is required.",
+   implication:"Cross-functional progress may still depend too heavily on escalation.",
+   sectionType:"exploratory", sectionTitle:"Where This Gap May Be Showing Up", heroType:"exploratory",
+   businessImplications:[
+     {title:"Cross-Functional Friction", desc:"Progress that depends on other teams may still route through formal escalation more than necessary."},
+     {title:"Influence Muscle Underused", desc:"People ready to act may not yet be reaching for relationships, expertise or credibility as tools of influence."},
+     {title:"Stakeholder Navigation as a Skill Gap", desc:"This is often a coachable skill gap, not a motivation problem."},
+   ],
+   actions:["expand_power","clarify_decisions","reduce_escalation"]},
+  {id:"clarification_bottleneck", priority:5, headline:"The Clarification Bottleneck", relatedDims:["Goal Clarity"],
+   cond:(s)=> s.dimScores["Goal Clarity"]<=40 && s.dependency>=70,
+   insight:"Ambiguity appears to travel upward.",
+   implication:"Managers may be spending too much time translating priorities and defining success for others.",
+   sectionType:"cost", sectionTitle:"What This Gap May Be Costing You", heroType:"significant",
+   businessImplications:[
+     {title:"Ambiguity Traveling Upward", desc:"When priorities aren't clear, that unclarity often escalates to managers rather than being resolved locally."},
+     {title:"Managerial Time Spent Translating", desc:"Managers may be spending real time re-explaining priorities and defining success criteria for others."},
+     {title:"Decisions Delayed by Missing Context", desc:"Work can stall while people wait for clarity that could often be requested directly."},
+   ],
+   actions:["push_clarity_down","clarify_decisions","self_reporting"]},
+  {id:"ownership_held_back", priority:5.5, headline:"Ownership Held Back by Dependency", relatedDims:["Points of Power","Proactivity","Diagnosing","Matching"],
+   cond:(s)=> s.capacity>=50 && s.capacity<70 && s.dependency>=60,
+   insight:"Ownership capacity is developing, but progress still appears to depend heavily on managerial involvement.",
+   implication:"The organization may be caught between two needs: continuing to build self-leadership capability while also reducing unnecessary escalation and approval.",
+   sectionType:"cost", sectionTitle:"Where Manager Dependency May Be Holding Ownership Back", heroType:"significant",
+   businessImplications:[
+     {title:"Two Needs at Once", desc:"Building capability and reducing unnecessary approval steps both matter here — neither alone is likely to be enough."},
+     {title:"Escalation as a Default Habit", desc:"Some of what routes to managers today may be more about habit than genuine need for oversight."},
+     {title:"A Developing, Not Yet Released, Capacity", desc:"There's real capability to work with — the constraint looks more structural than a skills gap."},
+   ],
+   actions:["stop_solving","clarify_decisions","self_reporting"]},
+  {id:"clear_constrained", priority:6, headline:"Clear — But Still Constrained", relatedDims:["Goal Clarity","Proactivity","Assumed Constraints"],
+   cond:(s)=> s.dimScores["Goal Clarity"]>=70 && s.dimScores["Proactivity"]<55 && s.dimScores["Assumed Constraints"]<55,
+   insight:"People may understand what is expected while still operating within narrow assumptions about what they can change or influence.",
+   implication:"Clarity exists, but discretionary ownership may remain limited.",
+   sectionType:"exploratory", sectionTitle:"Where This Gap May Be Showing Up", heroType:"exploratory",
+   businessImplications:[
+     {title:"Clarity Without Permission", desc:"People may understand what's expected but still operate as though initiative outside a narrow lane isn't welcome."},
+     {title:"Untapped Discretionary Effort", desc:"When assumed constraints go unchallenged, some genuinely available initiative may go unused."},
+     {title:"A Mindset Gap, Not a Skills Gap", desc:"This pattern often responds to explicit invitation and permission more than to training."},
+   ],
+   actions:["invite_initiative","challenge_constraints","clarify_decisions"]},
+  {id:"constraints_no_confidence", priority:7, headline:"Constraints Without Confidence", relatedDims:["Assumed Constraints","Diagnosing"],
+   // Note: threshold set to <48, not <55, deliberately — this is a low+low condition (unlike the
+   // high+low "tension" patterns), so it needs to sit clearly below the scale's neutral midpoint (50).
+   // At <55 it was firing on exactly-neutral "all middle answers" profiles, which isn't a real signal.
+   cond:(s)=> s.dimScores["Assumed Constraints"]<48 && s.dimScores["Diagnosing"]<48,
+   insight:"People may both accept limitations as fixed and lack clarity about their own readiness for a task — a double brake on initiative.",
+   implication:"Removing formal barriers alone may not unlock ownership without also building self-assessment skills.",
+   sectionType:"exploratory", sectionTitle:"Where This Gap May Be Showing Up", heroType:"exploratory",
+   businessImplications:[
+     {title:"A Double Brake on Initiative", desc:"Accepting limits as fixed and being unsure of one's own readiness can compound, each reinforcing the other."},
+     {title:"Structural Fixes Alone May Not Be Enough", desc:"Removing formal barriers may not unlock ownership on its own without also building self-assessment skills."},
+     {title:"A Confidence, Not Only a Permission, Gap", desc:"This pattern often needs coaching on self-assessment as much as it needs organizational permission."},
+   ],
+   actions:["challenge_constraints","self_assessment","stop_solving"]},
+  {id:"power_no_practice", priority:8, headline:"Power Without Practice", relatedDims:["Points of Power","Proactivity"],
+   cond:(s)=> s.dimScores["Points of Power"]>=70 && s.dimScores["Proactivity"]<55,
+   insight:"People appear to understand the influence available to them beyond formal authority, but may not be using it proactively.",
+   implication:"Awareness of influence isn't translating into initiative — the gap may be more about confidence or permission than knowledge.",
+   sectionType:"exploratory", sectionTitle:"Where This Gap May Be Showing Up", heroType:"exploratory",
+   businessImplications:[
+     {title:"Awareness Without Action", desc:"People may understand the influence available to them without yet using it proactively."},
+     {title:"A Confidence or Permission Gap", desc:"This often reflects hesitation rather than a lack of understanding of how influence works."},
+     {title:"Untapped Momentum", desc:"When this gap closes, initiative tends to follow quickly — the understanding is already there."},
+   ],
+   actions:["invite_initiative","reward_initiative","clarify_decisions"]},
+  {id:"asking_no_diagnosing", priority:9, headline:"Asking Without Diagnosing", relatedDims:["Matching","Diagnosing"],
+   cond:(s)=> s.dimScores["Matching"]>=70 && s.dimScores["Diagnosing"]<55,
+   insight:"People are comfortable requesting help, but may not always accurately identify what kind of help they actually need first.",
+   implication:"Managers may still be doing the diagnostic thinking, even though people are proactively initiating the conversation.",
+   sectionType:"exploratory", sectionTitle:"Where This Gap May Be Showing Up", heroType:"exploratory",
+   businessImplications:[
+     {title:"Requests Without Full Diagnosis", desc:"People may be comfortable asking for help without first accurately identifying what kind of help is actually needed."},
+     {title:"Managers Still Doing the Thinking", desc:"Even proactive requests can leave the diagnostic work sitting with the manager rather than the person asking."},
+     {title:"A Coachable Sequencing Gap", desc:"The opportunity is to build the diagnostic step, not to discourage the proactive asking that's already happening."},
+   ],
+   actions:["self_assessment","coach_diagnosis","stop_solving"]},
+  {id:"independence_ahead", priority:9.5, headline:"Independence Ahead of Consistency", relatedDims:DIMS,
+   cond:(s)=> s.capacity>=50 && s.capacity<75 && s.dependency<20,
+   insight:"Manager dependency is very low, but ownership capacity is not yet consistently strong across the six dimensions.",
+   implication:"The opportunity is to strengthen the capabilities that make autonomy reliable — not to add more managerial involvement.",
+   sectionType:"exploratory", sectionTitle:"Where Ownership Capacity May Need to Catch Up", heroType:"exploratory",
+   businessImplications:[
+     {title:"Autonomy Is Already Present", desc:"Managerial involvement does not appear to be the main constraint."},
+     {title:"Capability Is Still Uneven", desc:"Some self-leadership capabilities may not yet be consistently strong enough to support the autonomy already available."},
+     {title:"Strengthen, Don't Re-Centralize", desc:"The answer is not to pull decisions back upward, but to develop the capabilities needed to use autonomy well."},
+   ],
+   actions:["self_assessment","outcome_clarity","coach_diagnosis"]},
+  {id:"default_mixed", priority:99, headline:"A Mixed, Developing Picture", relatedDims:[],
+   cond:()=> true,
+   insight:"No single pattern dominates — ownership and dependency levels are relatively balanced across dimensions, without one clear driving tension.",
+   implication:"This is a reasonable moment to look at the six-dimension profile directly rather than a single headline pattern.",
+   sectionType:"exploratory", sectionTitle:"Where Ownership May Be Showing Up Unevenly", heroType:"exploratory",
+   businessImplications:[
+     {title:"No Single Dominant Pattern", desc:"Ownership and dependency levels are relatively balanced across dimensions, without one clear driving tension."},
+     {title:"Worth a Dimension-Level Look", desc:"With no standout pattern, the six-dimension profile itself is often the most useful next thing to review."},
+   ],
+   actions:["clarify_decisions","stop_solving","self_reporting"]},
+];
+
+// Dev-mode-only sanity net (C-level bug we just fixed): warns, never blocks render or shows
+// anything to the end user. Catches future patterns that accidentally mix tones.
+function validateReportCoherence(pattern, scores){
+  const warnings = [];
+  // Deliberately specific phrases, not generic words like "dependency" or "constrain" —
+  // those appear in legitimately positive framing too (e.g. "Scale Without Adding Dependency").
+  const costPhrases = /bottleneck|queuing|approval loop|waiting for|escalat(e|ion)|delayed by|managerial overload|spending real time/i;
+  const releaseActionIds = new Set(["codify_practices","extend_ownership","protect_centralization"]);
+
+  if(scores.dependency < 30 && pattern.sectionType === 'cost'){
+    warnings.push(`Pattern "${pattern.id}" uses cost framing but Dependency is only ${scores.dependency} (<30).`);
+  }
+  if(scores.capacity >= 75 && scores.gap < 15 && pattern.sectionTitle === 'What This Gap May Be Costing You'){
+    warnings.push(`Pattern "${pattern.id}" shows cost title despite high Capacity (${scores.capacity}) and low Gap (${scores.gap}).`);
+  }
+  if(scores.capacity < 60 && scores.gap < 15 && pattern.sectionType === 'opportunity'){
+    warnings.push(`Pattern "${pattern.id}" uses opportunity framing despite low Capacity (${scores.capacity}) — should be foundational.`);
+  }
+  if(pattern.sectionType === 'opportunity'){
+    pattern.businessImplications.forEach(imp=>{
+      if(costPhrases.test(imp.title) || costPhrases.test(imp.desc)){
+        warnings.push(`Pattern "${pattern.id}" is opportunity-typed but implication "${imp.title}" contains cost-toned language.`);
+      }
+    });
+  }
+  // 3.6 additions —
+  const gapLbl = gapLabel(scores.gap, scores.capacity, scores.dependency, pattern.heroType);
+  if(gapLbl === 'Healthy Ownership Balance' && pattern.heroType !== 'healthy'){
+    warnings.push(`Gap label is "Healthy Ownership Balance" but primary pattern "${pattern.id}" has heroType="${pattern.heroType}" (expected "healthy").`);
+  }
+  if(scores.capacity < 50 && pattern.heroType !== 'foundational' && (pattern.heroType === 'healthy' || pattern.sectionType === 'opportunity')){
+    warnings.push(`Capacity is ${scores.capacity} (<50) but primary pattern "${pattern.id}" is healthy/opportunity-typed.`);
+  }
+  if(scores.gap >= 30 && scores.dependency >= 60 && pattern.id === 'default_mixed'){
+    warnings.push(`Gap=${scores.gap} and Dependency=${scores.dependency} are both elevated, but the engine fell back to default_mixed instead of a specific pattern.`);
+  }
+  const expectedNarrative = getHeroNarrative(scores, pattern);
+  if(!expectedNarrative){
+    warnings.push(`No hero narrative resolved for pattern "${pattern.id}" (heroType="${pattern.heroType}").`);
+  }
+  if(pattern.heroType === 'foundational'){
+    const releaseHeavy = pattern.actions.filter(a=>releaseActionIds.has(a)).length;
+    if(releaseHeavy > pattern.actions.length / 2){
+      warnings.push(`Pattern "${pattern.id}" is foundational but its actions are mostly release/autonomy-oriented rather than capability-building.`);
+    }
+  }
+  if(pattern.id === 'default_mixed' && (scores.capacity<=30 || scores.capacity>=90 || scores.dependency<=15 || scores.dependency>=85)){
+    warnings.push(`default_mixed matched a structurally extreme profile (Capacity=${scores.capacity}, Dependency=${scores.dependency}) — a more specific pattern should likely cover this.`);
+  }
+  const certaintyRisk = /will cause|is causing|has caused|results in|directly reduces revenue|reduces revenue|increases revenue/i;
+  (pattern.businessImplications||[]).forEach(imp=>{
+    if(certaintyRisk.test(`${imp.title} ${imp.desc}`)){
+      warnings.push(`Implication "${imp.title}" overstates an unmeasured outcome as fact.`);
+    }
+  });
+  if(!diagnosticEvidence(scores, pattern).length){
+    warnings.push(`Pattern "${pattern.id}" has no reportable diagnostic evidence.`);
+  }
+
+  if(warnings.length && typeof console !== 'undefined' && console.warn){
+    warnings.forEach(w => console.warn('Diagnostic coherence warning:', w));
+  }
+  return warnings;
+}
+
+// 3.4 — Hero Note is contextual, keyed off the primary pattern's heroType, not a fixed paragraph.
+function getHeroNarrative(s, pattern){
+  const type = pattern.heroType;
+  if(type === 'healthy'){
+    return `A ${s.gap}-point Ownership Gap indicates that ownership capacity and the management environment enabling it are closely aligned. With strong Ownership Capacity and low Manager Dependency, the opportunity is less about closing a gap and more about protecting and extending what already works.`;
+  }
+  if(type === 'foundational'){
+    if(s.dependency>=60){
+      return `The ${s.gap}-point Ownership Gap is not the main story on its own. Ownership Capacity is still developing while Manager Dependency is high. The priority is to build self-leadership capability while making managerial support developmental rather than a permanent execution dependency.`;
+    }
+    if(s.dependency<30){
+      return `Low Manager Dependency should not be read as strong ownership in this profile. Ownership Capacity is still developing, so the key question is whether autonomy reflects real readiness — or simply limited managerial involvement.`;
+    }
+    return `The numerical gap is not the main story in this profile. Ownership Capacity itself is still developing, suggesting that the priority is to strengthen the foundations of self-leadership before focusing on releasing greater autonomy.`;
+  }
+  if(type === 'significant'){
+    return `A ${s.gap}-point Ownership Gap suggests that people's capacity to take ownership may be materially ahead of what the current management environment enables them to exercise.`;
+  }
+  // exploratory (default)
+  return `The numerical gap may be relatively small, but the dimension profile shows uneven patterns worth examining. The most useful insight may sit in where ownership is strong — and where it breaks down.`;
+}
+
+const ROLES = ["מנכ״ל/ית","הנהלה בכירה","משאבי אנוש / People","מנהל/ת עסקי/ת","מנהל/ת אנשים","עובד/ת ללא אחריות ניהולית","אחר"];
+
+/* =========================================================
+   CENTRAL CONFIG — thresholds, links, copy in one place
+   ========================================================= */
+const CONFIG = {
+  environment: "external", // "internal" | "external" — controls whether the review badge shows
+  publicTeamSelfService: false, // public flow shows "מהתובנה האישית לתמונה הארגונית" instead of free self-service team creation
+  organizationalDiagnosticEnabled: true,
+  scoring: { version: "v2.0", interpretation: "v10-sp5-truth-calibrated" },
+  bands: { exceptional:90, strong:75, developing:60, emerging:40 },
+  dependencyBands: { veryHigh:75, high:60, moderate:40 },
+  gapBands: { moderate:15, significant:30, major:45 },
+  privacy: { minGroupN: 3, perceptionGapThreshold: 15 },
+  alignment: { zeroPointSD: 40 },
+  teamPriority: { scoreWeight:0.4, dispersionWeight:0.75, dependencyBonus:15, roleGapBonus:15, corePatternBonus:15 },
+  roles: ROLES,
+  links: { selfLeadership: "https://www.blanchard.com/self-leadership" },
+  contact: { email: "erez@blanchard.co.il" },
+};
+
+
+const HE_DIM = {
+  "Assumed Constraints":"קריאת תיגר על הנחות ומגבלות",
+  "Points of Power":"הפעלת מקורות השפעה",
+  "Proactivity":"פרואקטיביות ולקיחת בעלות",
+  "Goal Clarity":"יצירת בהירות",
+  "Diagnosing":"אבחון מה נדרש",
+  "Matching":"בקשת הכיוון והתמיכה הנכונים"
+};
+
+const HE_DIM_EXPLANATIONS = {
+  "Assumed Constraints":"עד כמה אנשים בודקים הנחות, כללים ומגבלות לפני שהם מסיקים שאין דרך להתקדם.",
+  "Points of Power":"עד כמה אנשים משתמשים במומחיות, קשרים, אמינות וממשקים כדי להשפיע גם ללא סמכות פורמלית.",
+  "Proactivity":"עד כמה אנשים יוזמים צעד הבא, מביאים אפשרויות לפתרון ומקדמים נושאים בלי להמתין למנהל.",
+  "Goal Clarity":"עד כמה אנשים מבררים תוצאה רצויה, ציפיות ומידע חסר לפני שהם פועלים.",
+  "Diagnosing":"עד כמה אנשים יודעים לזהות מה בדיוק חסר להם כדי להתקדם — ידע, ניסיון, ביטחון, משוב או תמיכה.",
+  "Matching":"עד כמה אנשים יודעים לבקש מהמנהל Direction או Support ממוקדים, בלי להעביר אליו את האחריות לפתרון."
+};
+const HE_BAND={"Exceptional":"יוצא דופן","Strong":"חזק","Developing":"מתפתח","Emerging":"ראשוני","Constrained":"דורש חיזוק"};
+const HE_DEP={"Very High":"גבוהה מאוד","High":"גבוהה","Moderate":"בינונית","Low":"נמוכה"};
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = (str===null || str===undefined) ? '' : String(str);
+  return div.innerHTML;
+}
+
+/* =========================================================
+   SCORING
+   ========================================================= */
+function normalize(raw){ return ((raw-1)/4)*100; }
+
+function computeScores(answers){
+  if(!Array.isArray(answers) || answers.length!==24 || answers.some(v=>!Number.isFinite(v) || v<1 || v>5)){
+    throw new Error("Ownership Gap scoring requires 24 valid answers in the 1–5 range.");
+  }
+  const dimScores = {};
+  DIMS.forEach(d=>{
+    const idxs = QUESTIONS.map((q,i)=>q.dim===d?i:-1).filter(i=>i>=0);
+    if(idxs.length!==3) throw new Error(`Dimension mapping error for ${d}: expected 3 items, got ${idxs.length}`);
+    const avgRaw = idxs.reduce((a,i)=>a+answers[i],0)/idxs.length;
+    dimScores[d] = Math.round(normalize(avgRaw));
+  });
+  const capacity = Math.round(Object.values(dimScores).reduce((a,b)=>a+b,0)/DIMS.length);
+  // Q19–Q24 are direct dependency statements: higher frequency = higher Manager Dependency.
+  const depRaw = DEPENDENCY_IDX.reduce((a,i)=>a+answers[i],0)/DEPENDENCY_IDX.length;
+  const dependency = Math.round(normalize(depRaw));
+  const release = 100 - dependency;
+  const gap = Math.max(0, capacity - release);
+  return {dimScores, capacity, dependency, release, gap};
+}
+
+function band(score){
+  if(score>=CONFIG.bands.exceptional) return "Exceptional";
+  if(score>=CONFIG.bands.strong) return "Strong";
+  if(score>=CONFIG.bands.developing) return "Developing";
+  if(score>=CONFIG.bands.emerging) return "Emerging";
+  return "Constrained";
+}
+function bandClass(b){ return "b-"+b.toLowerCase(); }
+function bandColor(score){
+  if(score>=CONFIG.bands.strong) return "var(--teal)";
+  if(score>=CONFIG.bands.developing) return "var(--gold)";
+  if(score>=CONFIG.bands.emerging) return "var(--orange)";
+  return "var(--clay)";
+}
+
+function dependencyBand(score){
+  if(score>=CONFIG.dependencyBands.veryHigh) return "Very High";
+  if(score>=CONFIG.dependencyBands.high) return "High";
+  if(score>=CONFIG.dependencyBands.moderate) return "Moderate";
+  return "Low";
+}
+function dependencyBandClass(score){
+  // shared everywhere: low dependency = positive, high = concern
+  if(score>=CONFIG.dependencyBands.high) return "b-emerging";      // concern (reuses warm/clay styling)
+  if(score>=CONFIG.dependencyBands.moderate) return "b-developing"; // caution
+  return "b-strong";                                                 // positive
+}
+
+// Gap must never read as "healthy" when it's low only because Capacity is ALSO low (C7),
+// and (per the diagnostic-coherence fix) low Gap alone must never imply organizational health —
+// health requires sufficient Capacity AND sufficiently low Dependency, not just a small gap.
+// heroType (from the matched Primary Pattern) disambiguates "Foundational Ownership Need" —
+// reserved for genuinely foundational patterns — from "Developing Ownership Profile", the softer
+// label for low-gap/mid-capacity cases (e.g. default_mixed) that aren't a specific foundational signal.
+function gapLabel(gap, capacity, dependency, heroType){
+  if(gap < CONFIG.gapBands.moderate){
+    if(capacity < CONFIG.bands.developing){
+      return heroType === 'foundational' ? "Foundational Ownership Need" : "Developing Ownership Profile";
+    }
+    if(capacity >= 75 && dependency < 40) return "Healthy Ownership Balance";
+    return "Low Ownership Gap"; // neutral — small gap, but doesn't yet meet the bar for "healthy"
+  }
+  if(gap < CONFIG.gapBands.significant) return "Moderate Gap";
+  if(gap < CONFIG.gapBands.major) return "Significant Gap";
+  return "Major Gap";
+}
+function gapLabelClass(gap, capacity, dependency, heroType){
+  if(gap < CONFIG.gapBands.moderate){
+    if(capacity < CONFIG.bands.developing) return heroType === 'foundational' ? "b-emerging" : "b-developing";
+    if(capacity >= 75 && dependency < 40) return "b-strong";
+    return "b-developing";
+  }
+  if(gap < CONFIG.gapBands.significant) return "b-developing";
+  return "b-emerging";
+}
+
+function matchPatterns(scoreContext){
+  const substantive = PATTERNS.filter(p=>p.id!=="default_mixed");
+  const matched = substantive.filter(p=>p.cond(scoreContext)).sort((a,b)=>a.priority-b.priority);
+  if(matched.length===0){
+    return {primary: PATTERNS.find(p=>p.id==="default_mixed"), secondary: null};
+  }
+  const primary = matched[0];
+  let secondary = matched[1] || null;
+  // don't show a secondary that's really just restating the primary (identical related dimensions)
+  if(secondary){
+    const sameDims = primary.relatedDims.length===secondary.relatedDims.length &&
+      primary.relatedDims.every(d=>secondary.relatedDims.includes(d));
+    if(sameDims) secondary = null;
+  }
+  return {primary, secondary};
+}
+
+/* =========================================================
+   V10 DIAGNOSTIC TRUTH LAYER — Level + Shape + Evidence
+   Borrowed as a QA principle from SP5, not as a visual clone:
+   scores establish the level; the matched pattern explains the shape;
+   evidence shows why the interpretation fired.
+   ========================================================= */
+function ownershipLevel(s){
+  if(s.capacity>=75 && s.dependency<40) return {label:"Strong Ownership Foundation", tone:"strong"};
+  if(s.capacity<50) return {label:"Ownership Foundation Still Developing", tone:"foundational"};
+  if(s.dependency>=60) return {label:"Ownership Constrained by Manager Dependency", tone:"constraint"};
+  return {label:"Emerging Ownership System", tone:"developing"};
+}
+function diagnosticEvidence(s, pattern){
+  const evidence = [
+    {label:"Ownership Capacity", value:`${s.capacity}/100`, note:s.capacity>=75?"strong overall capacity":s.capacity<50?"capacity is still developing":"capacity is present but not yet consistently strong"},
+    {label:"Manager Dependency", value:`${s.dependency}/100`, note:s.dependency>=60?"manager involvement remains high":s.dependency<40?"manager dependency is relatively low":"manager dependency remains material"}
+  ];
+  const dims = (pattern.relatedDims||[]).filter(d=>s.dimScores[d]!==undefined);
+  if(dims.length){
+    const ranked = dims.map(d=>({d,score:s.dimScores[d]})).sort((a,b)=>a.score-b.score);
+    const low = ranked[0], high = ranked[ranked.length-1];
+    if(low && low.score<60) evidence.push({label:low.d, value:`${low.score}/100`, note:"a concentrated development signal supporting this pattern"});
+    if(high && high.d!==low?.d && high.score>=70) evidence.push({label:high.d, value:`${high.score}/100`, note:"a relative strength shaping the interpretation"});
+  } else {
+    const ranked = Object.entries(s.dimScores).sort((a,b)=>a[1]-b[1]);
+    if(ranked[0] && ranked[0][1]<60) evidence.push({label:ranked[0][0], value:`${ranked[0][1]}/100`, note:"the lowest dimension in the current profile"});
+  }
+  return evidence.slice(0,4);
+}
+function executiveQuestions(s, pattern){
+  if(pattern.heroType==='healthy') return [
+    "What management practices are making this ownership pattern possible today?",
+    "Where could growth, pressure or new leadership unintentionally pull decisions back upward?",
+    "Where is the next meaningful frontier for extending ownership without reducing clarity?"
+  ];
+  if(pattern.heroType==='foundational') return [
+    "Where are we asking for autonomy before people have enough clarity, confidence or self-diagnosis capability?",
+    "Which self-leadership habit would create the greatest lift if managers coached it consistently?",
+    "What should managers keep supporting for now — and what should employees increasingly learn to own?"
+  ];
+  if(s.dependency>=60) return [
+    "Which decisions still travel upward even when people are capable of owning them?",
+    "Where are managers adding real value — and where have they become part of the workflow?",
+    "What is one approval, escalation or follow-up habit we could redesign in the next 30 days?"
+  ];
+  return [
+    "Where does ownership work well today — and where does it become inconsistent?",
+    "Which part of this profile would our managers and employees describe differently?",
+    "What is the smallest management practice we could change to test this diagnosis?"
+  ];
+}
+function actionSequenceLabel(i){ return ["Start here","Then","Build into the rhythm"][i] || `Move ${i+1}`; }
+
+
+function hePattern(pattern){ return HE_PATTERNS[pattern.id] || {headline:pattern.headline,insight:pattern.insight,implication:pattern.implication,sectionTitle:pattern.sectionTitle,businessImplications:pattern.businessImplications}; }
+function heOwnershipLevel(s){
+  if(s.capacity>=75 && s.dependency<40) return "בסיס חזק ללקיחת בעלות";
+  if(s.capacity<50) return "הבסיס ללקיחת בעלות עדיין מתפתח";
+  if(s.dependency>=60) return "לקיחת הבעלות מעוכבת על ידי תלות במנהל";
+  return "תרבות של לקיחת בעלות בתהליך התפתחות";
+}
+function heHeroNarrative(s,pattern){
+  const space=100-s.dependency;
+  if(pattern.heroType==='healthy') return `יכולת לקחת בעלות היא ${s.capacity}/100 והמרחב הארגוני ללקיחת בעלות הוא ${space}/100. לכן ה־Ownership Gap הוא ${s.gap}. כאן Gap נמוך הוא סימן חיובי: היכולת גבוהה והמערכת מאפשרת לה להתממש.`;
+  if(pattern.heroType==='foundational') return `ה־Ownership Gap הוא ${s.gap}, אבל Gap נמוך אינו בהכרח מצב בריא. היכולת לקחת בעלות היא ${s.capacity}/100. ${s.dependency>=60?`במקביל, התלות במנהל גבוהה (${s.dependency}/100), ולכן נדרש מהלך כפול: לבנות יכולת ולצמצם תלות.`:`המוקד המרכזי הוא לבנות את היסודות שמאפשרים לאנשים להשתמש במרחב הקיים באופן עצמאי ועקבי.`}`;
+  if(pattern.heroType==='significant') return `יכולת לקחת בעלות היא ${s.capacity}/100. תלות במנהל של ${s.dependency}/100 משאירה מרחב ארגוני של ${space}/100 בלבד. לכן ${s.capacity} פחות ${space} יוצר Ownership Gap של ${s.gap} נקודות. המשמעות: חלק מהיכולת שכבר קיימת אינו מקבל מספיק מרחב להתממש — מצב שעלול להתבטא בהמתנה לאישורים, Escalation מיותר, עומס על מנהלים והאטה בביצוע.`;
+  return `יכולת לקחת בעלות היא ${s.capacity}/100, התלות במנהל היא ${s.dependency}/100, ולכן המרחב הארגוני ללקיחת בעלות הוא ${space}/100. ה־Ownership Gap הוא ${s.gap}. את המספר צריך לקרוא יחד עם רמת היכולת, התלות וששת הממדים — לא כציון בריאות בפני עצמו.`;
+}
+function heGapLabel(gap,capacity,dependency,heroType){
+ if(gap<15){ if(capacity<60) return heroType==='foundational'?"צורך בבניית יסודות":"פרופיל לקיחת בעלות מתפתח"; if(capacity>=75&&dependency<40)return "איזון בריא"; return "Ownership Gap נמוך"; }
+ if(gap<30)return "פער בינוני"; if(gap<45)return "פער משמעותי"; return "פער גדול";
+}
+
+const DRIVER_INTELLIGENCE={
+"Assumed Constraints":{manifestation:"אנשים עלולים לקבל כלל, נוהל או \"ככה עושים כאן\" כמגבלה מחייבת לפני שבדקו אם קיימת דרך אחרת להתקדם.",cost:"הזדמנויות לפתרון נתקעות מוקדם מדי ויותר נושאים עולים למנהל.",move:"לפני Escalation לשאול: מה באמת מגביל אותנו — עובדה, כלל מחייב או הנחה שאפשר לבדוק?",question:"אילו מגבלות אצלנו הן באמת מחייבות — ואילו הפכו להרגל שאיש כבר לא בודק?"},
+"Points of Power":{manifestation:"אנשים עלולים להמתין לסמכות פורמלית או להתערבות מנהל במקום להפעיל מומחיות, קשרים וממשקים.",cost:"המנהל הופך לצינור השפעה מרכזי ויכולת קיימת אינה מתורגמת לתנועה.",move:"למפות עם הצוות מקורות השפעה זמינים ולתרגל שימוש בהם לפני פנייה למנהל.",question:"איפה אנשים אצלנו מחכים לסמכות במקום להשתמש בהשפעה שכבר עומדת לרשותם?"},
+"Proactivity":{manifestation:"בעיות עלולות להגיע למנהל לפני שנבחנו אפשרויות פעולה, והצעד הבא אינו תמיד נלקח ללא הנחיה.",cost:"יותר זמן ניהולי מושקע בפתרון בעיות וקצב הביצוע תלוי בזמינות המנהל.",move:"לקבוע נורמה: בעיה שמגיעה למנהל מגיעה עם אפשרות פעולה אחת לפחות והמלצה של בעל התפקיד.",question:"כמה מהנושאים שמגיעים למנהלים מגיעים עם recommendation — וכמה מגיעים רק כבעיה?"},
+"Goal Clarity":{manifestation:"אנשים עלולים להתחיל לבצע בלי בהירות מספקת לגבי התוצאה, גבולות ההחלטה או המידע החסר.",cost:"נוצרות חזרות, תיקונים ואישורים חוזרים; אנשים בודקים עם המנהל כי הצלחה לא הוגדרה מספיק.",move:"להגדיר לפני ביצוע: התוצאה הרצויה, גבולות ההחלטה ומה מחייב התייעצות.",question:"האם אנשים יודעים מהי תוצאה טובה ומה הם רשאים להחליט — או בעיקר איזו משימה קיבלו?"},
+"Diagnosing":{manifestation:"כאשר אנשים נתקעים, לא תמיד ברור להם אם חסרים ידע, ניסיון, ביטחון, משוב או תמיכה — ולכן קל להעביר את הבעיה למנהל.",cost:"בקשות עזרה הופכות לפתרון על ידי המנהל, התלות מתחזקת והזדמנויות לפיתוח Self Leadership® מתפספסות.",move:"לפני Escalation לבקש שלוש תשובות: מה חוסם אותי? מה כבר ניסיתי? ומה בדיוק אני צריך ממך כדי להתקדם?",question:"האם אנשים יודעים לאבחן מה הם צריכים מהמנהל — או פשוט יודעים שהם צריכים את המנהל?"},
+"Matching":{manifestation:"גם כאשר מזוהה צורך בעזרה, הבקשה עלולה להיות כללית מדי ולהעביר למנהל יותר אחריות מהנדרש.",cost:"המנהל נכנס עמוק מדי לפתרון והעובד יוצא פחות בעלים של המשימה.",move:"לתרגל בקשות ממוקדות ל־Direction או Support ולהבהיר שהאחריות להמשך נשארת אצל בעל המשימה.",question:"כאשר מישהו מבקש עזרה, האם ברור מה בדיוק הוא צריך — ומה נשאר באחריותו?"}
+};
+function lowestDrivers(s,n=2){return DIMS.map(d=>({d,score:s.dimScores[d]})).sort((a,b)=>a.score-b.score).slice(0,n);}
+function tailoredStory(s){
+ const lows=lowestDrivers(s,2), manifestations=[],costs=[],moves=[],questions=[];
+ if(s.dependency>=60){
+  manifestations.push("יותר החלטות ונושאים עלולים לחזור למנהל לאישור, פתרון או הכרעה — גם כאשר חלק מהיכולת כבר קיים בצוות.");
+  costs.push("עומס ניהולי, המתנה לאישורים והאטה בקצב ההחלטות והביצוע.");
+  moves.push({title:"לזהות היכן התלות במנהל מיותרת",body:"במשך שבועיים לסמן החלטות, אישורים ו־Escalations שחוזרים למנהל, ואז להגדיר מחדש Decision Rights וגבולות ברורים."});
+  questions.push("אילו החלטות מגיעות היום למנהל שלא באמת חייבות להגיע אליו?");
+ }
+ lows.forEach((x,i)=>{if(x.score<65){const z=DRIVER_INTELLIGENCE[x.d];manifestations.push(z.manifestation);costs.push(z.cost);moves.push({title:i===0?`לחזק את ${HE_DIM[x.d]}`:`לבנות הרגל סביב ${HE_DIM[x.d]}`,body:z.move});questions.push(z.question);}});
+ if(s.capacity<65&&s.dependency>=60)moves.push({title:"להרחיב אוטונומיה באופן מדורג",body:"לא לשחרר הכול בבת אחת. לבחור תחומים שבהם היכולת מספקת, להגדיר גבולות ולבנות עצמאות תוך חיזוק הממדים החלשים."});
+ if(s.capacity>=75&&s.dependency>=60)moves.unshift({title:"לשחרר יכולת שכבר קיימת",body:"לבחור תחומים שבהם היכולת חזקה ולהעביר החלטות קרוב יותר לעבודה, עם גבולות ברורים ונקודות בקרה במקום אישור מראש."});
+ if(s.dependency<40&&s.capacity<65)moves.push({title:"לבנות יכולת בתוך המרחב שכבר קיים",body:"המרחב קיים יחסית; המוקד הוא תרגול, משוב ובקשת Direction/Support ממוקדים כדי להשתמש בו בעקביות."});
+ const uniq=a=>[...new Set(a)];
+ return {manifestations:uniq(manifestations).slice(0,3),costs:uniq(costs).slice(0,3),moves:moves.filter((x,i,a)=>a.findIndex(y=>y.title===x.title)===i).slice(0,3),questions:uniq(questions).slice(0,3)};
+}
+
+function heEvidence(s,pattern){
+ const ev=[
+   {label:"יכולת לקחת בעלות",value:`${s.capacity}/100`,note:s.capacity>=75?"היכולת הכוללת חזקה — אנשים מצוידים יחסית לפעול, לאבחן ולהתקדם.":s.capacity<50?"היכולת עדיין מתפתחת — חלק מהיסודות הנדרשים ללקיחת בעלות אינם עקביים.":"קיימת יכולת, אך היא עדיין אינה חזקה באופן עקבי."},
+   {label:"תלות במנהל",value:`${s.dependency}/100`,note:s.dependency>=60?"ההתקדמות נשענת במידה גבוהה על אישור, פתרון או זמינות של מנהלים.":s.dependency<40?"ההתקדמות נשענת יחסית מעט על מעורבות מנהלים.":"התלות במנהל עדיין מהותית בחלק מהמצבים."}
+ ];
+ const dims=(pattern.relatedDims||[]).filter(d=>s.dimScores[d]!==undefined);
+ if(dims.length){
+   const r=dims.map(d=>({d,score:s.dimScores[d]})).sort((a,b)=>a.score-b.score), low=r[0];
+   if(low&&low.score<60) ev.push({label:HE_DIM[low.d]||low.d,value:`${low.score}/100`,note:`זהו הממד החלש ביותר מבין הממדים הקשורים לדפוס שזוהה, ולכן הוא עשוי להסביר היכן לקיחת הבעלות נשברת בפועל.`});
+ }
+ return ev.slice(0,4);
+}
+function heExecutiveQuestions(s,pattern){
+ if(pattern.heroType==='healthy')return ["אילו פרקטיקות ניהוליות מאפשרות היום את רמת הבעלות הזו?","איפה צמיחה, לחץ או הנהלה חדשה עלולים למשוך החלטות בחזרה למעלה?","מהו הגבול הבא שבו אפשר להרחיב בעלות בלי לפגוע בבהירות?"];
+ if(pattern.heroType==='foundational')return ["איפה אנחנו מצפים לאוטונומיה לפני שיש מספיק בהירות, ביטחון או יכולת לאבחן מה נדרש?","איזה הרגל Self Leadership ייצר את השיפור הגדול ביותר אם מנהלים יאמנו אותו בעקביות?","במה מנהלים צריכים להמשיך לתמוך כרגע — ומה אנשים צריכים ללמוד לקחת על עצמם?"];
+ if(s.dependency>=60)return ["אילו החלטות עדיין עולות למעלה גם כשאנשים מסוגלים לקבל אותן?","איפה מנהלים מוסיפים ערך אמיתי — ואיפה הם כבר הפכו לחלק מיותר מזרימת העבודה?","איזה אישור, escalation או הרגל מעקב אחד נוכל לשנות ב־30 הימים הקרובים?"];
+ return ["איפה בעלות עובדת היטב היום — ואיפה היא הופכת ללא עקבית?","איזה חלק מהפרופיל מנהלים ועובדים היו מתארים אחרת?","מהי הפרקטיקה הניהולית הקטנה ביותר שנוכל לשנות כדי לבחון את האבחנה?"];
+}
+
+/* =========================================================
+   STATE / SESSION
+   ========================================================= */
+function sanitizeCode(s){ return (s||'').trim().replace(/[\s\/\\'"]+/g,'-').slice(0,80); }
+const urlParams = new URLSearchParams(window.location.search);
+let sessionToken = sanitizeCode(urlParams.get('session'));
+const arrivedViaInvite = !!sessionToken; // captured once, before sessionToken may be reassigned by "Build Team View"
+const internalOverride = CONFIG.environment === 'internal' && urlParams.get('internal') === '1'; // only works in internal builds — external/public builds cannot be unlocked via URL param
+const teamSelfServiceAvailable = CONFIG.publicTeamSelfService || internalOverride || arrivedViaInvite;
+const viewMode = urlParams.get('view');
+const respondentId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('r'+Date.now()+Math.random().toString(36).slice(2));
+
+let current = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+let lastScores = null; // set after computeScores runs
+let lastPatterns = null;
+let pendingRole = null, pendingCountry = null; // collected before Q1 for invited participants
+let profile = { orgName:'', name:'', role:'', country:'' }; // personalizes the report header (S-item, all entrants)
+let hasSubmittedToTeam = false; // best-effort, same-tab duplicate guard — see note in submitRespondentWithRetry
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.body.classList.toggle('report-active', id==='screen-individual' || id==='screen-group');
+  window.scrollTo(0,0);
+}
+
+/* =========================================================
+   ASSESSMENT FLOW
+   ========================================================= */
+/* =========================================================
+   INTAKE (organic path) — collects Organization/Name/Role before Q1
+   so the report can be personalized from the very first screen.
+   ========================================================= */
+function showIntake(){
+  document.getElementById('intakeContent').innerHTML = `
+    <div class="eyebrow">לפני שמתחילים</div>
+    <h2 style="font-size:24px; margin-bottom:20px;">כמה פרטים קצרים</h2>
+    <label>שם הארגון *</label><input type="text" id="intakeOrg" value="${escapeHtml(profile.orgName)}">
+    <label>השם שלך *</label><input type="text" id="intakeName" value="${escapeHtml(profile.name)}">
+    <label>התפקיד שלך *</label>
+    <select id="intakeRole"><option value="" ${profile.role?'':'selected'}>בחר/י תפקיד…</option>${ROLES.map(r=>`<option value="${escapeHtml(r)}" ${profile.role===r?'selected':''}>${escapeHtml(r)}</option>`).join('')}</select>
+    <label>מדינה / אזור (לא חובה)</label><input type="text" id="intakeCountry" value="${escapeHtml(profile.country)}">
+    <div id="intakeError" style="display:none; color:var(--clay); font-size:13px; margin-bottom:14px;"></div>
+    <button class="btn btn-primary" onclick="submitIntake()">להתחלת האבחון ←</button>
+    <div style="margin-top:14px;"><button class="btn btn-ghost btn-sm" onclick="show('screen-invite')">חזרה →</button></div>
+  `;
+  show('screen-intake');
+}
+
+function submitIntake(){
+  const orgName = document.getElementById('intakeOrg').value.trim();
+  const name = document.getElementById('intakeName').value.trim();
+  const role = document.getElementById('intakeRole').value;
+  const country = document.getElementById('intakeCountry').value.trim();
+  const errEl = document.getElementById('intakeError');
+  if(!orgName || !name){
+    errEl.textContent = 'יש למלא שם ארגון ושם.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if(!role){
+    errEl.textContent = 'יש לבחור תפקיד.';
+    errEl.style.display = 'block';
+    return;
+  }
+  profile = { orgName, name, role, country };
+  startAssessment();
+}
+
+function startAssessment(){
+  current = 0;
+  document.getElementById('progressTrack').style.display='block';
+  show('screen-assessment');
+  renderQuestion();
+}
+
+
+const FREQUENCY_LABELS = {
+  1:"כמעט אף פעם",
+  2:"לעיתים רחוקות",
+  3:"לפעמים",
+  4:"לעיתים קרובות",
+  5:"כמעט תמיד"
+};
+const HE_QUESTION_DIMENSIONS = {
+  "Assumed Constraints":"קריאת תיגר על הנחות ומגבלות",
+  "Points of Power":"הפעלת מקורות השפעה",
+  "Proactivity":"פרואקטיביות ולקיחת בעלות",
+  "Goal Clarity":"יצירת בהירות",
+  "Diagnosing":"אבחון מה נדרש",
+  "Matching":"בקשת הכיוון והתמיכה הנכונים",
+  "Manager Dependency":"עצמאות ולקיחת בעלות"
+};
+
+function renderQuestion(){
+  const q = QUESTIONS[current];
+  document.getElementById('qCounter').textContent = `שאלה ${current+1} מתוך ${QUESTIONS.length}`;
+  document.getElementById('qDimension').textContent = HE_QUESTION_DIMENSIONS[q.dim] || q.dim;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('progressFill').style.width = (current/QUESTIONS.length*100)+'%';
+
+  const row = document.getElementById('scaleRow');
+  row.innerHTML = '';
+  for(let v=5; v>=1; v--){
+    const wrap = document.createElement('div');
+    const selected = answers[current]===v;
+    wrap.className = 'scale-choice' + (selected ? ' selected' : '');
+
+    const b = document.createElement('button');
+    b.className = 'scale-btn' + (selected ? ' selected' : '') + ((v===1||v===5) ? ' endpoint' : '');
+    b.textContent = v;
+    b.type = 'button';
+    b.setAttribute('role','radio');
+    b.setAttribute('aria-checked', selected ? 'true' : 'false');
+    b.setAttribute('aria-label', `${v} — ${FREQUENCY_LABELS[v]}`);
+    b.onclick = ()=>selectAnswer(v);
+
+    const label = document.createElement('div');
+    label.className = 'scale-label';
+    label.textContent = FREQUENCY_LABELS[v];
+
+    wrap.appendChild(b);
+    wrap.appendChild(label);
+    row.appendChild(wrap);
+  }
+  document.getElementById('nextBtn').disabled = answers[current]===null;
+  document.getElementById('nextBtn').textContent = current===QUESTIONS.length-1 ? 'סיום ←' : 'הבא ←';
+  document.getElementById('backBtn').style.visibility = current===0 ? 'hidden' : 'visible';
+}
+
+function selectAnswer(v){
+  answers[current] = v;
+  renderQuestion();
+}
+
+function prevQuestion(){
+  if(current>0){ current--; renderQuestion(); }
+}
+
+function nextQuestion(){
+  if(answers[current]===null) return;
+  if(current < QUESTIONS.length-1){
+    current++;
+    renderQuestion();
+  } else {
+    document.getElementById('progressFill').style.width='100%';
+    document.getElementById('progressTrack').style.display='none';
+    lastScores = computeScores(answers);
+    lastPatterns = matchPatterns(lastScores);
+    if(sessionToken){
+      finishInvitedSubmission();
+    } else {
+      showTransition(false);
+    }
+  }
+}
+
+function showTransition(joinedTeam){
+  const sub = document.getElementById('transitionSub');
+  if(sub){
+    sub.textContent = joinedTeam
+      ? "על בסיס 24 התשובות חישבנו את היכולת לקחת בעלות, את התלות במנהל ואת הפער ביניהן — כדי לזהות היכן התרבות הניהולית מחזקת לקיחת בעלות והיכן היא עלולה לעכב אותה. Your response has also been added to your team's results."
+      : "על בסיס 24 התשובות חישבנו את היכולת לקחת בעלות, את התלות במנהל ואת הפער ביניהן — כדי לזהות היכן התרבות הניהולית מחזקת לקיחת בעלות והיכן היא עלולה לעכב אותה.";
+  }
+  show('screen-transition');
+}
+
+/* =========================================================
+   INDIVIDUAL REPORT
+   ========================================================= */
+
+function shareIndividualReport(channel){
+  const s=lastScores;
+  if(!s) return;
+  const subject='The Ownership Gap™ — הדוח שלי';
+  const body=`סיימתי את The Ownership Gap™.\n\nיכולת לקחת בעלות: ${s.capacity}/100\nתלות במנהל: ${s.dependency}/100\nOwnership Gap: ${s.gap}\n\nהדוח המלא כולל את האבחנה, המשמעויות והמלצות הפעולה.`;
+  if(channel==='email'){
+    window.location.href=`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  } else if(channel==='whatsapp'){
+    window.open(`https://wa.me/?text=${encodeURIComponent(subject+'\n\n'+body)}`,'_blank','noopener');
+  }
+}
+
+
+function openOrganizationalDiagnostic(){
+  const candidates=['screen-org','screen-organizational','screen-org-diagnostic','screen-org-offer'];
+  const id=candidates.find(x=>document.getElementById(x));
+  if(id){ show(id); return; }
+  const el=[...document.querySelectorAll('[id]')].find(x=>/org|organiz/i.test(x.id) && /screen/i.test(x.id));
+  if(el){ show(el.id); return; }
+  alert('האבחון הארגוני יהיה זמין בקרוב. אפשר בינתיים לפנות אלינו לשיחה.');
+}
+
+function showIndividualReport(){
+  const s=lastScores, p=lastPatterns;
+  if(!s || !p) return;
+  validateReportCoherence(p.primary,s);
+  const hp=hePattern(p.primary), ts=tailoredStory(s);
+  const lows=lowestDrivers(s,3);
+  const date=new Date().toLocaleDateString('he-IL',{year:'numeric',month:'long',day:'numeric'});
+  const safeName=escapeHtml(profile.name||'');
+  const safeRole=escapeHtml(profile.role||'');
+  const diagnosisTitle = hp.headline || 'תמונת לקיחת הבעלות בארגון';
+  const diagnosisBody = hp.insight || heHeroNarrative(s,p);
+  const meaning = ts.manifestations.slice(0,3);
+  const costs = ts.costs.slice(0,3);
+  const moves = ts.moves.slice(0,3);
+  const questions = ts.questions.slice(0,3);
+
+  const driverCards = lows.map((x,i)=>{
+    const z=DRIVER_INTELLIGENCE[x.d];
+    return `<div class="v18-driver ${i===0?'priority':''}">
+      <div class="v18-driver-top"><strong>${HE_DIM[x.d]}</strong><span>${x.score}/100</span></div>
+      <div class="v18-driver-tag">${i===0?'מוקד מרכזי':i===1?'מוקד נוסף':'כדאי לשים לב'}</div>
+      <p>${HE_DIM_EXPLANATIONS[x.d]}</p>
+      ${z?`<div class="v18-driver-why"><b>למה זה חשוב:</b> ${z.cost}</div>`:''}
+    </div>`;
+  }).join('');
+
+  const otherDims=DIMS.filter(d=>!lows.some(x=>x.d===d)).map(d=>
+    `<div class="v18-mini-dim"><span>${HE_DIM[d]}</span><b>${s.dimScores[d]}/100</b></div>`
+  ).join('');
+
+  const moveHtml=moves.map((x,i)=>`<div class="v18-action">
+    <div class="v18-action-num">${i+1}</div>
+    <div><strong>${x.title}</strong><p>${x.body}</p></div>
+  </div>`).join('');
+
+  const qHtml=questions.map((q,i)=>`<div class="v18-question"><span>${i+1}</span><p>${q}</p></div>`).join('');
+
+  const firstMove=moves[0]||{title:'לבחור מוקד אחד',body:'לבחור התנהגות אחת שהכי חשוב לשנות ולהגדיר לה ניסוי קצר.'};
+  const secondMove=moves[1]||firstMove;
+
+  document.getElementById('individualContent').innerHTML=`
+  <div class="v18-report-shell" dir="rtl">
+    <header class="v18-report-head">
+      <div class="v18-brand">The Ownership Gap<sup>™</sup></div>
+      <div class="v18-meta">
+        ${safeName?`<strong>הוכן עבור: ${safeName}${safeRole?' · '+safeRole:''}</strong>`:''}
+        <span>תאריך האבחון: ${date}</span>
+        <small>התוצאה משקפת את נקודת המבט שלך על התרבות והפרקטיקות הניהוליות בארגון — נקודת מבט אישית, לא תמונה ארגונית משותפת.</small>
+      </div>
+      <button class="btn-print" onclick="window.print()">הדפסה / שמירה כ־PDF</button>
+    </header>
+
+    <section class="v18-section v18-diagnosis">
+      <div class="v18-kicker">01 · האבחנה</div>
+      <h1>${diagnosisTitle}</h1>
+      <p class="v18-lead">${diagnosisBody}</p>
+      <div class="v18-score-strip" aria-label="מדדי מפתח">
+        <div><span>יכולת לקחת בעלות</span><strong>${s.capacity}</strong></div>
+        <div><span>תלות במנהל</span><strong>${s.dependency}</strong></div>
+        <div><span>Ownership Gap</span><strong>${s.gap}</strong></div>
+      </div>
+      <div class="v18-note">המספרים הם אינדיקציה תומכת. האבחנה והמשמעות הניהולית הן העיקר.</div>
+    </section>
+
+    <section class="v18-section">
+      <div class="v18-kicker">02 · מה זה אומר בפועל?</div>
+      <div class="v18-two-col">
+        <div>
+          <h2>איך זה עשוי להיראות ביום־יום</h2>
+          <div class="v18-bullets">${meaning.map(x=>`<div>${x}</div>`).join('')}</div>
+        </div>
+        <div class="v18-cost-box">
+          <h2>מה עלול להיות המחיר</h2>
+          <div class="v18-bullets">${costs.map(x=>`<div>${x}</div>`).join('')}</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v18-section">
+      <div class="v18-kicker">03 · למה זו התמונה?</div>
+      <h2>הממדים שמסבירים את האבחנה</h2>
+      <p class="v18-sub">מתוך ששת הממדים, אלה המוקדים שבולטים יותר בתשובות שלך. הם עוזרים להבין היכן כדאי להתערב — לא רק מה הציון.</p>
+      <div class="v18-drivers">${driverCards}</div>
+      <details class="v18-all-dims">
+        <summary>לצפייה בכל ששת הממדים</summary>
+        <div class="v18-mini-grid">${otherDims}${lows.map(x=>`<div class="v18-mini-dim"><span>${HE_DIM[x.d]}</span><b>${x.score}/100</b></div>`).join('')}</div>
+      </details>
+    </section>
+
+    <section class="v18-section">
+      <div class="v18-kicker">04 · מה נדרש לעשות?</div>
+      <h2>העדיפויות הניהוליות שעולות מהאבחנה</h2>
+      <div class="v18-actions">${moveHtml}</div>
+    </section>
+
+    <section class="v18-section v18-plan">
+      <div class="v18-kicker">05 · מתובנה לפעולה</div>
+      <h2>תכנית פעולה פשוטה ל־30 הימים הקרובים</h2>
+      <div class="v18-plan-grid">
+        <div><span>עכשיו</span><strong>${firstMove.title}</strong><p>${firstMove.body}</p></div>
+        <div><span>בשבועיים הקרובים</span><strong>${secondMove.title}</strong><p>${secondMove.body}</p></div>
+        <div><span>בעוד 30 יום</span><strong>לבדוק מה השתנה</strong><p>לבחון האם פחות נושאים חוזרים למנהל, האם ההחלטות מתקבלות קרוב יותר לעבודה, ומה עדיין דורש חיזוק.</p></div>
+      </div>
+      <h3>שאלות לשיחת הנהלה</h3>
+      <div class="v18-questions">${qHtml}</div>
+    </section>
+
+
+    <section class="v181-next">
+      <div class="v18-kicker">06 · מה הלאה?</div>
+      <h2>לקחת את התמונה צעד אחד קדימה</h2>
+      <p class="v18-sub">אפשר לשמור את הדוח, לשתף אותו, לבדוק האם התמונה חוזרת גם אצל מנהלים נוספים — או לחשוב יחד מה נכון לעשות מכאן.</p>
+
+      <div class="v181-next-grid">
+        <div class="v181-next-card">
+          <div class="v181-icon">01</div>
+          <strong>לשמור או לשתף</strong>
+          <p>לשמור את הדוח כ־PDF, או לשתף באימייל/WhatsApp תקציר קצר של התוצאה.</p>
+          <div class="v181-share-actions">
+            <button type="button" onclick="window.print()">PDF</button>
+            <button type="button" onclick="shareIndividualReport('email')">Email</button>
+            <button type="button" onclick="shareIndividualReport('whatsapp')">WhatsApp</button>
+          </div>
+        </div>
+
+        <div class="v181-next-card">
+          <div class="v181-icon">02</div>
+          <strong>האם זו נקודת המבט שלך — או דפוס ארגוני?</strong>
+          <p>האבחון הארגוני מאפשר להשוות בין מנהלים וקבוצות, לזהות פערי תפיסה ולמקד את מוקדי הפעולה.</p>
+          <button type="button" class="v181-link-btn" onclick="openOrganizationalDiagnostic()">לאבחון הארגוני ←</button>
+        </div>
+      </div>
+
+      <div class="v181-consult">
+        <img class="v182-erez-photo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/7QCEUGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAGgcAigAYkZCTUQwYTAwMGFhYjAxMDAwMDM4MDQwMDAwZWMwNTAwMDA4ODA2MDAwMDAxMDcwMDAwZWIwNzAwMDBjOTBhMDAwMDU2MGIwMDAwMDQwYzAwMDA3OTBjMDAwMGZiMTAwMDAwAP/bAIQABQYGCwgLCwsLCw0LCwsNDg4NDQ4ODw0ODg4NDxAQEBEREBAQEA8TEhMPEBETFBQTERMWFhYTFhUVFhkWGRYWEgEFBQUKBwoICQkICwgKCAsKCgkJCgoMCQoJCgkMDQsKCwsKCw0MCwsICwsMDAwNDQwMDQoLCg0MDQ0MExQTExOc/8IAEQgAyADIAwEiAAIRAQMRAf/EAHYAAAICAwEAAAAAAAAAAAAAAAABAgMEBgcFEAABAwEFBgMGBQUAAAAAAAABAAIRAwQQEiEwEyAxQEFRImFxFCMygZHBUFJyodEzgpKisREAAgECBAUEAwEAAAAAAAAAAAERITEQQVFhIHGBkaEwscHwQNHh8f/aAAwDAQACAAMAAAAB5I0A0CAAAAJSiwkoe5GzyJbVg12eECtoE00gAAAEAHWOT9YDkYADQDEwGmEgYbXtesblhenkYvp4lV3MPK6LpeZ53mKKux5qIEiIyZACfV+TdZDkYCAABoBtMJTg0/X2jzfVxc/O8naZ15FOF6WNE5l5lkPQ8lAOLEMGhD61yXrTORgIAAAAJRYTZMNgXm7Fj5mwqGdXlS0bZvIVWjilm+cAgBJjcBE+tcj64HImAAgAQDnCQWqEAPb12Kl1XD1fccbMflbNzwflmUsvAxlfQERAACH1zkXXQ5EAAmBEaYpJhO+F7VOJ6lAT3/n+x42VPXaLrqJxjKcCu1s89WVRbSAl13kHXw5C4CJpIJJMHKNzLGQaui6wlTlxBPLxAjcrQgSgzFx8miLgMBdf5D14OPAAAA7avahLNxdgz8fM0HH3XTcnEyKrCdbbgHp42PtdV5H2bcTN0zzt51nIxfBpyca/GiAB17kPXg46ICQgPS27XPWx8rJpyNNcdswcm+FvjQ2i1PWKNwaesbNdlV2ldmFGeJpmZg5vnLHvx7aUhA+vch68HHAAGmj1Z4OVVfdh5F0Z+Vb6lDjd7Hg5cLNhytTzIW7Pma76MbLdY9XU7cdE4ZmDTiZmGiIJN9e5D14OOAAAIcosJTrmOx30oWwa64z6hT4uxY+dqj2bFa0C2yWV56jKM40Y11KIppM6/wAg6+HHBAMQDaESsqmGZizpCeNkUB6+2aviV37pja1ONnn+l5uZkYdtJFiptiitSUWuuck62zjZ2QDjZ2QDjb7GBx2XYBHKKOvEo8po66TjyfJ6eVWcbl2Ishx3K6wRlzOHTxrl0epifK11UT5T1YA//9oACAEBAAEFAtKeZAlUrKXL2JVbJHKlUGAJjVs05qrU4ccuUoGUxSnFVaaq05PJsrFis9pJNpDlQpOlzcqTQ0Wr+pyVmph4A94mwU8qcLSZ5OyPU+8aUH4i/hbSRylCpgdGIsbdVqK008TeSxLGrNaIQtLE+04lRYrc6BCjkYvs7A4tYAgYVaptHRdGuFCLVCo8WK2V906w3GZKrV2Y3jqDcCIUIBFDcOoLuu41hKKF5R0mtlCztKdZnNu67jXgMYzGW2RpTrEE+zubcdKg1NF1RrHKq3A5u4SqDMLQiirSdKiySHLiqNoa1PG0Bs4K2ELYlezlezuTLOQmi4qo+E52I6NIwgnCB8DtuCg8FBQoWBQg255hVX4lCOizMuqmcT3I0Ss2oVITa6bXWNByGa6Eq01ELjo03QpWNbVbRHCU2kCvZXLxNQcmOuqPwDje7VwqLrLVTU+gxwfiol9rwh1UvQN7tQKopW0cFtirJWlSsnCs1kVabWO1wqilPuoE4nVs6VSS900ghdxvhRohOuJusph9RxaaNWCa8tClTdhRGpUULAi1N4Wwe9hRcNwhQFARC//aAAgBAwABPwHdawngEaDh0R06PC6tTg6QVJpyMo0s5XX0TjJJ7nSpuxAZ8F81U8QMabXYU1xcq7sLY6nUpOgeie/EZ5VjZKdRafJOZHnfRZjPkFsW/lVWiG5g7zBCq9E1gjutg0r2dqYwN4IlVqmLeaclkeqw9nJpPqhUQKr1Iy76Mpr4TYOawnODCdMmdNlTCtqI+ukSpuLo3v/aAAgBAgABPwHdLoQqjUqcbqb50ineinpcMo0nCCUUzIjTLZTslSEme2pUbJTW4eQO650BCoQmvnyvqvwhbV3dU6pOR3n5qmnOPotqVtnJzi5AKkyEd0qSFiniEQEWKFSZcdBzZREIHuE246LmysGaFx3wERcG3m//2gAIAQEABj8C/BsuWG4eZleETymQQDhx4LIn5Lh87o6p0d+TlDy3CT0lT35OFIdhKkrK4Z5Hj8uVldLoR6Yc+VgriF4VJWH8325bO6UXfT05YXYB/d/HL5rz6fifDkss98giSeB7XdVk5d/TUm+Dx+hUaQ76XC93iwvJ/wBeybOYE953s92dLyQunrOn5aYXhXHTjkuy8JleIHdnkuKg3TGflku4XBZ8iP0tv6fRR1R73TGX8rIyD+3Is/T9zuCED3CPqnen35IblM9nN/6i38pP7LsiIzN/DXG6/wAzP+Wf30OK+JfEuK//2gAIAQEBAT8h9FFBPTCfxW4H5RnVQhKs5GrItfCfwySiuGqMNqO4soJJJJJ9ekFgTOgi0oU3ROQ6FlFkp/Dij2IJLfPMhy3tlQiuEnyQKVSrmbnesFUtUPLXTXJkFlvdFfP4UiY2ROlBuHUVjrYpDWylYmtrs2+v4KwapuipNNqFPPuIakl6sRI8tUemBSDZKaN2fhIggmNFQT5qRDUNB7ZEsLdi5jyD5L5E+GcJ9FCGo9gnS5EQpUJTUl1iMS7V5f1iR6yG8hhrCLNDEVEKRtRJTOyNDLJolsDQy16qEEJR3j3Bk4Mz5vrvwQIP1UqLMViKsZNFFZT016DVQ5Zf6E5debwnFoXhkknhSRZCdXyxSEjzGbBGDrhfDJJPAmE1ch2Fg/ckGmaKUxIIwbTC/RmpIQxZ6orFHa/bBvw4M+SKQ1VOofFkrlwfd/BC51Sf6Mih9Wweo/RhVF8JRqhzY3p+aC+p/o0jEib7uMPnTvzwNQeBaklW68hofoOU1KHnYmmXbSzJCFNQxoojVq1aGNNCm5kbdnNci9zPMbWMk0KN0aDTH0mNISjCtG9BjPDQY2SSTwxK0S+49EVn4G0YtBMFSSUosLYZFkD4FyElJEXGa6R7wrPOI2SSTw0hVSqxBshDrAZrcjKcDxuEhBidRlcxNKEm8ZF8+QhGF+hV7kMhYUDQDMNFUILKS1uvBJZySEyKY2S3bXeD9NLEyJt4JaM6kSI606DzuQBzKhETLbMZIpN9hlL9BrsS1g4/TvGq+vtR8CfVjcv8i0OxI69RdPNCai1a/Q2hKmK/sqhHY1t/RAIhMO+xiGMdRoggjjkao1Og+hoNMYKRm28lnSfgtr+H8Goyo+QpHOXj+MZuBhkYkehcfN7iLSw5trlBPwNBku5olG37hEo1skpwLd2OYxpvYhgQQR6CPkE7Lam6NDbVXQijtDEmJ6FiOwm9hydY6CP8sraNYZ9iYhWn0P/aAAwDAQECAQMBAAAQMeqe64au0yyei6m+OJoHGWS8MAKCmCH3fKy+EqgACCignozyCguCiOqm+/f4W2oyKOKkU5xTvrpyYouWa2vnDnrta4oQ0fs8zLkdemoo8UOpcY5PG/icgI6tWtOUFS9RsAAWz07qYOjY1UoMMmpbOuJj8VGIwwwjhwzwAzxwg//aAAgBAwEBPxDhoMgglhI9JCQhM3GsisunpRlTYTyDaUCnUsKEjeR10MoJH3fpQPNsVuFebJXtu129N7SjREIi/wAc/wBeolj6hkjpsvxYJdxB7lQ1qTVY3TcG9Wewodhk/wB8UT3Jx5CsKbjQR1Np9ym/0REiFZeXxS3RqRebuUAn+mFKRIOvgsFxJ4J8jpV0jZm1pyFRFTV8/QWMaOqJnl3VHpRT1E5lhL4LH//aAAgBAgEBPxDhVcxmkifp1CNCB6Z05XcJ0hW2rFgmi9LmDDfPSgUFW82d9LCPRgoGpGjF8Sxj0U0x9rsaGWPNGQZymnUfC0jNgkZ9oK48CDOfEWtjILAX9sBmdzkiPQRgmNFhFKhCKW9Q5+HpE2DmyQtwv//aAAgBAQEBPxCeKMEcg0uRN7BNkeQ0r3RK3O+DJJJ3wphBGMECFIpIEjKjNiB1ooDmT0IQ2JclRWvMdBiRskkkkknGSSSSRMTGldTNIhvqKnSg0Jhpo5ry3+oqAhgaYIcFOKCBCGeKIEFAEy40lT2KT0SkKzNVKo6DUYP05wkTExM2UE4BrJ6rEljQFUrh6bJUbuNVgYnGolELzNLiWAlAeS5lp2WQqmxV0vn4JJJJ45EIQoJrUpKNRHO3aaexZjcOBwJFod09IIN8+41Dz1T8U6jfLAml+/4CwNEZJ6Avq38AJUVzPqGS4Ak5baOCUm3oQBOeqpFSt+ChR0D8hdHyI/vVAzKU2+oRJJ0JKZDc3iwe86ynKznGBBGDeCcE8MkiwMlUSybNIZd3MfuivYrWepSRzXN2v6Rq4H3Zw7Cw5IaxggjjTGJBMRMTg1YBK0lBNMyNl82i5+xrKjfUHN7sQ0LjCHCCCCCSSSSSSRiZknQgTqRvZgxBm5k62j9j5dCEhvCHMnEh+orweIffoWOSHPooXcp8Ee5dmIVG7KfHTUc5tLdR5k18imJSJEyKg1xiScEdYUMdjfInRchvLeEkiXMUWyRQXV0MzYWRMJJDBK8KeASTjO24+oKeA1sEmN0EGQpMUpvYXcVRAQpEfWSU7hBCCCOJmevCKENXM6qzPrG/VjZ0a7ogTo8kShqH1wXuu5HpA1GFK7eyF6q9UiFovKPEjK2s0+VfcgkYlhXjqhujIrVQ60e0plvoqsZ6AvcCjLyTCQqGmIQtSY8J2GQhKE9bmE4+okSn3UhPYrU2DPfvNsJ2SyWS+FRCJs5115D4LjJDI+Ca7OTulRZgZR1BVkQqFrPkeENZ5iXyZ7Lc+sxJ/aFNUKvMTUKlUlU1BYiasouM44SVGp6aGQ/DCMUhCkzrI0DnrT1ZDDICejKlbkVLRfm9ZzHFJft3Er0jKmRQTarFhK7v4CyERlnc0BVyWxj52ESkp2VO4Ykr8IYwgSHkQRfWXpmSChvS7L262WzBmDS0Hcmgp8uRHWTcVKeObcpYI6VVkn0JDZun2f0ISiBisZEolErhm0VSORFWkjuJBR1hjy03Io+qTqQTqJC0j7WEInEe4+iHKEyR4GhVi2ryRmZZI0NBQhkIhELhUm8an7Rpk+pe5ta7ijn3v0c1cyfnUt8CUeoj/WagPp8nKAH3JT7B5JzeZVM0yIRUU1YkKuW/Ami2hEQQRwySSM4ZFJUyFLT+R/SEQ818jMs3g7kNbFCw1+Y4qamxXTebrQcSclGlnaRZdh19oCxRB1DqbbCqBB4RcfogkkQpBdLVzPjQRsR3SBizJqJUF2+YlP8AsRlErXf8s0TDtBalv2uGlyajqw55+gZJEx6B7NPeWJF1Bony31EXYX0jBX0P6ZzNjqJOFqykp/BJs5pF/lNBfRjFYkSJEkkk4SJj1R7HuLQSyO8MhD4jr8x7kouXIRJ4DFh6oSdyP9jY0v8AR9I/oqtJwZurL9kXO9Iiz7uziq8lB0TDaznp1F17CpNdD//Z" alt="ארז אלמוגי">
+        <div class="v182-consult-copy">
+          <span>רוצה לחשוב יחד על התמונה שעלתה?</span>
+          <strong>אשמח לעבור איתך על התוצאה, להבין מה היא עשויה לומר על הארגון ולחשוב יחד מה נכון לעשות מכאן.</strong>
+          <small>ארז אלמוגי · Blanchard Israel</small>
+        </div>
+        <a href="mailto:erez@blanchard.co.il?subject=The%20Ownership%20Gap%20-%20שיחה%20על%20התוצאות" class="v181-consult-btn">לתיאום שיחה עם ארז</a>
+      </div>
+    </section>
+
+    <footer class="v18-footer">
+      <strong>The Ownership Gap™</strong> הוא כלי אבחון ורפלקציה ניהולית של Blanchard, שנועד לייצר תמונת מצב ראשונית ושיחה ניהולית על תרבות של לקיחת בעלות.
+    </footer>
+  </div>`;
+  show('screen-individual');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function emailReport(){
+  const s = lastScores, p = lastPatterns;
+  const subject = encodeURIComponent('My Ownership Gap Results');
+  const body = encodeURIComponent(`My Ownership Gap: ${s.gap} pts (${gapLabel(s.gap, s.capacity, s.dependency, p.primary.heroType)})\nOwnership Capacity: ${s.capacity}/100 (${band(s.capacity)})\nManager Dependency: ${s.dependency}/100 (${dependencyBand(s.dependency)})\n\nCore Ownership Tension: ${p.primary.headline}\n${p.primary.insight}\n\n— <span class="og-lockup" dir="ltr">The Ownership Gap<span class="og-tm">™</span></span>, Blanchard Israel`);
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+}
+
+/* =========================================================
+   INVITED PARTICIPANT FLOW (C1) — role/country collected BEFORE Q1;
+   Finish automatically adds exactly one respondent to the Team Session.
+   ========================================================= */
+async function loadInvitedSession(){
+  const container = document.getElementById('invitedContent');
+  container.innerHTML = `<div class="eyebrow">Team Invitation</div><p style="color:var(--slate);">Loading your team's session…</p>`;
+  show('screen-invited');
+
+  let sessionData = null, loadError = false;
+  try{
+    const r = await window.storage.get(`session:${sessionToken}`, true);
+    if(r && r.value) sessionData = JSON.parse(r.value);
+  }catch(e){ loadError = true; }
+
+  if(loadError){
+    container.innerHTML = `<div class="empty-state"><h2>Storage unavailable</h2><p>Shared storage only works when this tool is opened as a published Claude artifact, not as a downloaded HTML file.</p></div>`;
+    return;
+  }
+  if(!sessionData){
+    container.innerHTML = `<div class="empty-state"><h2>Session not found</h2><p>This invitation link looks invalid, or the session may have been removed. Ask your facilitator for a new link.</p></div>`;
+    return;
+  }
+  if(sessionData.status === 'CLOSED'){
+    container.innerHTML = `<div class="empty-state"><h2>This Team Session is now closed</h2><p><strong>${escapeHtml(sessionData.orgName)} — ${escapeHtml(sessionData.teamName)}</strong> is no longer accepting new responses. Ask your facilitator if you believe this is a mistake.</p></div>`;
+    return;
+  }
+
+  document.getElementById('orgBadge').style.display='flex';
+  document.getElementById('orgBadgeCode').textContent = `${sessionData.orgName} · ${sessionData.teamName}`;
+
+  container.innerHTML = `
+    <div class="eyebrow">You've Been Invited to Contribute</div>
+    <h2 style="font-size:24px; margin-bottom:8px;">${escapeHtml(sessionData.orgName)} — ${escapeHtml(sessionData.teamName)}</h2>
+    <p style="color:var(--slate); font-size:14.5px; line-height:1.6; margin-bottom:24px;">Your responses will contribute to the team's Ownership Gap view. You will also receive your own individual results. Individual responses are not displayed in the Team Dashboard. Team results are shown only in aggregated form.</p>
+    <label>השם שלך *</label>
+    <input type="text" id="invitedName">
+    <label>Your role *</label>
+    <select id="invitedRole"><option value="" selected>בחר/י תפקיד…</option>${ROLES.map(r=>`<option value="${escapeHtml(r)}">${escapeHtml(r)}</option>`).join('')}</select>
+    <label>מדינה / אזור (לא חובה)</label>
+    <input type="text" id="invitedCountry">
+    <div id="invitedError" style="display:none; color:var(--clay); font-size:13px; margin-bottom:14px;"></div>
+    <button class="btn btn-primary" onclick="beginInvitedAssessment('${escapeHtml(sessionData.orgName).replace(/'/g,"\\'")}')">להתחלת האבחון ←</button>
+  `;
+}
+
+function beginInvitedAssessment(orgName){
+  const name = document.getElementById('invitedName').value.trim();
+  const role = document.getElementById('invitedRole').value;
+  const errEl = document.getElementById('invitedError');
+  if(!name){
+    errEl.textContent = 'Please enter your name.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if(!role){
+    errEl.textContent = 'יש לבחור תפקיד.';
+    errEl.style.display = 'block';
+    return;
+  }
+  pendingRole = role;
+  pendingCountry = document.getElementById('invitedCountry').value.trim();
+  profile = { orgName: orgName, name, role: pendingRole, country: pendingCountry };
+  startAssessment();
+}
+
+async function finishInvitedSubmission(){
+  show('screen-transition');
+  document.getElementById('transitionSub').textContent = 'Saving your response to the team session…';
+  const result = await submitRespondentWithRetry(pendingRole, pendingCountry);
+  if(result.ok && result.reason!=='duplicate'){
+    showTransition(true);
+  } else if(result.reason === 'duplicate'){
+    document.getElementById('transitionSub').textContent = "You've already submitted a response to this Team View in this session — showing your original results below.";
+  } else {
+    renderSubmissionError();
+  }
+}
+
+function renderSubmissionError(){
+  const el = document.getElementById('screen-transition').querySelector('.center-wrap');
+  el.innerHTML = `
+    <div class="check-mark" style="border-color:var(--clay); color:var(--clay);">!</div>
+    <h2 style="font-size:26px; margin-bottom:14px;">We Couldn't Save Your Response</h2>
+    <p style="color:var(--slate); line-height:1.7; margin-bottom:28px; font-size:14.5px;">This can happen if the shared storage connection is temporarily unavailable. Your answers are still on this page — you can safely retry.</p>
+    <button class="btn btn-primary" onclick="finishInvitedSubmission()">↻ Retry</button>
+  `;
+}
+
+/* =========================================================
+   TEAM SESSION — CREATE (organic "Build the Team View" path, no invite link)
+   ========================================================= */
+function genToken(){
+  // cryptographically strong session id (M6) — shared via copyable link, not typed manually, so length is not a UX cost
+  if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  if(window.crypto && crypto.getRandomValues){
+    const arr = new Uint32Array(4);
+    crypto.getRandomValues(arr);
+    return Array.from(arr, n=>n.toString(16).padStart(8,'0')).join('');
+  }
+  return 'r'+Date.now()+Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2);
+}
+
+function showTeamCreate(){
+  renderCreateForm();
+  show('screen-team-create');
+}
+
+function renderCreateForm(){
+  const container = document.getElementById('teamCreateContent');
+  container.innerHTML = `
+    <div class="eyebrow">Build the Team View</div>
+    <h2 style="font-size:24px; margin-bottom:8px;">Create a Team Session</h2>
+    <p style="color:var(--slate-dim); font-size:13px; margin-bottom:20px;">"Team / Group Name" is the specific group taking this together — e.g. "Executive Committee" or "Sales Leadership" — not your own name.</p>
+    <label>שם הארגון *</label><input type="text" id="orgName" value="${escapeHtml(profile.orgName)}">
+    <label>Team / Group Name *</label><input type="text" id="teamName" placeholder="e.g. Executive Committee">
+    <label>התפקיד שלך *</label>
+    <select id="creatorRole"><option value="" ${profile.role?'':'selected'}>בחר/י תפקיד…</option>${ROLES.map(r=>`<option value="${escapeHtml(r)}" ${profile.role===r?'selected':''}>${escapeHtml(r)}</option>`).join('')}</select>
+    <label>מדינה / אזור (לא חובה)</label><input type="text" id="creatorCountry" value="${escapeHtml(profile.country)}">
+    <div id="createError" style="display:none; color:var(--clay); font-size:13px; margin-bottom:14px;"></div>
+    <button class="btn btn-primary" id="createBtn" onclick="submitCreate()">Create Session →</button>
+    <div style="margin-top:14px;"><button class="btn btn-ghost btn-sm" onclick="show('screen-team-prompt')">חזרה →</button></div>
+  `;
+}
+
+async function submitCreate(){
+  const orgName = document.getElementById('orgName').value.trim();
+  const teamName = document.getElementById('teamName').value.trim();
+  const role = document.getElementById('creatorRole').value;
+  const country = document.getElementById('creatorCountry').value.trim();
+  const errEl = document.getElementById('createError');
+  if(!orgName || !teamName){
+    errEl.textContent = 'Organization Name and Team Name are required.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if(!role){
+    errEl.textContent = 'יש לבחור תפקיד.';
+    errEl.style.display = 'block';
+    return;
+  }
+  document.getElementById('createBtn').disabled = true;
+
+  // reuse the same token across retries so a transient failure doesn't orphan an
+  // already-created session record and silently mint a second, empty one
+  if(!sessionToken) sessionToken = genToken();
+  const sessionData = {
+    session_id: sessionToken, token: sessionToken, orgName, teamName,
+    creator_id: respondentId, status: 'OPEN',
+    created_at: Date.now(), calculation_version: CONFIG.scoring.version,
+  };
+  try{
+    await window.storage.set(`session:${sessionToken}`, JSON.stringify(sessionData), true);
+    const result = await submitRespondentWithRetry(role, country);
+    if(!result.ok && result.reason!=='duplicate') throw new Error('save failed');
+  }catch(e){
+    errEl.textContent = 'Could not create the session — shared storage only works when this tool is opened as a published Claude artifact.';
+    errEl.style.display = 'block';
+    document.getElementById('createBtn').disabled = false;
+    return;
+  }
+  renderShareScreen(sessionData);
+  show('screen-team-share');
+}
+
+/* =========================================================
+   RESPONDENT PERSISTENCE (C2: raw answers · C3: same-tab duplicate guard)
+   ========================================================= */
+async function submitRespondentWithRetry(role, country){
+  // Best-effort duplicate guard: prevents a double-click or accidental re-submit
+  // within the SAME browser tab/session from counting twice. This does NOT protect
+  // against someone deliberately reloading the page — that would require a signed
+  // per-invitation token and server-side auth, which this client-only storage layer
+  // cannot provide. Flagged explicitly as a Phase 2 infrastructure limitation.
+  if(hasSubmittedToTeam){
+    return {ok:true, reason:'duplicate'};
+  }
+  const s = lastScores;
+  const key = `respondent:${sessionToken}:${respondentId}`;
+  const value = JSON.stringify({
+    respondent_id: respondentId, session_id: sessionToken,
+    name: profile.name, role, country, answers: answers.slice(),
+    dimension_scores: s.dimScores, ownership_capacity: s.capacity,
+    manager_dependency: s.dependency, ownership_release: s.release, ownership_gap: s.gap,
+    calculation_version: CONFIG.scoring.version, completed_at: Date.now(),
+  });
+  try{
+    await window.storage.set(key, value, true);
+    hasSubmittedToTeam = true;
+    return {ok:true};
+  }catch(e){
+    return {ok:false, reason:'storage_error'};
+  }
+}
+
+function renderShareScreen(sessionData){
+  const link = `${window.location.origin}${window.location.pathname}?session=${sessionData.token}`;
+  const dashboardLink = `${window.location.origin}${window.location.pathname}?session=${sessionData.token}&view=team`;
+  document.getElementById('orgBadge').style.display='flex';
+  document.getElementById('orgBadgeCode').textContent = `${sessionData.orgName} · ${sessionData.teamName}`;
+  const emailBody = encodeURIComponent(`I'd like to compare how we each experience ownership and manager dependency in our organization. The assessment takes approximately 10 minutes. Individual responses are not displayed in the group view — only aggregated results are shared.\n\n${link}`);
+  const emailSubject = encodeURIComponent('How much ownership are we really enabling?');
+  document.getElementById('teamShareContent').innerHTML = `
+    <div class="eyebrow">Team Session Created</div>
+    <h2 style="font-size:24px; margin-bottom:8px;">Invite Your Team</h2>
+    <p style="color:var(--slate); font-size:14px; margin-bottom:22px;">The Team View becomes available once at least three people have completed the assessment.</p>
+
+    <label>Participant Invitation Link</label>
+    <div class="invite-link-box">
+      <input type="text" id="inviteLinkInput" readonly value="${escapeHtml(link)}">
+      <button class="btn btn-ghost btn-sm" onclick="copyToClipboard('inviteLinkInput', this)">Copy</button>
+    </div>
+    <div class="share-row">
+      <a class="btn btn-ghost btn-sm" href="mailto:?subject=${emailSubject}&body=${emailBody}">✉ Share by Email</a>
+      <a class="btn btn-ghost btn-sm" href="https://wa.me/?text=${emailBody}" target="_blank" rel="noopener">💬 Share via WhatsApp</a>
+    </div>
+
+    <label style="margin-top:20px;">Your Team Dashboard Link (bookmark this)</label>
+    <div class="invite-link-box">
+      <input type="text" id="dashLinkInput" readonly value="${escapeHtml(dashboardLink)}">
+      <button class="btn btn-ghost btn-sm" onclick="copyToClipboard('dashLinkInput', this)">Copy</button>
+    </div>
+
+    <div style="margin-top:28px;">
+      <button class="btn btn-primary" onclick="viewGroupResults()">View Team Dashboard →</button>
+    </div>
+    <div style="margin-top:14px;"><button class="btn btn-ghost btn-sm" onclick="closeSession('${sessionData.token}')">Close This Session</button></div>
+  `;
+}
+
+function copyToClipboard(inputId, btn){
+  const input = document.getElementById(inputId);
+  input.select();
+  navigator.clipboard && navigator.clipboard.writeText(input.value);
+  const original = btn.textContent;
+  btn.textContent = 'Copied ✓';
+  setTimeout(()=>{ btn.textContent = original; }, 1800);
+}
+
+async function closeSession(token){
+  if(!window.confirm('Close this session? No further responses will be accepted, but existing results remain viewable.')) return;
+  try{
+    const r = await window.storage.get(`session:${token}`, true);
+    if(r && r.value){
+      const data = JSON.parse(r.value);
+      data.status = 'CLOSED';
+      data.updated_at = Date.now();
+      await window.storage.set(`session:${token}`, JSON.stringify(data), true);
+      alert('Session closed. Existing results remain viewable via the Team Dashboard link.');
+    }
+  }catch(e){ alert('Could not update the session — please try again.'); }
+}
+
+/* =========================================================
+   GROUP / TEAM DASHBOARD — real data only, N>=3 privacy threshold
+   ========================================================= */
+const MIN_N = CONFIG.privacy.minGroupN;
+
+function viewGroupResults(){
+  show('screen-group');
+  loadGroupDashboard();
+}
+
+async function loadGroupDashboard(){
+  const container = document.getElementById('groupContent');
+  container.innerHTML = `<div class="empty-state"><p>Loading responses…</p></div>`;
+  if(!sessionToken){
+    container.innerHTML = `<div class="empty-state"><h2>No team session</h2><p>Start from an individual assessment and choose "Build the Team View" to create or join a session.</p></div>`;
+    return;
+  }
+
+  let sessionData = null, entries = [];
+  try{
+    const sr = await window.storage.get(`session:${sessionToken}`, true);
+    if(sr && sr.value) sessionData = JSON.parse(sr.value);
+    const listResult = await window.storage.list(`respondent:${sessionToken}:`, true);
+    const keys = (listResult && listResult.keys) || [];
+    for(const k of keys){
+      try{
+        const r = await window.storage.get(k, true);
+        if(r && r.value) entries.push(JSON.parse(r.value));
+      }catch(e){}
+    }
+  }catch(e){
+    container.innerHTML = `<div class="empty-state"><h2>Storage unavailable</h2><p>Shared storage only works when this tool is opened as a published Claude artifact, not as a downloaded HTML file.</p></div>`;
+    return;
+  }
+
+  if(!sessionData){
+    container.innerHTML = `<div class="empty-state"><h2>Session not found</h2><p>This dashboard link looks invalid, or the session may have been removed.</p></div>`;
+    return;
+  }
+
+  const n = entries.length;
+  if(n < MIN_N){
+    const dots = Array.from({length:MIN_N}, (_,i)=>`<div class="dot ${i<n?'filled':''}"></div>`).join('');
+    container.innerHTML = `<div class="empty-state">
+      <div class="eyebrow" style="justify-content:center;">Team Session${sessionData ? ': '+escapeHtml(sessionData.orgName)+' — '+escapeHtml(sessionData.teamName) : ''}</div>
+      <h2>Waiting for More Responses</h2>
+      <p>The Team View becomes available once at least three people have completed the assessment.</p>
+      <div class="lock-progress">${dots}</div>
+      <p style="font-family:var(--mono); font-size:13px; color:var(--gold);">${n} of ${MIN_N} completed</p>
+      <button class="btn btn-ghost btn-sm" style="margin-top:20px;" onclick="loadGroupDashboard()">↻ Refresh</button>
+    </div>`;
+    return;
+  }
+
+  renderGroupDashboard(sessionData, entries);
+}
+
+function stdDev(vals){
+  const m = vals.reduce((a,b)=>a+b,0)/vals.length;
+  const variance = vals.reduce((a,b)=>a+Math.pow(b-m,2),0)/vals.length;
+  return Math.sqrt(variance);
+}
+
+function renderGroupDashboard(sessionData, entries){
+  const n = entries.length;
+  const groupDim = {}, dimSD = {};
+  DIMS.forEach(d=>{
+    const vals = entries.map(e=>e.dimension_scores ? e.dimension_scores[d] : e.dimScores[d]);
+    groupDim[d] = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+    dimSD[d] = stdDev(vals);
+  });
+  const getCap = e => e.ownership_capacity!==undefined ? e.ownership_capacity : e.capacity;
+  const getDep = e => e.manager_dependency!==undefined ? e.manager_dependency : e.dependency;
+  const groupCapacity = Math.round(entries.reduce((a,e)=>a+getCap(e),0)/n);
+  const groupDependency = Math.round(entries.reduce((a,e)=>a+getDep(e),0)/n);
+  const groupRelease = 100 - groupDependency;
+  const groupGap = Math.max(0, groupCapacity - groupRelease);
+  // Alignment: normalize average SD to a 0-100 scale (low SD = high alignment). Provisional heuristic — see CONFIG.alignment.
+  const avgSD = Object.values(dimSD).reduce((a,b)=>a+b,0)/DIMS.length;
+  const alignment = Math.max(0, Math.round(100 - (avgSD/CONFIG.alignment.zeroPointSD)*100));
+  const alignLabel = alignment>=70 ? "Strong Alignment" : (alignment>=45 ? "Moderate Alignment" : "Meaningful Perception Gap");
+
+  // role subgroups — N>=3 eligible AND complementary suppression (C4): if any respondent falls into a
+  // role bucket with N<3, we don't show ANY role breakdown, since Overall + the eligible groups shown
+  // together would let that hidden bucket's average be reverse-engineered algebraically.
+  const roleGroups = {};
+  entries.forEach(e=>{ (roleGroups[e.role] = roleGroups[e.role]||[]).push(e); });
+  const eligibleRolesRaw = Object.keys(roleGroups).filter(r=>roleGroups[r].length>=MIN_N);
+  const coveredN = eligibleRolesRaw.reduce((a,r)=>a+roleGroups[r].length,0);
+  const hiddenN = n - coveredN;
+  const eligibleRoles = (eligibleRolesRaw.length>=2 && hiddenN===0) ? eligibleRolesRaw : [];
+  const roleComparisonSuppressed = eligibleRolesRaw.length>=2 && hiddenN>0;
+
+  const dimScoreOf = e => e.dimension_scores ? e.dimension_scores : e.dimScores;
+
+  // perception gaps: pairwise role comparison per dimension
+  let perceptionGaps = [];
+  if(eligibleRoles.length>=2){
+    DIMS.forEach(d=>{
+      const roleAvgs = eligibleRoles.map(r=>({role:r, avg: Math.round(roleGroups[r].reduce((a,e)=>a+dimScoreOf(e)[d],0)/roleGroups[r].length)}));
+      for(let i=0;i<roleAvgs.length;i++) for(let j=i+1;j<roleAvgs.length;j++){
+        const diff = Math.abs(roleAvgs[i].avg - roleAvgs[j].avg);
+        if(diff>=CONFIG.privacy.perceptionGapThreshold) perceptionGaps.push({dim:d, a:roleAvgs[i], b:roleAvgs[j], diff});
+      }
+    });
+  }
+  perceptionGaps.sort((a,b)=>b.diff-a.diff);
+
+  // team pattern (reuse engine on group-level scores)
+  const teamPatterns = matchPatterns({capacity:groupCapacity, dependency:groupDependency, dimScores:groupDim});
+
+  // team priorities: weighted score per dimension (low score + dependency relevance + dispersion + role gap + presence in core pattern)
+  const dependencyDims = ["Points of Power","Proactivity","Diagnosing","Matching"];
+  const coreDims = teamPatterns.primary.relatedDims || [];
+  const w = CONFIG.teamPriority;
+  const priorities = DIMS.map(d=>{
+    const hasRoleGap = perceptionGaps.some(g=>g.dim===d);
+    const inCorePattern = coreDims.includes(d);
+    const score = (100-groupDim[d])*w.scoreWeight + Math.min(dimSD[d],40)*w.dispersionWeight
+      + (dependencyDims.includes(d)?w.dependencyBonus:0) + (hasRoleGap?w.roleGapBonus:0) + (inCorePattern?w.corePatternBonus:0);
+    return {dim:d, score, avg:groupDim[d], hasRoleGap, inCorePattern};
+  }).sort((a,b)=>b.score-a.score).slice(0,3);
+
+  // heatmap
+  const heatCols = ["Overall", ...eligibleRoles];
+  const heatRows = DIMS.map(d=>{
+    const overall = groupDim[d];
+    const roleVals = eligibleRoles.map(r=>Math.round(roleGroups[r].reduce((a,e)=>a+dimScoreOf(e)[d],0)/roleGroups[r].length));
+    return {dim:d, vals:[overall, ...roleVals]};
+  });
+  function heatColor(v){
+    if(v>=75) return 'rgba(79,169,140,0.35)';
+    if(v>=55) return 'rgba(240,194,57,0.30)';
+    return 'rgba(193,97,63,0.32)';
+  }
+
+  const lastResponse = entries.reduce((max,e)=>{ const t=e.completed_at||e.completedAt||0; return t>max?t:max; }, 0);
+  const orgLabel = sessionData ? `${escapeHtml(sessionData.orgName)} — ${escapeHtml(sessionData.teamName)}` : 'Team Session';
+  const createdLabel = sessionData && sessionData.created_at ? new Date(sessionData.created_at).toLocaleDateString() : '—';
+  if(document.getElementById('orgBadge').style.display !== 'none'){
+    document.getElementById('orgBadgeCode').textContent = sessionData ? `${sessionData.orgName} · ${sessionData.teamName}` : sessionToken;
+  }
+
+  const container = document.getElementById('groupContent');
+  container.innerHTML = `
+    <div class="print-header"><span class="pw"><span class="og-lockup" dir="ltr">The Ownership Gap<span class="og-tm">™</span></span></span><span class="pt">Blanchard Israel · blanchard.co.il · info@blanchard.co.il</span></div>
+    <div class="dash-head">
+      <div>
+        <div class="eyebrow" style="margin-bottom:8px;">Your Team's Ownership Gap</div>
+        <h2>${orgLabel}</h2>
+        <div class="sub">Created ${createdLabel} · ${n} respondent${n===1?'':'s'} · Last response ${lastResponse ? new Date(lastResponse).toLocaleDateString() : '—'}</div>
+      </div>
+      <div class="confidential">Individual responses are not displayed in this dashboard<br><button class="btn btn-ghost btn-sm no-print" style="margin-top:8px;" onclick="window.print()">🖨 Print / Save PDF</button></div>
+    </div>
+
+    <div class="score-row team">
+      <div class="score-card"><div class="lbl">Ownership Gap</div><div class="num">${groupGap}<span>pts</span></div><div class="band ${gapLabelClass(groupGap, groupCapacity, groupDependency, teamPatterns.primary.heroType)}">${gapLabel(groupGap, groupCapacity, groupDependency, teamPatterns.primary.heroType)}</div></div>
+      <div class="score-card"><div class="lbl">Ownership Capacity</div><div class="num">${groupCapacity}<span>/100</span></div><div class="band ${bandClass(band(groupCapacity))}">${band(groupCapacity)}</div></div>
+      <div class="score-card"><div class="lbl">Manager Dependency</div><div class="num">${groupDependency}<span>/100</span></div><div class="band ${dependencyBandClass(groupDependency)}">${dependencyBand(groupDependency)}</div></div>
+      <div class="score-card">
+        <div class="lbl">Leadership Alignment</div>
+        <div class="band ${alignment>=70?'b-strong':'b-emerging'}" style="font-size:15px; margin-top:2px;">${alignLabel}</div>
+        <div style="font-family:var(--mono); font-size:11.5px; color:var(--slate-dim); margin-top:8px;">Alignment Index: ${alignment}</div>
+      </div>
+    </div>
+    <p style="font-size:11.5px; color:var(--slate-dim); margin:-6px 0 18px; line-height:1.5;">Alignment is based on response dispersion across the six dimensions. Thresholds are provisional and will be calibrated as benchmark data grows.</p>
+
+    <div class="panel">
+      <div class="eyebrow" style="margin-bottom:6px;">Team Ownership Tension</div>
+      <div class="tension-headline">${teamPatterns.primary.headline}</div>
+      <p class="tension-insight">${teamPatterns.primary.insight}</p>
+      <p class="tension-impl">${teamPatterns.primary.implication}${alignment<45 ? ' Leaders also differ meaningfully in how they perceive the current environment — worth naming directly.' : ''}</p>
+    </div>
+
+    <div class="panel">
+      <h3>Dimension View</h3>
+      <div class="sub">Average, range, and alignment per dimension</div>
+      ${DIMS.map(d=>{
+        const vals = entries.map(e=>dimScoreOf(e)[d]);
+        const lo = Math.min(...vals), hi = Math.max(...vals);
+        return `<div class="bar-row">
+          <div class="bar-row-top"><span class="dname">${d}</span><span class="dval">avg ${groupDim[d]} · range ${lo}–${hi}</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:${groupDim[d]}%; background:${dimSD[d]>25?'var(--clay)':'var(--gold)'};"></div></div>
+          <div class="bar-band">${dimSD[d]>25?'Meaningful perception gap':'Reasonable agreement'}</div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    ${eligibleRoles.length>=2 ? `
+    <div class="panel">
+      <h3>Team Heatmap</h3>
+      <div class="sub">Rows: dimensions · Columns: overall + role groups with 3+ respondents</div>
+      <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
+      <table class="heatmap-table">
+        <thead><tr><th>Dimension</th>${heatCols.map(c=>`<th>${escapeHtml(c)}</th>`).join('')}</tr></thead>
+        <tbody>${heatRows.map(row=>`<tr><td class="dname">${row.dim}</td>${row.vals.map(v=>`<td><span class="heat-cell" style="background:${heatColor(v)}">${v}</span></td>`).join('')}</tr>`).join('')}</tbody>
+      </table>
+      </div>
+    </div>` : `<div class="panel"><h3>Role Comparison</h3><p style="color:var(--slate-dim); font-size:13.5px;">${roleComparisonSuppressed
+        ? 'Role comparison is hidden for this team: showing the eligible groups together with the overall average would make it possible to indirectly calculate the score of a role group with fewer than 3 respondents. Individual responses are not displayed in the Team Dashboard, including for small groups.'
+        : 'Insufficient responses to display role comparison. Individual responses are not displayed in the Team Dashboard — each role group needs at least 3 completed responses before it can be shown in aggregated form.'}</p></div>`}
+
+    ${perceptionGaps.length>0 ? `
+    <div class="panel">
+      <h3>Perception Gaps</h3>
+      <div class="sub">${CONFIG.privacy.perceptionGapThreshold}+ point differences between role groups</div>
+      <ul class="impl-list" style="grid-template-columns:1fr;">
+        ${perceptionGaps.slice(0,4).map(g=>`<li><b>${g.dim}</b>${escapeHtml(g.a.role)} scores ${g.a.avg}, ${escapeHtml(g.b.role)} scores ${g.b.avg} — a ${g.diff}-point gap<span class="gap-flag">GAP</span></li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    <div class="panel">
+      <h3>Team Priorities</h3>
+      <div class="sub">Weighted by score, dependency relevance, dispersion, and role gaps — not just the lowest averages</div>
+      <ul class="action-list">
+        ${priorities.map(p=>`<li><div class="a-title">${p.dim}</div><div class="a-desc">Average ${p.avg}/100${p.hasRoleGap?' · role perception gap detected':''}${dependencyDims.includes(p.dim)?' · tied to Manager Dependency':''}${p.inCorePattern?' · part of the core tension pattern':''}</div></li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="footer-cta">
+      <p>Scores tell you where to look. The real value comes from understanding what is creating the pattern — and what to change first.</p>
+      <div class="cta-row" style="justify-content:center;">
+        <button class="btn btn-primary" onclick="openContact()">Request a 30-Minute Executive Debrief →</button>
+        <a class="btn btn-ghost" href="${CONFIG.links.selfLeadership}" target="_blank" rel="noopener">Explore Self Leadership® →</a>
+        <button class="btn btn-ghost" onclick="loadGroupDashboard()">↻ Refresh</button>
+      </div>
+    </div>
+    <div class="print-footer"><span class="og-lockup" dir="ltr">The Ownership Gap<span class="og-tm">™</span></span> is an executive reflection tool designed to support a focused leadership conversation about ownership culture. Alignment thresholds are provisional. © ${new Date().getFullYear()} Blanchard Israel Ltd. All rights reserved. · blanchard.co.il</div>
+  `;
+}
+
+/* =========================================================
+   CONTACT MODAL
+   ========================================================= */
+function openContact(){
+  document.getElementById('contactModal').classList.add('active');
+  // pre-fill from what was already collected before the assessment — no need to type it twice
+  const nameEl = document.getElementById('cName');
+  const companyEl = document.getElementById('cCompany');
+  if(nameEl && profile.name && !nameEl.value) nameEl.value = profile.name;
+  if(companyEl && profile.orgName && !companyEl.value) companyEl.value = profile.orgName;
+}
+function closeContact(){ document.getElementById('contactModal').classList.remove('active'); }
+function sendContact(){
+  const name = document.getElementById('cName').value || '(no name)';
+  const company = document.getElementById('cCompany').value || '(no company)';
+  const email = document.getElementById('cEmail').value || '(no email)';
+  const msg = document.getElementById('cMsg').value || '';
+  const subject = encodeURIComponent('Ownership Gap — Executive Debrief Request');
+  const body = encodeURIComponent(`Name: ${name}\nCompany: ${company}\nEmail: ${email}\n\nMessage:\n${msg}`);
+  window.location.href = `mailto:${CONFIG.contact.email}?subject=${subject}&body=${body}`;
+  closeContact();
+}
+
+/* =========================================================
+   BOOTSTRAP
+   ========================================================= */
+if(CONFIG.environment !== 'internal'){
+  const tag = document.querySelector('.proto-tag');
+  if(tag) tag.style.display = 'none';
+}
+
+if(sessionToken && viewMode==='team'){
+  // creator's bookmarked dashboard link — go straight to the group dashboard, no assessment required
+  document.getElementById('orgBadge').style.display='flex';
+  document.getElementById('orgBadgeCode').textContent = 'Loading…';
+  viewGroupResults();
+} else if(sessionToken){
+  // invited participant link — must complete assessment; auto-joins the team on Finish (C1)
+  loadInvitedSession();
+}
+</script>
+</body>
+</html>
+
+<style>
+  #reportContent .hero-metric .hero-num{font-size:clamp(38px,5vw,58px)!important;}
+  #reportContent .hero-metric{padding-top:24px!important;padding-bottom:24px!important;}
+  @media print{
+    #reportContent .hero-metric .hero-num{font-size:36px!important;}
+    #reportContent .hero-metric{padding:14px 18px!important;}
+  }
+</style>
+
+<style>
+  .og-lockup{display:inline-block;direction:ltr;unicode-bidi:isolate;white-space:nowrap;}
+  .og-tm{font-size:.42em;vertical-align:super;margin-left:2px;color:var(--orange);font-weight:700;line-height:0;}
+  .why-now-lead span{
+    background:linear-gradient(transparent 58%, rgba(244,207,76,.58) 58%, rgba(244,207,76,.58) 91%, transparent 91%);
+    color:var(--white);font-weight:700;padding:0 2px;
+  }
+  .diagnosis-hero{border-top:4px solid var(--orange)!important;}
+  .diagnosis-kicker{font-size:14px;color:var(--ink-text-soft);font-weight:700;margin:2px 0 8px;}
+  .gap-explainer{
+    background:var(--ink-card);border:1px solid rgba(255,255,255,.12);border-radius:12px;
+    padding:28px 30px;margin:0 0 18px;color:var(--white);
+  }
+  .gap-explainer-title{font-size:17px;font-weight:700;margin-bottom:20px;}
+  .gap-equation{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:12px;}
+  .gap-part{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:4px 7px;}
+  .gap-part .gp-label{width:100%;font-size:12.5px;color:var(--slate);line-height:1.35;}
+  .gap-part strong{font-size:34px;line-height:1;color:var(--white);}
+  .gap-part small{align-self:flex-end;color:var(--slate-dim);font-size:13px;}
+  .gap-part em{width:100%;font-style:normal;font-size:11.5px;color:var(--slate-dim);line-height:1.4;margin-top:5px;}
+  .gap-result{border-color:rgba(232,118,58,.38);background:rgba(232,118,58,.09);}
+  .gap-op{align-self:center;font-size:24px;color:var(--orange);font-weight:700;}
+  .gap-meaning{font-size:14.5px;line-height:1.7;color:var(--slate);margin-top:18px;max-width:760px;}
+  .dim-explainer{font-size:12.5px;line-height:1.5;color:var(--ink-text-soft);margin-top:6px;max-width:780px;}
+  @media(max-width:640px){
+    .gap-explainer{padding:22px 18px;}
+    .gap-equation{grid-template-columns:1fr;}
+    .gap-op{text-align:center;line-height:1;}
+    .gap-part{padding:14px;}
+    .dim-explainer{font-size:12px;}
+  }
+  @media print{
+    .gap-explainer{padding:12px 14px!important;margin-bottom:8px!important;background:#173843!important;}
+    .gap-explainer-title{font-size:14px!important;margin-bottom:8px!important;}
+    .gap-equation{gap:6px!important;}
+    .gap-part{padding:7px!important;}
+    .gap-part strong{font-size:23px!important;}
+    .gap-part .gp-label{font-size:9.5px!important;}
+    .gap-part em{font-size:8.5px!important;}
+    .gap-meaning{font-size:10.5px!important;line-height:1.35!important;margin-top:8px!important;}
+    .dim-explainer{font-size:9.2px!important;line-height:1.25!important;margin-top:3px!important;}
+    .dimensions-panel .bar-row{margin-bottom:8px!important;}
+  }
+</style>
+
+<style>
+.report-preview{max-width:700px;margin:22px auto 26px;display:grid;grid-template-columns:1fr 1fr;gap:9px;text-align:right}
+.report-preview>div{display:flex;gap:10px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:11px 13px}
+.report-preview strong{color:var(--orange);font-size:11px}.report-preview span{font-size:12px;line-height:1.5;color:var(--slate)}.report-preview b{display:block;color:var(--white);font-size:12.5px}
+.behavior-grid,.cost-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
+.behavior-item,.cost-item{padding:14px;border-radius:10px;background:var(--paper-soft);font-size:13px;line-height:1.6;color:var(--ink-text)}
+.cost-title{margin:22px 0 0;font-size:16px}.cost-item{border-right:3px solid var(--orange)}
+.move,.question{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid rgba(20,50,60,.12)}
+.move-num,.question span{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;font-weight:700;font-size:12px}
+.move strong{font-size:15px}.move p,.question p{margin:4px 0 0;font-size:13px;line-height:1.6;color:var(--ink-text-soft)}
+@media(max-width:640px){.report-preview,.behavior-grid,.cost-grid{grid-template-columns:1fr}}
+@media print{.report-preview{display:none!important}.behavior-item,.cost-item{padding:7px!important;font-size:9px!important}.move,.question{padding:6px 0!important}.move p,.question p{font-size:9px!important}}
+</style>
+<style>
+.v18-report-shell{max-width:1080px;margin:0 auto;padding:28px 20px 60px;color:var(--ink-text)}
+.v18-report-head{position:relative;background:linear-gradient(135deg,#102f3c,#0d5148);color:#fff;border-radius:16px;padding:24px 28px;margin-bottom:18px}
+.v18-brand{font-size:22px;font-weight:800;direction:ltr;text-align:right}.v18-brand sup{color:var(--orange);font-size:11px}
+.v18-meta{margin-top:16px;display:grid;gap:4px}.v18-meta strong{font-size:14px}.v18-meta span,.v18-meta small{color:rgba(255,255,255,.75);font-size:12px;line-height:1.55}
+.btn-print{position:absolute;left:24px;top:24px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;border-radius:8px;padding:8px 12px;cursor:pointer}
+.v18-section{background:#fbf8f0;border:1px solid rgba(20,50,60,.12);border-radius:16px;padding:28px;margin:16px 0;box-shadow:0 2px 10px rgba(20,50,60,.05)}
+.v18-kicker{color:var(--orange);font-weight:800;font-size:12px;letter-spacing:.03em;margin-bottom:10px}
+.v18-section h1{font-size:32px;line-height:1.25;margin:0 0 12px}.v18-section h2{font-size:22px;line-height:1.35;margin:0 0 10px}.v18-section h3{font-size:18px;margin:26px 0 10px}
+.v18-lead{font-size:17px;line-height:1.8;margin:0;max-width:900px}.v18-sub{font-size:14px;line-height:1.65;color:var(--ink-text-soft);margin:0 0 18px}
+.v18-score-strip{display:flex;gap:8px;margin-top:22px}.v18-score-strip>div{display:flex;align-items:baseline;gap:8px;padding:9px 12px;border-radius:8px;background:rgba(20,50,60,.06);font-size:12px}.v18-score-strip strong{font-size:20px}.v18-note{font-size:11px;color:var(--ink-text-soft);margin-top:8px}
+.v18-two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.v18-cost-box{border-right:4px solid var(--orange);padding-right:20px}
+.v18-bullets{display:grid;gap:10px}.v18-bullets>div{font-size:14px;line-height:1.65;padding-right:16px;position:relative}.v18-bullets>div:before{content:"";position:absolute;right:0;top:.7em;width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.v18-drivers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.v18-driver{background:#f1eee5;border-radius:12px;padding:16px;border-top:3px solid #d8d3c6}.v18-driver.priority{border-top-color:var(--orange)}
+.v18-driver-top{display:flex;justify-content:space-between;gap:10px}.v18-driver-top strong{font-size:15px}.v18-driver-top span{font-size:13px;color:var(--ink-text-soft)}
+.v18-driver-tag{display:inline-block;margin:8px 0;color:var(--orange);font-weight:700;font-size:11px}.v18-driver p,.v18-driver-why{font-size:12.5px;line-height:1.6;margin:4px 0}.v18-driver-why{margin-top:10px}
+.v18-all-dims{margin-top:14px}.v18-all-dims summary{cursor:pointer;font-size:13px;font-weight:700}.v18-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.v18-mini-dim{display:flex;justify-content:space-between;background:#f1eee5;padding:8px 10px;border-radius:7px;font-size:11.5px}
+.v18-actions{display:grid;gap:4px}.v18-action{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid rgba(20,50,60,.12)}.v18-action:last-child{border-bottom:0}
+.v18-action-num,.v18-question span{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;font-size:11px;font-weight:800}
+.v18-action strong{font-size:15px}.v18-action p{font-size:13px;line-height:1.6;margin:4px 0 0;color:var(--ink-text-soft)}
+.v18-plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.v18-plan-grid>div{background:#f1eee5;border-radius:10px;padding:15px}.v18-plan-grid span{display:block;color:var(--orange);font-size:11px;font-weight:800;margin-bottom:6px}.v18-plan-grid strong{font-size:14px}.v18-plan-grid p{font-size:12px;line-height:1.55;margin:6px 0 0}
+.v18-questions{display:grid;gap:5px}.v18-question{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;padding:9px 0;border-bottom:1px solid rgba(20,50,60,.1)}.v18-question p{margin:3px 0 0;font-size:13px;line-height:1.55}
+.v18-footer{text-align:center;font-size:10.5px;line-height:1.5;color:var(--slate);padding:14px 30px}
+@media(max-width:700px){
+ .v18-report-shell{padding:14px 12px 40px}.v18-report-head,.v18-section{padding:20px}.btn-print{position:static;margin-top:14px}
+ .v18-section h1{font-size:27px}.v18-lead{font-size:16px}.v18-two-col,.v18-drivers,.v18-plan-grid{grid-template-columns:1fr}
+ .v18-score-strip{display:grid;grid-template-columns:repeat(3,1fr)}.v18-score-strip>div{display:block;text-align:center}.v18-score-strip span{display:block;font-size:10px}.v18-score-strip strong{font-size:18px}
+ .v18-mini-grid{grid-template-columns:1fr}
+}
+@media print{
+ body{background:#fff!important}.v18-report-shell{max-width:none;padding:0}.btn-print{display:none!important}
+ .v18-report-head{border-radius:0;margin:0 0 8px;padding:16px 20px}.v18-section{box-shadow:none;margin:7px 0;padding:16px 20px;break-inside:avoid}
+ .v18-section h1{font-size:23px}.v18-section h2{font-size:17px}.v18-lead{font-size:13px;line-height:1.55}
+ .v18-two-col,.v18-drivers,.v18-plan-grid{gap:7px}.v18-driver,.v18-plan-grid>div{padding:9px}
+ .v18-driver p,.v18-driver-why,.v18-action p,.v18-plan-grid p,.v18-question p,.v18-bullets>div{font-size:9.5px;line-height:1.35}
+ .v18-score-strip{margin-top:10px}.v18-score-strip>div{padding:5px 8px}.v18-note{font-size:8px}
+ details.v18-all-dims{display:none!important}.v18-footer{font-size:8px}
+}
+</style>
+
+<style>
+.v181-next{background:#fbf8f0;border:1px solid rgba(20,50,60,.12);border-radius:16px;padding:28px;margin:16px 0;box-shadow:0 2px 10px rgba(20,50,60,.05)}
+.v181-next h2{font-size:22px;margin:0 0 8px}
+.v181-next-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v181-next-card{background:#f1eee5;border-radius:12px;padding:16px;position:relative}
+.v181-next-card strong{display:block;font-size:15px;padding-left:34px}
+.v181-next-card p{font-size:12.5px;line-height:1.55;margin:7px 0 12px;color:var(--ink-text-soft)}
+.v181-icon{position:absolute;left:14px;top:14px;color:var(--orange);font-size:11px;font-weight:800}
+.v181-share-actions{display:flex;gap:7px;direction:ltr;justify-content:flex-end}
+.v181-share-actions button,.v181-link-btn{border:1px solid rgba(20,50,60,.18);background:#fff;color:var(--ink-text);border-radius:7px;padding:7px 10px;font:inherit;font-size:11px;font-weight:700;cursor:pointer}
+.v181-link-btn{background:var(--orange);color:#fff;border-color:var(--orange)}
+.v181-consult{margin-top:12px;background:linear-gradient(135deg,#12333f,#0e5148);color:#fff;border-radius:13px;padding:18px 20px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.v181-consult span{display:block;color:#f2b544;font-size:11px;font-weight:800;margin-bottom:5px}
+.v181-consult strong{display:block;font-size:14px;line-height:1.55;max-width:680px}
+.v181-consult small{display:block;margin-top:7px;color:rgba(255,255,255,.65)}
+.v181-consult-btn{white-space:nowrap;text-decoration:none;background:var(--orange);color:#fff;border-radius:8px;padding:10px 14px;font-size:12px;font-weight:800}
+@media(max-width:700px){
+ .v181-next{padding:20px}.v181-next-grid{grid-template-columns:1fr}
+ .v181-consult{display:block}.v181-consult-btn{display:inline-block;margin-top:14px}
+}
+@media print{
+ /* Sharing/contact actions are useful on screen, not as interactive controls in the PDF. */
+ .v181-share-actions,.v181-consult-btn,.btn-print{display:none!important}
+ .v181-next{box-shadow:none;margin:7px 0;padding:14px 18px;break-inside:avoid}
+ .v181-next-grid{gap:7px;margin-top:8px}
+ .v181-next-card{padding:9px}.v181-next-card p{font-size:9px;line-height:1.3;margin:4px 0}
+ .v181-next-card strong{font-size:10.5px}.v181-consult{margin-top:7px;padding:10px 12px}
+ .v181-consult strong{font-size:9.5px;line-height:1.35}.v181-consult small,.v181-consult span{font-size:8px}
+ /* Use page 2 more efficiently without forcing one-page compression. */
+ .v18-section{margin:5px 0;padding:13px 18px}
+ .v18-plan-grid>div{padding:7px}
+ .v18-action{padding:7px 0}
+ .v18-question{padding:5px 0}
+}
+</style>
+
+<style>
+.v182-erez-photo{width:72px;height:72px;object-fit:cover;object-position:center 24%;border-radius:50%;flex:0 0 72px;border:2px solid rgba(255,255,255,.22);box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.v182-consult-copy{flex:1;min-width:0}
+@media(max-width:700px){.v181-consult{display:grid;grid-template-columns:58px 1fr;column-gap:12px;align-items:center}.v182-erez-photo{width:58px;height:58px;flex-basis:58px}.v181-consult-btn{grid-column:1/-1;justify-self:start;margin-top:8px}}
+@media print{.v182-erez-photo{width:42px;height:42px;flex-basis:42px}.v181-consult{display:flex!important}}
+</style>

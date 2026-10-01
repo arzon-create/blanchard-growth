@@ -415,7 +415,7 @@
 </style>
 
 <style id="v2013-mobile-refinement">
-/* V20.14 — mobile executive refinement: unambiguous scales + denser profile/actions */
+/* V20.15 — diagnostic engine + intervention bridge: unambiguous scales + denser profile/actions */
 .v204-meter,.v204-scale{direction:ltr!important}
 .v204-scale span{direction:rtl;text-align:center}
 @media(max-width:700px){
@@ -436,7 +436,7 @@
 </head>
 <body>
 
-<div class="proto-tag">פיילוט עברית — לשימוש פנימי</div>
+<div class="proto-tag">פיילוט עברית — V20.15 · לשימוש פנימי</div>
 <div class="brandmark"><div class="brand-word">blanchard<span class="dot">.</span></div><div class="brand-region">ISRAEL</div></div>
 <div class="legal-footer">© 2026 Blanchard Israel Ltd. All rights reserved.</div>
 <div class="org-badge" id="orgBadge" style="display:none;">Session: <b id="orgBadgeCode">—</b></div>
@@ -1230,7 +1230,7 @@ function v20LikelyDrivers(){
   return all.filter(x=>x.score>=4 || (max>=3 && x.score===max)).slice(0,2);
 }
 function v204CapabilitySignalHTML(s){
-  if(!s || !lastPatterns || lastPatterns.primary!=="ownership_held_back") return "";
+  if(!s || v215InterventionMode(s)!=="build_release") return "";
   const weakest=DIMS.map(dim=>({dim,score:Number(s.dimScores[dim]||0)})).sort((a,b)=>a.score-b.score)[0];
   return `<div class="v202-driver-card v204-capability-signal"><span class="rank">CAPABILITY SIGNAL</span><h3>${v204DisplayLabel(weakest.dim)} עדיין דורש חיזוק</h3><p>זהו הממד החלש ביותר בפרופיל (${Math.round(weakest.score)}/100). הוא מצביע על המקום שבו היכולת לקחת בעלות עדיין נשברת בפועל — ולכן לא נכון לטפל רק בתלות במנהל.</p></div>`;
 }
@@ -1252,17 +1252,29 @@ function v202Experiment(key){
 }
 function v202ActionsHTML(){
  const d=v20LikelyDrivers();
- if(!d.length) return '';
  const s=lastScores;
- // Dual constraint: when capacity is weak while dependency is high, one move must build capability — not only change manager behavior.
- if(s && lastPatterns && lastPatterns.primary==="ownership_held_back"){
-   const weakest=DIMS.map(dim=>({dim,score:s.dimScores[dim]})).sort((a,b)=>a.score-b.score)[0];
-   const capMove=`<div class="v202-action"><div class="why">מוקד מרכזי: בניית יכולת וביטחון לקחת בעלות</div><h3>לחזק באופן ממוקד את ${v204DisplayLabel(weakest.dim)} — כדי שאפשר יהיה להעביר יותר אחריות בלי להחליף תלות אחת באחרת.</h3><span class="experiment"><b>ניסוי ראשון:</b> בחרו משימה חוזרת אחת שבה אנשים נתקעים. הגדירו מה הם צריכים לדעת, להחליט או לנסות בעצמם, ואיזו תמיכה זמנית תאפשר להם להתקדם בלי להעביר את האחריות למנהל.</span></div>`;
+ if(!s) return "";
+ const mode=v215InterventionMode(s);
+ const weakest=DIMS.map(dim=>({dim,score:Number(s.dimScores[dim]||0)})).sort((a,b)=>a.score-b.score)[0];
+
+ const buildMove=()=>`<div class="v202-action"><div class="why">מוקד מרכזי: בניית יכולת וביטחון לקחת בעלות</div><h3>לחזק באופן ממוקד את ${v204DisplayLabel(weakest.dim)} — במקום להניח שעוד אוטונומיה לבדה תפתור את הפער.</h3><span class="experiment"><b>ניסוי ראשון:</b> בחרו משימה חוזרת אחת שבה אנשים נתקעים. הגדירו מה הם צריכים לדעת, להחליט או לנסות בעצמם, ואיזו תמיכה זמנית תאפשר להם להתקדם בלי להעביר את האחריות למנהל.</span></div>`;
+
+ const envMove=(x,label="מוקד מרכזי")=>`<div class="v202-action"><div class="why">${label}: ${x.title}</div><h3>${x.action}</h3><span class="experiment"><b>ניסוי ראשון:</b> ${v202Experiment(x.key)}</span></div>`;
+
+ if(mode==="build_release"){
    const x=d[0];
-   const envMove=`<div class="v202-action"><div class="why">מוקד נוסף: ${x.title}</div><h3>${x.action}</h3><span class="experiment"><b>ניסוי ראשון:</b> ${v202Experiment(x.key)}</span></div>`;
-   return capMove+envMove;
+   return buildMove() + (x ? envMove(x,"מוקד נוסף") : "");
  }
- return d.slice(0,2).map((x,i)=>`<div class="v202-action"><div class="why">מוקד ${i===0?'מרכזי':'נוסף'}: ${x.title}</div><h3>${x.action}</h3><span class="experiment"><b>ניסוי ראשון:</b> ${v202Experiment(x.key)}</span></div>`).join('');
+ if(mode==="build"){
+   const second=DIMS.map(dim=>({dim,score:Number(s.dimScores[dim]||0)})).sort((a,b)=>a.score-b.score)[1];
+   return buildMove()+`<div class="v202-action"><div class="why">מוקד נוסף: ${v204DisplayLabel(second.dim)}</div><h3>לחזק את היכולת הזו דרך תרגול בעבודה עצמה — לא רק דרך הסבר או הדרכה.</h3><span class="experiment"><b>ניסוי ראשון:</b> בחרו סיטואציה אמיתית אחת השבוע שבה אפשר לתת לאדם לאבחן, להציע דרך פעולה ולבקש תמיכה ממוקדת.</span></div>`;
+ }
+ if(mode==="release"){
+   if(!d.length) return `<div class="v202-action"><div class="why">מוקד מרכזי: להפחית תלות מיותרת</div><h3>לזהות החלטות ובעיות שחוזרות למנהל למרות שהיכולת כבר קיימת — ולהחזיר אותן למקום שבו העבודה מתבצעת.</h3><span class="experiment"><b>ניסוי ראשון:</b> במשך שבועיים סמנו כל החלטה שחזרה למנהל ושאלו: האם באמת נדרש כאן מנהל, או שנדרש יותר מרחב, בהירות או ביטחון?</span></div>`;
+   return d.slice(0,2).map((x,i)=>envMove(x,i===0?"מוקד מרכזי":"מוקד נוסף")).join("");
+ }
+ // sustain
+ return `<div class="v202-action"><div class="why">מוקד מרכזי: לשמר את מה שעובד</div><h3>לזהות אילו נורמות ניהוליות מאפשרות היום Ownership גבוה — ולהפוך אותן לפרקטיקות מודעות שאפשר לשמר גם בצמיחה ובשינוי.</h3><span class="experiment"><b>ניסוי ראשון:</b> בחרו שתי החלטות או שגרות שבהן Ownership עובד היטב ותעדו מה מאפשר זאת: בהירות, גבולות החלטה, אמון, יכולת או מנגנון עבודה.</span></div><div class="v202-action"><div class="why">מוקד נוסף: להרחיב בזהירות</div><h3>לבחור תחום אחד שבו אפשר להעביר עוד החלטה או אחריות קרוב יותר לעבודה — עם גבולות ברורים.</h3><span class="experiment"><b>ניסוי ראשון:</b> הגדירו החלטה אחת שעוברת לבעלות הצוות, מה נשאר בבקרה ניהולית ומתי נדרשת התייעצות.</span></div>`;
 }
 function answerLabel(v){
  const map={1:"כמעט אף פעם",2:"לעיתים רחוקות",3:"לפעמים",4:"לעיתים קרובות",5:"כמעט תמיד"};
@@ -1548,6 +1560,79 @@ function dimensionStatus(score){
   if(score>=65) return {label:"בסיס קיים", cls:"mid"};
   return {label:"כדאי לבחון", cls:"attention"};
 }
+
+// ===================== V20.15 — CAPACITY × DEPENDENCY DIAGNOSTIC ENGINE =====================
+function v215InterventionMode(s){
+  // Continuous interpretation with four practical anchors.
+  if(s.capacity < 60 && s.dependency >= 60) return "build_release";
+  if(s.capacity < 60 && s.dependency < 60) return "build";
+  if(s.capacity >= 70 && s.dependency >= 50) return "release";
+  if(s.capacity >= 75 && s.dependency < 40) return "sustain";
+  // Mid-zone: choose the dominant constraint rather than force a quadrant.
+  if(s.dependency >= 55) return s.capacity >= 65 ? "release" : "build_release";
+  if(s.capacity < 65) return "build";
+  return "sustain";
+}
+function v215Diagnosis(s,hp){
+  const mode=v215InterventionMode(s);
+  if(mode==="release"){
+    const depWord=s.dependency>=60?"גבוהה":"בינונית";
+    return {
+      title:"היכולת לקחת בעלות קיימת — התלות במנהל עדיין עוצרת חלק ממנה",
+      body:`לאנשים כבר קיימת יכולת משמעותית לקחת בעלות ולהתקדם באופן עצמאי. במקביל, התלות במנהל היא ${depWord} — ולכן חלק מההחלטות, הבעיות והאחריות עדיין חוזרים כלפי מעלה. כאן האתגר המרכזי הוא פחות לבנות עוד יכולת, ויותר לאפשר ליכולת שכבר קיימת להתממש.`
+    };
+  }
+  if(mode==="build_release"){
+    return {
+      title:"היכולת לקחת בעלות עדיין נבנית — והתלות במנהל מעמיקה את הפער",
+      body:"התמונה מצביעה על אתגר כפול: חלק מיכולות ה־Ownership עדיין אינן חזקות מספיק, ובמקביל החלטות ואחריות ממשיכות לעלות למנהל. לכן לא מספיק רק להעביר יותר סמכות — צריך גם לבנות את היכולת והביטחון לקחת בעלות ולהתקדם באופן עצמאי."
+    };
+  }
+  if(mode==="build"){
+    return {
+      title:"המרחב קיים — היכולת לקחת בעלות עדיין צריכה להתחזק",
+      body:"התלות במנהל אינה נראית כחסם המרכזי. המוקד הוא לחזק את היכולת לזהות מה נדרש, לפעול מתוך בהירות, לגייס עזרה והשפעה ולהתקדם באופן עצמאי ועקבי."
+    };
+  }
+  if(mode==="sustain"){
+    return {
+      title:"בסיס חזק של Ownership — האתגר הוא לשמר ולהרחיב אותו",
+      body:"היכולת לקחת בעלות חזקה והתלות במנהל נמוכה יחסית. המוקד אינו לתקן בעיה אלא להגן על הדפוס הזה בצמיחה, בלחץ ובשינוי — ולהרחיב Ownership למקומות נוספים בלי לאבד בהירות."
+    };
+  }
+  return {title:hp?.headline||"תמונת ה־Ownership בארגון",body:hp?.insight||"התשובות מצביעות על דפוס שכדאי לבחון לעומק."};
+}
+function v215Section3Intro(s){
+  const mode=v215InterventionMode(s);
+  if(mode==="release"){
+    return {
+      title:"מה עדיין מחזיר החלטות ואחריות למנהל?",
+      body:s.dependency>=60
+        ?"היכולת כבר קיימת במידה משמעותית — אבל דפוסי עבודה וניהול עדיין מחזירים החלטות, בעיות ואחריות כלפי מעלה. המוקד כאן הוא לזהות מה מונע מהיכולת הקיימת להפוך ליותר Ownership בפועל."
+        :"היכולת כבר קיימת במידה משמעותית. התלות במנהל אינה קיצונית, אבל היא עדיין מהווה חסם ביחס לרמת היכולת — ולכן חשוב לזהות באילו מצבים העבודה חוזרת למנהל למרות שאפשר היה לקדם אותה קרוב יותר לעבודה."
+    };
+  }
+  if(mode==="build_release") return {
+    title:"מה מחזק את התלות במנהל?",
+    body:"היכולת עדיין נבנית — ובמקביל דפוסי העבודה ממשיכים להחזיר החלטות ואחריות למנהל. לכן נכון לטפל גם ביכולת של האנשים וגם בתנאים הניהוליים שמעצבים את ההתנהגות."
+  };
+  if(mode==="build") return {
+    title:"איפה היכולת עדיין נשברת בפועל?",
+    body:"כאן התלות במנהל אינה החסם המרכזי. השאלה החשובה היא אילו יכולות והרגלים עדיין מונעים מאנשים להשתמש במרחב שכבר קיים ולקחת בעלות באופן עקבי."
+  };
+  return {
+    title:"מה חשוב לשמר — ואיפה אפשר להרחיב Ownership?",
+    body:"התמונה מצביעה על בסיס חזק. עכשיו כדאי לזהות אילו פרקטיקות מאפשרות אותו, ואיפה אפשר להרחיב אחריות והחלטה בלי ליצור עמימות או תלות חדשה."
+  };
+}
+function v215ActionHeading(s){
+  const mode=v215InterventionMode(s);
+  if(mode==="release") return {title:"לשחרר את היכולת שכבר קיימת",sub:"המטרה: לצמצם תלות מיותרת במנהל, להחזיר החלטות ופתרון בעיות למקום שבו העבודה מתבצעת — בלי לפגוע בבהירות ובבקרה הנדרשת."};
+  if(mode==="build_release") return {title:"שני מהלכים במקביל: לבנות יכולת ולהפחית תלות",sub:"המטרה: לחזק את היכולת החלשה ביותר בפרופיל, ובמקביל לשנות את דפוס העבודה שמחזיר החלטות למנהל."};
+  if(mode==="build") return {title:"לבנות את היכולת להשתמש באוטונומיה",sub:"המטרה: לחזק את היכולות שמאפשרות לאנשים לזהות מה נדרש, לפעול, להשפיע ולבקש את התמיכה הנכונה — בלי להעביר את האחריות."};
+  return {title:"לשמר את הבסיס החזק ולהרחיב Ownership",sub:"המטרה: להבין מה כבר עובד, להגן עליו בצמיחה ובשינוי, ולהרחיב בעלות למקומות נוספים באופן מכוון."};
+}
+
 function showIndividualReport(){
   const s=lastScores, p=lastPatterns;
   if(!s || !p) return;
@@ -1555,8 +1640,11 @@ function showIndividualReport(){
   const hp=hePattern(p.primary), ts=tailoredStory(s);
   const date=new Date().toLocaleDateString('he-IL',{year:'numeric',month:'long',day:'numeric'});
   const safeName=escapeHtml(profile.name||''), safeRole=escapeHtml(profile.role||'');
-  const diagnosisTitle=hp.headline||'תמונת לקיחת הבעלות בארגון';
-  const diagnosisBody=hp.insight||'התשובות מצביעות על דפוס שכדאי לבחון לעומק.';
+  const dx=v215Diagnosis(s,hp);
+  const diagnosisTitle=dx.title;
+  const diagnosisBody=dx.body;
+  const sec3=v215Section3Intro(s);
+  const actHead=v215ActionHeading(s);
   const meaning=ts.manifestations.slice(0,3), costs=ts.costs.slice(0,3);
   const allDims=DIMS.map(d=>({d,score:s.dimScores[d],st:dimensionStatus(s.dimScores[d])}));
   let focusDims=allDims.filter(x=>x.score<65).sort((a,b)=>a.score-b.score).slice(0,2);
@@ -1585,17 +1673,23 @@ function showIndividualReport(){
 
 <section class="v18-section">
   <div class="v18-kicker">03 · מה עדיין מעכב את ה־Ownership?</div>
-  <h2>${p.primary==='ownership_held_back'?'מה מחזיק את ה־Ownership במקום?':'אילו דפוסי ניהול עדיין מגבילים את היכולת של האנשים לקחת בעלות?'}</h2>
-  <p class="v18-lead">${p.primary==='ownership_held_back'?'התמונה מצביעה על שני כוחות שפועלים יחד: יכולת שעדיין אינה עקבית מספיק, וסביבת עבודה שממשיכה להחזיר החלטות ואחריות למנהל.':'גם כשלאנשים יש יכולת לקחת יותר בעלות, דפוסי ניהול מסוימים עלולים להחזיר החלטות, בעיות ואחריות כלפי מעלה.'}</p>
+  <h2>${sec3.title}</h2>
+  <p class="v18-lead">${sec3.body}</p>
   ${v204CapabilitySignalHTML(s)}
   ${v20DriverHTML()}
 </section>
 
 <section class="v18-section"><div class="v18-kicker">04 · המשמעות העסקית</div><h2>מה המחיר הארגוני אם הדפוס נשאר כפי שהוא?</h2><div class="v204-impact-grid">${v204ExecutiveImpact(s)}</div></section>
-    <section class="v18-section v18-plan"><div class="v18-kicker">05 · LEADERSHIP MOVES</div><h2>${p.primary==='ownership_held_back'?'שני מהלכים במקביל: לבנות יכולת ולהפחית תלות':'שני מהלכים להעברת יותר בעלות למקום שבו העבודה מתבצעת'}</h2><p class="v18-sub">${p.primary==='ownership_held_back'?'המטרה: לחזק את היכולת החלשה ביותר בפרופיל, ובמקביל לשנות את דפוס העבודה שמחזיר החלטות למנהל — כדי שהיכולת והתנאים ל־Ownership יתחזקו יחד.':'המטרה: להעצים יכולת וביטחון, להרחיב יוזמה ואחריות — ולצמצם תלות מיותרת במנהל.'}</p><div class="v202-action-stack">${actionHtml}</div></section>
-    <section class="v181-next"><div class="v18-kicker">06 · מה הלאה?</div><h2>רוצים להפוך נקודת מבט אחת לתמונה ארגונית?</h2><p class="v18-sub">זו נקודת מבט אחת על הארגון. אבחון צוותי / ארגוני מאפשר לחבר את נקודות המבט של חברי ההנהלה, לזהות פערי תפיסה וצווארי בקבוק — ולתרגם אותם, במפגש מונחה עם מומחה Blanchard, לסדרי עדיפויות ומהלכים מעשיים.</p><div class="v181-next-grid v205-single-next"><div class="v181-next-card"><div class="v181-icon">01</div><strong class="v204-cta-question">אבחון צוותי / ארגוני של The Ownership Gap™</strong><p>חברי הנהלה או צוות ניהולי מאבחנים את אותה יחידה מנקודות מבט שונות. כך מתקבלת תמונה רחבה יותר של ה־Ownership בארגון — לא רק מה אנשים חושבים, אלא היכן נדרשת פעולה ניהולית משותפת.</p><button type="button" class="v181-link-btn" onclick="openOrganizationalDiagnostic()">לבחינת אבחון צוותי / ארגוני ←</button></div></div>
-      <div class="v181-consult"><img class="v182-erez-photo" src="data:image/jpeg;base64,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" alt="ארז אלמוגי"><div class="v182-consult-copy"><span>מעדיפים להתחיל בשיחה קצרה?</span><strong>אשמח לעבור איתך על התוצאה ולחשוב יחד מה נכון לבדוק או לעשות מכאן.</strong><small>ארז אלמוגי · Blanchard Israel</small></div><a href="mailto:erez@blanchard.co.il?subject=The%20Ownership%20Gap%20-%20שיחה%20על%20התוצאות&body=היי ארז,%0D%0A%0D%0Aהשלמתי את The Ownership Gap™ והתוצאה העלתה כמה נקודות שמעניין אותי לחשוב עליהן לעומק.%0D%0Aאשמח לקבוע שיחה קצרה ולעבור יחד על התמונה ועל המשמעויות האפשריות לארגון.%0D%0A%0D%0Aתודה" class="v181-consult-btn">לתיאום שיחה עם ארז</a></div>
-    </section>
+    <section class="v18-section v18-plan"><div class="v18-kicker">05 · LEADERSHIP MOVES</div><h2>${actHead.title}</h2><p class="v18-sub">${actHead.sub}</p><div class="v202-action-stack">${actionHtml}</div></section>
+    <section class="v181-next"><div class="v18-kicker">06 · מה הלאה?</div>
+<h2>מהתובנה — למהלך שמתאים לארגון שלכם</h2>
+<p class="v18-sub">האבחון לא נועד להוביל אוטומטית לתוכנית מדף. לפעמים הצעד הנכון הוא שיחה ממוקדת על דפוס אחד; לפעמים מהלך מנהיגותי רחב יותר; ולפעמים כדאי קודם להשוות נקודות מבט של הנהלה או צוות. המטרה היא להתחיל מהדפוס שנחשף — לא מהפתרון.</p>
+<div class="v181-next-grid">
+  <div class="v181-next-card"><div class="v181-icon">01</div><strong class="v204-cta-question">לחשוב יחד על מהלך לחיזוק Ownership</strong><p>אם התוצאה פוגשת אתגר אמיתי אצלכם, אפשר להתחיל בהתייעצות קצרה ולבחון איזה שינוי בהתנהגות ניהולית, בזכויות החלטה, ביכולת של האנשים או בשגרות העבודה יכול לייצר את המנוף הגדול ביותר.</p></div>
+  <div class="v181-next-card"><div class="v181-icon">02</div><strong class="v204-cta-question">להרחיב לתמונה צוותית / ארגונית</strong><p>כאשר חשוב להבין אם אחרים רואים את אותה תמונה, חברי הנהלה או צוות ניהולי יכולים לאבחן את אותה יחידה מנקודות מבט שונות — ולזהות פערי תפיסה וצווארי בקבוק משותפים.</p><button type="button" class="v181-link-btn" onclick="openOrganizationalDiagnostic()">לבחינת אבחון צוותי / ארגוני ←</button></div>
+</div>
+<div class="v181-consult"><img class="v182-erez-photo" src="data:image/jpeg;base64,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" alt="ארז אלמוגי"><div class="v182-consult-copy"><span>רוצים לחשוב מה נכון לעשות אצלכם?</span><strong>אפשר להתחיל בשיחה על התוצאה — גם לפני אבחון צוותי. נבחן יחד איפה ה־Ownership נתקע ומהו המהלך הניהולי או הארגוני שכדאי לבדוק.</strong><small>ארז אלמוגי · Blanchard Israel</small></div><a href="mailto:erez@blanchard.co.il?subject=The%20Ownership%20Gap%20-%20שיחה%20על%20התוצאות&body=היי ארז,%0D%0A%0D%0Aהשלמתי את The Ownership Gap™ והתוצאה העלתה כמה נקודות שמעניין אותי לחשוב עליהן לעומק.%0D%0Aאשמח לקבוע שיחה קצרה ולעבור יחד על התמונה ועל המשמעויות האפשריות לארגון.%0D%0A%0D%0Aתודה" class="v181-consult-btn">לשיחה על התוצאה והאפשרויות ←</a></div>
+</section>
     <footer class="v18-footer"><strong>The Ownership Gap™</strong> הוא כלי אבחון ורפלקציה ניהולית של Blanchard, שנועד לייצר תמונת מצב ראשונית ושיחה ניהולית על דפוסי Ownership בקבוצה שנבחרה.<span class="v191-build" aria-label="גרסת דוח"> · Pilot V20.14</span></footer>
   </div>`;
   show('screen-individual'); window.scrollTo({top:0,behavior:'smooth'});

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<!-- Ownership Gap Hebrew Pilot V20.16: executive diagnostic report + business impact + leadership moves + expandable answer evidence. | V20.2.1: homepage simplification + intake cleanup + item audit + report-flow fix. | V20: PATTERN → DRIVERS → IMPLICATION → ACTION; target-group framing; driver-sensitive dependency layer; integrated profile. | V19.1: end-to-end report renderer fix + cache hardening + pilot calibration. | V18.1: restored next-step layer and print optimization. | V18: executive diagnosis-first report. | V17: adaptive report intelligence. | V16: consolidated pilot feedback + culture positioning + transparent Gap math + report depth. | V15: questionnaire UX + terminology lock + executive report polish. Based on V14 QA. | V14: V7 locked questionnaire + V11 narrative architecture + Hebrew scoring adapter.  SP5-grade Diagnostic Truth + final visual/readability QA. Core questions/scoring unchanged. -->
+<!-- Ownership Gap Hebrew Pilot V20.17: executive diagnostic report + business impact + leadership moves + expandable answer evidence. | V20.2.1: homepage simplification + intake cleanup + item audit + report-flow fix. | V20: PATTERN → DRIVERS → IMPLICATION → ACTION; target-group framing; driver-sensitive dependency layer; integrated profile. | V19.1: end-to-end report renderer fix + cache hardening + pilot calibration. | V18.1: restored next-step layer and print optimization. | V18: executive diagnosis-first report. | V17: adaptive report intelligence. | V16: consolidated pilot feedback + culture positioning + transparent Gap math + report depth. | V15: questionnaire UX + terminology lock + executive report polish. Based on V14 QA. | V14: V7 locked questionnaire + V11 narrative architecture + Hebrew scoring adapter.  SP5-grade Diagnostic Truth + final visual/readability QA. Core questions/scoring unchanged. -->
 <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -377,6 +377,16 @@
 @media print{.v204-answer-details{display:none!important}.v204-signals,.v204-impact-grid{grid-template-columns:1fr 1fr}.v19-report h1{font-size:24pt!important}.v19-report h2{font-size:18pt!important}.v18-section{padding:20px 24px!important}}
 
 .v205-single-next{grid-template-columns:1fr!important}.v205-single-next .v181-next-card{max-width:none!important}
+
+/* V20.17 — clearer transition from diagnostic to next step */
+.v217-next{background:#0f4f49!important;color:#fff!important;border:0!important;box-shadow:0 14px 34px rgba(8,54,50,.18)!important}
+.v217-next .v18-kicker{color:#f28a45!important}
+.v217-next h2,.v217-next .v18-sub{color:#fff!important}
+.v217-next .v18-sub{opacity:.88}
+.v217-next .v181-next-card{background:#fff!important;color:#173044!important;box-shadow:none!important}
+.v217-next .v181-next-card p{color:#66757c!important}
+.v217-trace{display:inline-block;margin:4px 0 8px;font-size:11px;font-weight:800;letter-spacing:.03em;color:#d26a3b}
+@media(max-width:720px){.v217-next{padding:22px 18px!important}.v217-next .v181-next-card{padding:14px!important}.v217-next .v181-next-card p{font-size:13px!important;line-height:1.5!important}}
 </style>
 
 <style id="v206-final-qa">
@@ -415,7 +425,7 @@
 </style>
 
 <style id="v2013-mobile-refinement">
-/* V20.16 — diagnostic engine + intervention bridge: unambiguous scales + denser profile/actions */
+/* V20.17 — diagnostic engine + intervention bridge: unambiguous scales + denser profile/actions */
 .v204-meter,.v204-scale{direction:ltr!important}
 .v204-scale span{direction:rtl;text-align:center}
 @media(max-width:700px){
@@ -436,7 +446,7 @@
 </head>
 <body>
 
-<div class="proto-tag">פיילוט עברית — V20.16 · לשימוש פנימי</div>
+<div class="proto-tag">פיילוט עברית — V20.17 · לשימוש פנימי</div>
 <div class="brandmark"><div class="brand-word">blanchard<span class="dot">.</span></div><div class="brand-region">ISRAEL</div></div>
 <div class="legal-footer">© 2026 Blanchard Israel Ltd. All rights reserved.</div>
 <div class="org-badge" id="orgBadge" style="display:none;">Session: <b id="orgBadgeCode">—</b></div>
@@ -1259,7 +1269,7 @@ function v202ActionsHTML(){
 
  const buildMove=()=>`<div class="v202-action"><div class="why">מוקד מרכזי: בניית יכולת וביטחון לקחת בעלות</div><h3>לחזק באופן ממוקד את ${v204DisplayLabel(weakest.dim)} — במקום להניח שעוד אוטונומיה לבדה תפתור את הפער.</h3><span class="experiment"><b>ניסוי ראשון:</b> בחרו משימה חוזרת אחת שבה אנשים נתקעים. הגדירו מה הם צריכים לדעת, להחליט או לנסות בעצמם, ואיזו תמיכה זמנית תאפשר להם להתקדם בלי להעביר את האחריות למנהל.</span></div>`;
 
- const envMove=(x,label="מוקד מרכזי")=>`<div class="v202-action"><div class="why">${label}: ${x.title}</div><h3>${x.action}</h3><span class="experiment"><b>ניסוי ראשון:</b> ${v202Experiment(x.key)}</span></div>`;
+ const envMove=(x,label="מוקד מרכזי")=>`<div class="v202-action"><div class="why">${label}: ${x.title}</div><div class="v217-trace">מהממצא למהלך</div><h3>${x.action}</h3><span class="experiment"><b>ניסוי ראשון:</b> ${v202Experiment(x.key)}</span></div>`;
 
  if(mode==="build_release"){
    const x=d[0];
@@ -1302,16 +1312,20 @@ function v202ProfileBars(dimScores){
 }
 function v204ExecutiveImpact(s){
  const out=[];
- if(s.dependency>=55){
-  out.push(['החלטות וביצוע מאבדים מהירות','כאשר החלטות ופתרון בעיות ממשיכים לעלות למעלה, העבודה ממתינה לזמינות המנהל. זמן התגובה מתארך והארגון מאבד מהירות במקום שבו אפשר היה להחליט ולהתקדם קרוב יותר לעבודה.']);
-  out.push(['זמן ניהולי יקר נשאב לתפעול','המנהל הופך לצוואר בקבוק: במקום להשקיע זמן בהובלה, פיתוח אנשים, לקוחות וצמיחה, הוא ממשיך לפתור בעיות ולקבל החלטות שהצוות יכול ללמוד לקבל בעצמו. ככל שהפעילות גדלה, הדפוס הזה מקשה לעשות Scale.']);
- }
- if(s.capacity<75){
-  const pro=Number(s.dimScores?.["Proactivity"]||0);
-  if(pro<55){
-    out.push(['יוזמה ואחריות נשארות מתחת לפוטנציאל','כאשר היוזמה וההובלה קדימה חלשות, אנשים מתרגלים פחות להציע דרך, לקבל החלטות ולשאת באחריות לתוצאה. במקביל, כשהחלטות ממשיכות לעלות למנהל, נוצר מעגל שמזין את עצמו: פחות תרגול של Ownership מגדיל תלות — והתלות מצמצמת עוד יותר את ההזדמנות לבנות Ownership.']);
-  } else {
-    out.push(['יכולת, יוזמה ומשמעות נשארות מתחת לפוטנציאל','כשאנשים מקבלים פחות הזדמנויות להפעיל שיקול דעת ולקחת אחריות, הם מפתחים פחות ביטחון ועצמאות. לאורך זמן זה עלול לפגוע ביוזמה ובתחושת המשמעות — ולהשאיר ערך ארגוני על השולחן.']);
+ const mode=v215InterventionMode(s);
+ if(mode==="release"){
+  out.push(['יכולת קיימת — אבל חלק ממנה נשאר על השולחן','הארגון כבר מחזיק ביכולת משמעותית לקחת בעלות, אבל דפוסי ניהול שמחזירים החלטות ופתרון בעיות למעלה מונעים ממנו לקבל את מלוא הערך ממנה. הפער כאן אינו רק פיתוחי — הוא פער בין היכולת שכבר קיימת לבין המרחב להשתמש בה.']);
+  out.push(['החלטות וביצוע מאבדים מהירות','כאשר החלטות ופתרון בעיות ממשיכים לעלות למעלה, העבודה ממתינה לזמינות המנהל. זמן התגובה מתארך במקום שבו אפשר היה להחליט ולהתקדם קרוב יותר לעבודה.']);
+  out.push(['זמן ניהולי יקר נשאב לתפעול','המנהל נשאר בתוך לולאת הפתרון והאישור גם כשהצוות כבר מסוגל לשאת יותר אחריות. כך זמן שהיה יכול להיות מושקע בהובלה, פיתוח אנשים, לקוחות וצמיחה נשאב חזרה לתפעול.']);
+ } else {
+  if(s.dependency>=55){
+   out.push(['החלטות וביצוע מאבדים מהירות','כאשר החלטות ופתרון בעיות ממשיכים לעלות למעלה, העבודה ממתינה לזמינות המנהל. זמן התגובה מתארך והארגון מאבד מהירות במקום שבו אפשר היה להחליט ולהתקדם קרוב יותר לעבודה.']);
+   out.push(['זמן ניהולי יקר נשאב לתפעול','המנהל הופך לצוואר בקבוק: במקום להשקיע זמן בהובלה, פיתוח אנשים, לקוחות וצמיחה, הוא ממשיך לפתור בעיות ולקבל החלטות שהצוות יכול ללמוד לקבל בעצמו. ככל שהפעילות גדלה, הדפוס הזה מקשה לעשות Scale.']);
+  }
+  if(s.capacity<75){
+   const pro=Number(s.dimScores?.["Proactivity"]||0);
+   if(pro<55) out.push(['יוזמה ואחריות נשארות מתחת לפוטנציאל','כאשר היוזמה וההובלה קדימה חלשות, אנשים מתרגלים פחות להציע דרך, לקבל החלטות ולשאת באחריות לתוצאה. במקביל, כשהחלטות ממשיכות לעלות למנהל, נוצר מעגל שמזין את עצמו: פחות תרגול של Ownership מגדיל תלות — והתלות מצמצמת עוד יותר את ההזדמנות לבנות Ownership.']);
+   else out.push(['יכולת, יוזמה ומשמעות נשארות מתחת לפוטנציאל','כשאנשים מקבלים פחות הזדמנויות להפעיל שיקול דעת ולקחת אחריות, הם מפתחים פחות ביטחון ועצמאות. לאורך זמן זה עלול לפגוע ביוזמה ובתחושת המשמעות — ולהשאיר ערך ארגוני על השולחן.']);
   }
  }
  if(!out.length) out.push(['בסיס חזק שאפשר למנף לצמיחה','היכולת והעצמאות כבר חזקות. האתגר העסקי הוא לשמר את הדפוס גם בצמיחה, בלחץ ובשינוי — ולהרחיב Ownership בלי למשוך החלטות חזרה למעלה.']);
@@ -1561,7 +1575,7 @@ function dimensionStatus(score){
   return {label:"כדאי לבחון", cls:"attention"};
 }
 
-// ===================== V20.16 — CAPACITY × DEPENDENCY DIAGNOSTIC ENGINE =====================
+// ===================== V20.17 — CAPACITY × DEPENDENCY DIAGNOSTIC ENGINE =====================
 function v215InterventionMode(s){
   // Continuous interpretation with four practical anchors.
   if(s.capacity < 60 && s.dependency >= 60) return "build_release";
@@ -1578,8 +1592,8 @@ function v215Diagnosis(s,hp){
   if(mode==="release"){
     const depWord=s.dependency>=60?"גבוהה":"בינונית";
     return {
-      title:"היכולת לקחת בעלות קיימת — התלות במנהל עדיין עוצרת חלק ממנה",
-      body:`לאנשים כבר קיימת יכולת משמעותית לקחת בעלות ולהתקדם באופן עצמאי. במקביל, התלות במנהל היא ${depWord} — ולכן חלק מההחלטות, הבעיות והאחריות עדיין חוזרים כלפי מעלה. כאן האתגר המרכזי הוא פחות לבנות עוד יכולת, ויותר לאפשר ליכולת שכבר קיימת להתממש.`
+      title:"היכולת לקחת בעלות כבר קיימת — אבל דפוסי הניהול עדיין לא מאפשרים לה להתממש במלואה",
+      body:`לאנשים כבר יש בסיס משמעותי לקחת בעלות ולהתקדם באופן עצמאי. במקביל, התלות במנהל היא ${depWord} — ולכן החלטות, פתרון בעיות ואחריות עדיין חוזרים כלפי מעלה. האתגר המרכזי כאן אינו לבנות את היכולת מאפס, אלא לשחרר אותה: חלק מהיכולת שכבר קיימת בארגון נשארת לא מנוצלת.`
     };
   }
   if(mode==="build_release"){
@@ -1681,16 +1695,15 @@ function showIndividualReport(){
 
 <section class="v18-section"><div class="v18-kicker">04 · המשמעות העסקית</div><h2>מה המחיר הארגוני אם הדפוס נשאר כפי שהוא?</h2><div class="v204-impact-grid">${v204ExecutiveImpact(s)}</div></section>
     <section class="v18-section v18-plan"><div class="v18-kicker">05 · LEADERSHIP MOVES</div><h2>${actHead.title}</h2><p class="v18-sub">${actHead.sub}</p><div class="v202-action-stack">${actionHtml}</div></section>
-    <section class="v181-next"><div class="v18-kicker">06 · מה הלאה?</div>
+    <section class="v181-next v217-next"><div class="v18-kicker">06 · מה הלאה?</div>
 <h2>מהתובנה — לצעד הבא שמתאים לכם</h2>
-<p class="v18-sub">התוצאה היא נקודת פתיחה. אפשר לחשוב יחד על המהלך הנכון לחיזוק ה־Ownership אצלכם — או להרחיב את התמונה ולבדוק אם אחרים בארגון רואים את אותו דפוס.</p>
+<p class="v18-sub">לא צריך לבחור עכשיו תוכנית. אפשר להתחיל מהשאלה מה באמת יעזור ל־Ownership להתקדם אצלכם.</p>
 <div class="v181-next-grid">
-  <div class="v181-next-card"><div class="v181-icon">01</div><strong class="v204-cta-question">לחשוב יחד על המהלך הנכון</strong><p>אם התוצאה פוגשת אתגר אמיתי אצלכם, אפשר להתחיל בשיחה קצרה. נבחן יחד איפה ה־Ownership נתקע ומה יכול לייצר את השינוי המשמעותי ביותר — ביכולת של האנשים, בהתנהגות הניהולית, בזכויות ההחלטה או בשגרות העבודה.</p><a href="mailto:erez@blanchard.co.il?subject=The%20Ownership%20Gap%20-%20שיחה%20על%20התוצאות&body=היי ארז,%0D%0A%0D%0Aהשלמתי את The Ownership Gap™ והתוצאה העלתה כמה נקודות שמעניין אותי לחשוב עליהן לעומק.%0D%0Aאשמח לקבוע שיחה קצרה ולעבור יחד על התמונה ועל המשמעויות האפשריות לארגון.%0D%0A%0D%0Aתודה" class="v181-link-btn">לשיחה על התוצאה והאפשרויות ←</a></div>
-  <div class="v181-next-card"><div class="v181-icon">02</div><strong class="v204-cta-question">להרחיב לתמונה צוותית / ארגונית</strong><p>הזמינו חברי הנהלה או צוות ניהולי לאבחן את אותה יחידה מנקודות מבט שונות — ולזהות פערי תפיסה וצווארי בקבוק משותפים.</p><button type="button" class="v181-link-btn" onclick="openOrganizationalDiagnostic()">לבחינת אבחון צוותי / ארגוני ←</button></div>
+  <div class="v181-next-card"><div class="v181-icon">01</div><strong class="v204-cta-question">לחשוב יחד על המהלך הנכון</strong><p>שיחה קצרה על התוצאה, הדפוס שעלה ומה עשוי לייצר את השינוי המשמעותי ביותר אצלכם.</p><a href="mailto:erez@blanchard.co.il?subject=The%20Ownership%20Gap%20-%20שיחה%20על%20התוצאות&body=היי ארז,%0D%0A%0D%0Aהשלמתי את The Ownership Gap™ והתוצאה העלתה כמה נקודות שמעניין אותי לחשוב עליהן לעומק.%0D%0Aאשמח לקבוע שיחה קצרה ולעבור יחד על התמונה ועל המשמעויות האפשריות לארגון.%0D%0A%0D%0Aתודה" class="v181-link-btn">לשיחה על התוצאה ←</a></div>
+  <div class="v181-next-card"><div class="v181-icon">02</div><strong class="v204-cta-question">להרחיב לתמונה צוותית / ארגונית</strong><p>לבדוק אם חברי הנהלה או צוות ניהולי רואים את אותה תמונה — ולזהות פערי תפיסה וצווארי בקבוק משותפים.</p><button type="button" class="v181-link-btn" onclick="openOrganizationalDiagnostic()">לבחינת אבחון צוותי / ארגוני ←</button></div>
 </div>
-
 </section>
-    <footer class="v18-footer"><strong>The Ownership Gap™</strong> הוא כלי אבחון ורפלקציה ניהולית של Blanchard, שנועד לייצר תמונת מצב ראשונית ושיחה ניהולית על דפוסי Ownership בקבוצה שנבחרה.<span class="v191-build" aria-label="גרסת דוח"> · Pilot V20.16</span></footer>
+    <footer class="v18-footer"><strong>The Ownership Gap™</strong> הוא כלי אבחון ורפלקציה ניהולית של Blanchard, שנועד לייצר תמונת מצב ראשונית ושיחה ניהולית על דפוסי Ownership בקבוצה שנבחרה.<span class="v191-build" aria-label="גרסת דוח"> · Pilot V20.17</span></footer>
   </div>`;
   show('screen-individual'); window.scrollTo({top:0,behavior:'smooth'});
 }
